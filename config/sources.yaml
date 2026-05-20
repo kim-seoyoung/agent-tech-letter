@@ -1,0 +1,31 @@
+# Source configuration for Tech-Letter for HYL.
+#
+# Schema is defined in techletter/config/sources.py (pydantic, extra=forbid).
+# Adding a new feed is a one-line edit here; no code changes required.
+
+arxiv:
+  enabled: true
+  categories:
+    - "cs.AI"
+    - "cs.CL"
+  keywords:
+    - "agent"
+    - "agentic"
+    - "tool-use"
+    - "tool use"
+    - "LLM agent"
+    - "ReAct"
+    - "planning"
+
+github:
+  enabled: true
+  spoken_language: "en"
+  period: "weekly"
+
+rss:
+  enabled: true
+  feeds:
+    - "https://thenewstack.io/ai/feed/"
+    - "https://importai.substack.com/feed"
+    - "https://www.latent.space/feed"
+    - "https://simonwillison.net/atom/everything/"

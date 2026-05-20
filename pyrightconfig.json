@@ -1,0 +1,12 @@
+{
+  "include": ["techletter", "tests"],
+  "exclude": ["**/__pycache__", ".venv", "sdlc-studio"],
+  "pythonVersion": "3.11",
+  "typeCheckingMode": "basic",
+  "strict": ["techletter"],
+  "reportMissingImports": "error",
+  "reportMissingTypeStubs": "none",
+  "reportUnknownMemberType": "warning",
+  "reportUnknownArgumentType": "warning",
+  "reportUnknownVariableType": "warning"
+}

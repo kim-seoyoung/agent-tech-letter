@@ -16,7 +16,7 @@ pip-wheel-metadata/
 .venv/
 venv/
 env/
-.python-version
+# `.python-version` IS tracked — uv uses it to pin the project Python.
 
 # --- Test + coverage ---
 .pytest_cache/

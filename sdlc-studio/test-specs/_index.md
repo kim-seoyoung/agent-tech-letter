@@ -21,6 +21,8 @@
 | [TS0003](TS0003-orchestration-and-dx.md) | Orchestration & DX | [EP0003](../epics/EP0003-orchestration-and-dx.md) | US0012–US0017 | TC0126–TC0197 | **Ready** |
 | [TS0004](TS0004-multichannel-delivery.md) | Multichannel Delivery | [EP0004](../epics/EP0004-multichannel-delivery.md) | US0018–US0022 | TC0198–TC0260 | **Ready** |
 | [TS0005](TS0005-item-model-and-source-adapter-protocol.md) | _Story view:_ `Item` + `SourceAdapter` protocol | [EP0001](../epics/EP0001-content-ingestion.md) | US0001 only | indexes TC0001–TC0011 (canonical in TS0001) | **Done** |
+| [TS0006](TS0006-arxiv-source-adapter.md) | _Story view:_ arXiv source adapter | [EP0001](../epics/EP0001-content-ingestion.md) | US0002 only | indexes TC0012–TC0021 (canonical in TS0001) | **Done** |
+| [TS0007](TS0007-rss-source-adapter.md) | _Story view:_ RSS source adapter | [EP0001](../epics/EP0001-content-ingestion.md) | US0004 only | indexes TC0037–TC0046 (canonical in TS0001) | **Done** |
 
 ## Statistics
 

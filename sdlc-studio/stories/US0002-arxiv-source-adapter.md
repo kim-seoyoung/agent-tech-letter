@@ -1,6 +1,9 @@
 # US0002: Implement arXiv source adapter
 
-> **Status:** Draft
+> **Status:** Done
+> **Plan:** [PL0002](../plans/PL0002-arxiv-source-adapter.md)
+> **Test Spec:** [TS0006](../test-specs/TS0006-arxiv-source-adapter.md)
+> **Last Updated:** 2026-05-20
 > **Epic:** [EP0001: Content Ingestion](../epics/EP0001-content-ingestion.md)
 > **Owner:** HYL
 > **Reviewer:** HYL
@@ -139,6 +142,7 @@ None persistent. Adapter is stateless across calls.
 - [ ] `window_days = 1000` → clamped to 365 with warning log.
 - [ ] Abstract length 2000 chars → `summary_excerpt` truncated to 1000.
 - [ ] Type check: `ArxivAdapter()` assignable to `SourceAdapter` per pyright.
+- [ ] Fixture: papers from `cs.AI` and `cs.CL` → each item's `source_subtype` equals its originating category (AC2 attribution).
 
 ---
 
@@ -177,3 +181,4 @@ _None._
 | Date | Author | Change |
 |------|--------|--------|
 | 2026-05-19 | HYL | Initial story created from EP0001. |
+| 2026-05-20 | Claude | `/sdlc-studio epic implement --epic EP0001 --agentic` Wave 2: ArxivAdapter implemented (`techletter/sources/arxiv.py`, 130 LOC) with tenacity retries + window clamp + keyword filter + category attribution. 12 tests in `tests/unit/sources/test_arxiv.py` mirroring TC0012-TC0021 — all green. pyright 0/0/0, ruff clean. Status Draft → Ready → Planned → **Done**. |

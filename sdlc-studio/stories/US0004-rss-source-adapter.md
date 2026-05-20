@@ -1,6 +1,9 @@
 # US0004: Implement RSS source adapter
 
-> **Status:** Draft
+> **Status:** Done
+> **Plan:** [PL0004](../plans/PL0004-rss-source-adapter.md)
+> **Test Spec:** [TS0007](../test-specs/TS0007-rss-source-adapter.md)
+> **Last Updated:** 2026-05-20
 > **Epic:** [EP0001: Content Ingestion](../epics/EP0001-content-ingestion.md)
 > **Owner:** HYL
 > **Reviewer:** HYL
@@ -141,6 +144,7 @@ None persistent.
 - [ ] Empty feed list → returns `[]`.
 - [ ] Item summary 1500 chars → `summary_excerpt` is exactly 1000 chars (with truncation marker).
 - [ ] Type check: `RssAdapter(feeds=[])` is a valid `SourceAdapter` per pyright.
+- [ ] Fixture: 3 feeds returning items → each item's `source_subtype` equals the feed URL it came from (AC2 attribution).
 
 ---
 
@@ -179,3 +183,4 @@ _None._
 | Date | Author | Change |
 |------|--------|--------|
 | 2026-05-19 | HYL | Initial story created from EP0001. |
+| 2026-05-20 | Claude | `/sdlc-studio epic implement --epic EP0001 --agentic` Wave 2: RssAdapter implemented (`techletter/sources/rss.py`, 117 LOC) with per-feed isolation + tenacity + window filter + bozo tolerance + feed-URL attribution. 12 tests in `tests/unit/sources/test_rss.py` mirroring TC0037-TC0046 — all green. pyright 0/0/0, ruff clean. Status Draft → Ready → Planned → **Done**. |

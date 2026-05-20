@@ -1,6 +1,6 @@
 # US0005: Source registry + `config/sources.yaml` loader
 
-> **Status:** Draft
+> **Status:** Ready
 > **Epic:** [EP0001: Content Ingestion](../epics/EP0001-content-ingestion.md)
 > **Owner:** HYL
 > **Reviewer:** HYL
@@ -183,9 +183,9 @@ This story closes the loop: with it merged, the pipeline can call `fetch_all` an
 | Story | Type | What's Needed | Status |
 |-------|------|---------------|--------|
 | [US0001](US0001-item-model-and-source-adapter-protocol.md) | Schema | `Item` model + `SourceAdapter` protocol | Done |
-| [US0002](US0002-arxiv-source-adapter.md) | Service | `ArxivAdapter` to register | Draft |
-| [US0003](US0003-github-trending-source-adapter.md) | Service | `GitHubTrendingAdapter` to register | Draft |
-| [US0004](US0004-rss-source-adapter.md) | Service | `RssAdapter` to register | Draft |
+| [US0002](US0002-arxiv-source-adapter.md) | Service | `ArxivAdapter` to register | Done |
+| [US0003](US0003-github-trending-source-adapter.md) | Service | `GitHubTrendingAdapter` to register | Ready |
+| [US0004](US0004-rss-source-adapter.md) | Service | `RssAdapter` to register | Done |
 
 (Strictly the registry only needs US0001 to exist for type checking. US0002–US0004 only need to be merged before the registry can be exercised end-to-end, but the registry itself can be written against a fake adapter for unit tests.)
 

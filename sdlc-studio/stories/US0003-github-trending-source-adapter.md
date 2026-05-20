@@ -1,6 +1,6 @@
 # US0003: Implement GitHub Trending source adapter
 
-> **Status:** Draft
+> **Status:** Ready
 > **Epic:** [EP0001: Content Ingestion](../epics/EP0001-content-ingestion.md)
 > **Owner:** HYL
 > **Reviewer:** HYL

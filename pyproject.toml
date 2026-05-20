@@ -14,6 +14,7 @@ dependencies = [
     "selectolax>=0.3",   # US0003 GitHub trending HTML parsing
     "tenacity>=9",       # shared retry decorator across US0002/US0003/US0004
     "pyyaml>=6",         # US0005 config loader
+    "anthropic>=0.40",   # US0006 LLM client (EP0002)
 ]
 
 [project.optional-dependencies]

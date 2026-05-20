@@ -1,6 +1,6 @@
 # PL0001: `Item` model + `SourceAdapter` protocol — Implementation Plan
 
-> **Status:** Draft
+> **Status:** Done
 > **Story:** [US0001: `Item` model + `SourceAdapter` protocol](../stories/US0001-item-model-and-source-adapter-protocol.md)
 > **Epic:** [EP0001: Content Ingestion](../epics/EP0001-content-ingestion.md)
 > **Test Spec:** [TS0005](../test-specs/TS0005-item-model-and-source-adapter-protocol.md) (story view) → canonical TCs in [TS0001](../test-specs/TS0001-content-ingestion.md) TC0001–TC0011
@@ -78,22 +78,22 @@ This is the first code file in the repo — no patterns exist yet. PL0001 establ
 
 | #  | Task                                                                         | File                                                          | Depends On | Status |
 | -- | ---------------------------------------------------------------------------- | ------------------------------------------------------------- | ---------- | ------ |
-| 1  | Initialise uv project, write `pyproject.toml` (deps + dev-deps + ruff + pytest config) | `pyproject.toml`                                              | —          | [ ]    |
-| 2  | Add `pyrightconfig.json` with strict mode for `techletter/`                  | `pyrightconfig.json`                                          | 1          | [ ]    |
-| 3  | Create package skeleton (empty `__init__.py` files)                          | `techletter/`, `techletter/models/`, `techletter/sources/`, `tests/`, `tests/unit/`, `tests/unit/models/`, `tests/unit/sources/` | 1 | [ ]    |
-| 4  | Pin Python version                                                           | `.python-version` (3.11)                                      | 1          | [ ]    |
-| 5  | **TDD:** Write `tests/unit/models/test_item.py` covering TC0001–TC0011       | `tests/unit/models/test_item.py`                              | 3          | [ ]    |
-| 6  | **TDD:** Write `tests/unit/sources/test_base.py` covering protocol + `SourceFetchError` | `tests/unit/sources/test_base.py`                             | 3          | [ ]    |
-| 7  | Run pytest → confirm all tests fail (red phase)                              | n/a                                                           | 5, 6       | [ ]    |
-| 8  | Define `Maturity` Literal alias                                              | `techletter/models/__init__.py`                               | 3          | [ ]    |
-| 9  | Define `Item` pydantic model (10 fields, `frozen=True`)                      | `techletter/models/__init__.py`                               | 8          | [ ]    |
-| 10 | Add `published_at` tz-aware `field_validator`                                | `techletter/models/__init__.py`                               | 9          | [ ]    |
-| 11 | Define `SourceAdapter` typing.Protocol                                       | `techletter/sources/base.py`                                  | 3          | [ ]    |
-| 12 | Define `SourceFetchError(Exception)`                                         | `techletter/sources/base.py`                                  | 11         | [ ]    |
-| 13 | Run `uv run pytest -q` → confirm green                                       | n/a                                                           | 5–12       | [ ]    |
-| 14 | Run `uv run pyright techletter/ tests/` → zero errors                        | n/a                                                           | 9–12       | [ ]    |
-| 15 | Run `uv run ruff check . && uv run ruff format --check .`                    | n/a                                                           | 9–12       | [ ]    |
-| 16 | Update `README.md` quickstart stub (will be expanded by US0017)              | `README.md`                                                   | 1          | [ ]    |
+| 1  | Initialise uv project, write `pyproject.toml` (deps + dev-deps + ruff + pytest config) | `pyproject.toml`                                              | —          | [x]    |
+| 2  | Add `pyrightconfig.json` with strict mode for `techletter/`                  | `pyrightconfig.json`                                          | 1          | [x]    |
+| 3  | Create package skeleton (empty `__init__.py` files)                          | `techletter/`, `techletter/models/`, `techletter/sources/`, `tests/`, `tests/unit/`, `tests/unit/models/`, `tests/unit/sources/` | 1 | [x]    |
+| 4  | Pin Python version                                                           | `.python-version` (3.11)                                      | 1          | [x]    |
+| 5  | **TDD:** Write `tests/unit/models/test_item.py` covering TC0001–TC0011       | `tests/unit/models/test_item.py`                              | 3          | [x]    |
+| 6  | **TDD:** Write `tests/unit/sources/test_base.py` covering protocol + `SourceFetchError` | `tests/unit/sources/test_base.py`                             | 3          | [x]    |
+| 7  | Run pytest → confirm all tests fail (red phase)                              | n/a                                                           | 5, 6       | [x]    |
+| 8  | Define `Maturity` Literal alias                                              | `techletter/models/__init__.py`                               | 3          | [x]    |
+| 9  | Define `Item` pydantic model (10 fields, `frozen=True`)                      | `techletter/models/__init__.py`                               | 8          | [x]    |
+| 10 | Add `published_at` tz-aware `field_validator`                                | `techletter/models/__init__.py`                               | 9          | [x]    |
+| 11 | Define `SourceAdapter` typing.Protocol                                       | `techletter/sources/base.py`                                  | 3          | [x]    |
+| 12 | Define `SourceFetchError(Exception)`                                         | `techletter/sources/base.py`                                  | 11         | [x]    |
+| 13 | Run `uv run pytest -q` → confirm green                                       | n/a                                                           | 5–12       | [x]    |
+| 14 | Run `uv run pyright techletter/ tests/` → zero errors                        | n/a                                                           | 9–12       | [x]    |
+| 15 | Run `uv run ruff check . && uv run ruff format --check .`                    | n/a                                                           | 9–12       | [x]    |
+| 16 | Update `README.md` quickstart stub (will be expanded by US0017)              | `README.md`                                                   | 1          | [x]    |
 
 ### Parallel Execution Groups (within this story)
 
@@ -184,11 +184,11 @@ This is the first code file in the repo — no patterns exist yet. PL0001 establ
 
 | AC  | Verification Method                       | File Evidence                              | Status  |
 | --- | ----------------------------------------- | ------------------------------------------ | ------- |
-| AC1 | TC0001, TC0011 pass                       | `tests/unit/models/test_item.py:test_*`    | Pending |
-| AC2 | TC0009/Protocol-conformance test passes   | `tests/unit/sources/test_base.py`          | Pending |
-| AC3 | FakeAdapter assigned to `SourceAdapter` — pyright passes | `tests/unit/sources/test_base.py` (pyright-asserted via `reveal_type` or explicit annotation) | Pending |
-| AC4 | TC0002, TC0003 pass                       | `tests/unit/models/test_item.py`           | Pending |
-| AC5 | TC0005 passes (tz-naive rejection)        | `tests/unit/models/test_item.py`           | Pending |
+| AC1 | TC0001, TC0011 pass                       | `tests/unit/models/test_item.py:test_*`    | Done    |
+| AC2 | TC0009/Protocol-conformance test passes   | `tests/unit/sources/test_base.py`          | Done    |
+| AC3 | FakeAdapter assigned to `SourceAdapter` — pyright passes | `tests/unit/sources/test_base.py` (pyright-asserted via `reveal_type` or explicit annotation) | Done    |
+| AC4 | TC0002, TC0003 pass                       | `tests/unit/models/test_item.py`           | Done    |
+| AC5 | TC0005 passes (tz-naive rejection)        | `tests/unit/models/test_item.py`           | Done    |
 
 ---
 
@@ -232,17 +232,17 @@ Additional pyright-only edge cases from story (caught at static analysis, not ru
 
 ## Definition of Done
 
-- [ ] All 5 AC verified by tests (Phase 4 evidence column)
-- [ ] All 8 runtime edge cases tested + passing
-- [ ] All 2 pyright-only edge cases verified by static-analysis test setup
-- [ ] `uv run pytest -q` → green
-- [ ] `uv run pyright techletter/ tests/` → 0 errors, 0 warnings
-- [ ] `uv run ruff check . && uv run ruff format --check .` → green
-- [ ] `Item` is `frozen=True` (mutation attempt raises)
-- [ ] `SourceFetchError` importable from `techletter.sources.base` (pre-empts US0002 hub conflict)
-- [ ] `Maturity` Literal alias importable from `techletter.models` (pre-empts US0003 hub conflict)
-- [ ] `README.md` quickstart stub created (expanded later by US0017)
-- [ ] `pyproject.toml`, `pyrightconfig.json`, `.python-version`, `uv.lock` committed
+- [x] All 5 AC verified by tests (Phase 4 evidence column)
+- [x] All 8 runtime edge cases tested + passing
+- [x] All 2 pyright-only edge cases verified by static-analysis test setup
+- [x] `uv run pytest -q` → green (31/31 tests pass; includes 7 parametric TC0003, 3 parametric TC0006, 4 parametric TC0009, hypothesis TC0011 with 50 examples)
+- [x] `uv run pyright techletter/ tests/` → 0 errors, 0 warnings, 0 informations
+- [x] `uv run ruff check . && uv run ruff format --check .` → green (after auto-fix of 8 UP017 / RUF002 issues + 3 format adjustments)
+- [x] `Item` is `frozen=True` (TC0010 confirms mutation raises ValidationError)
+- [x] `SourceFetchError` importable from `techletter.sources.base` (pre-empts US0002 hub conflict)
+- [x] `Maturity` Literal alias importable from `techletter.models` (pre-empts US0003 hub conflict)
+- [x] `README.md` quickstart stub created (expanded later by US0017)
+- [x] `pyproject.toml`, `pyrightconfig.json`, `.python-version`, `uv.lock` created (commit pending user decision)
 
 ---
 
@@ -260,3 +260,4 @@ Additional pyright-only edge cases from story (caught at static analysis, not ru
 | Date       | Author | Change                                                          |
 | ---------- | ------ | --------------------------------------------------------------- |
 | 2026-05-20 | Claude | Initial plan created from US0001 via `/sdlc-studio story plan`. |
+| 2026-05-20 | Claude | `/sdlc-studio story implement`: TDD cycle complete. 31/31 pytest, 0/0/0 pyright, ruff clean. All 16 tasks ticked, all 11 DoD items satisfied. Plan status Draft → Done. |

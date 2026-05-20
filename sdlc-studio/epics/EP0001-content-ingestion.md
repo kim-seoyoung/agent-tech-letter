@@ -144,7 +144,7 @@ This epic establishes the **source-side adapter pattern** (ADR-002 in TRD). Each
 
 Stories generated 2026-05-19. See [Story Index](../stories/_index.md) for full details.
 
-- [ ] [US0001](../stories/US0001-item-model-and-source-adapter-protocol.md) — `Item` model + `SourceAdapter` protocol (3 pts)
+- [x] [US0001](../stories/US0001-item-model-and-source-adapter-protocol.md) — `Item` model + `SourceAdapter` protocol (3 pts) **Done**
 - [ ] [US0002](../stories/US0002-arxiv-source-adapter.md) — arXiv source adapter (3 pts)
 - [ ] [US0003](../stories/US0003-github-trending-source-adapter.md) — GitHub Trending source adapter (5 pts)
 - [ ] [US0004](../stories/US0004-rss-source-adapter.md) — RSS source adapter (2 pts)

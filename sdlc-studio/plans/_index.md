@@ -6,16 +6,16 @@
 
 | Status      | Count |
 | ----------- | ----- |
-| Draft       | 1     |
+| Draft       | 0     |
 | In Progress | 0     |
-| Done        | 0     |
+| Done        | 1     |
 | **Total**   | **1** |
 
 ## Plans
 
 | ID                                                                                | Story                                                                              | Title                                            | Status | Approach |
 | --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------ | ------ | -------- |
-| [PL0001](PL0001-item-model-and-source-adapter-protocol.md) | [US0001](../stories/US0001-item-model-and-source-adapter-protocol.md) | `Item` model + `SourceAdapter` protocol         | Draft  | TDD      |
+| [PL0001](PL0001-item-model-and-source-adapter-protocol.md) | [US0001](../stories/US0001-item-model-and-source-adapter-protocol.md) | `Item` model + `SourceAdapter` protocol         | Done   | TDD      |
 
 ## Notes
 

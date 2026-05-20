@@ -1,6 +1,6 @@
 # TS0005: `Item` model + `SourceAdapter` protocol — Story Test Spec
 
-> **Status:** Ready
+> **Status:** Done
 > **Story:** [US0001](../stories/US0001-item-model-and-source-adapter-protocol.md)
 > **Epic:** [EP0001: Content Ingestion](../epics/EP0001-content-ingestion.md)
 > **Plan:** [PL0001](../plans/PL0001-item-model-and-source-adapter-protocol.md)
@@ -115,17 +115,17 @@ fake_adapter:
 
 | TC     | Title                                                          | Status  | Implementation |
 | ------ | -------------------------------------------------------------- | ------- | -------------- |
-| TC0001 | `Item` constructs with all required fields                      | Pending | —              |
-| TC0002 | `ValidationError` on missing `url`                              | Pending | —              |
-| TC0003 | `ValidationError` on missing required field (parametric)        | Pending | —              |
-| TC0004 | tz-aware UTC datetime accepted                                  | Pending | —              |
-| TC0005 | tz-naive datetime rejected                                      | Pending | —              |
-| TC0006 | `HttpUrl` rejects non-http(s) schemes                           | Pending | —              |
-| TC0007 | `summary_excerpt` > 1000 chars → `ValidationError`              | Pending | —              |
-| TC0008 | Unknown `item_kind` value → `ValidationError`                   | Pending | —              |
-| TC0009 | `maturity` outside allowed set + Protocol conformance           | Pending | —              |
-| TC0010 | Mutation on frozen `Item` raises                                | Pending | —              |
-| TC0011 | hypothesis Item round-trip                                      | Pending | —              |
+| TC0001 | `Item` constructs with all required fields                      | Done    | `tests/unit/`  |
+| TC0002 | `ValidationError` on missing `url`                              | Done    | `tests/unit/`  |
+| TC0003 | `ValidationError` on missing required field (parametric)        | Done    | `tests/unit/`  |
+| TC0004 | tz-aware UTC datetime accepted                                  | Done    | `tests/unit/`  |
+| TC0005 | tz-naive datetime rejected                                      | Done    | `tests/unit/`  |
+| TC0006 | `HttpUrl` rejects non-http(s) schemes                           | Done    | `tests/unit/`  |
+| TC0007 | `summary_excerpt` > 1000 chars → `ValidationError`              | Done    | `tests/unit/`  |
+| TC0008 | Unknown `item_kind` value → `ValidationError`                   | Done    | `tests/unit/`  |
+| TC0009 | `maturity` outside allowed set + Protocol conformance           | Done    | `tests/unit/`  |
+| TC0010 | Mutation on frozen `Item` raises                                | Done    | `tests/unit/`  |
+| TC0011 | hypothesis Item round-trip                                      | Done    | `tests/unit/`  |
 
 ---
 
@@ -148,3 +148,4 @@ fake_adapter:
 | Date       | Author | Change                                                                                      |
 | ---------- | ------ | ------------------------------------------------------------------------------------------- |
 | 2026-05-20 | Claude | Initial story-scoped TS created via `/sdlc-studio story plan --story US0001`. Indexes into TS0001 TC0001–TC0011. Status set to Ready (mirrors the canonical TS0001's Ready status). |
+| 2026-05-20 | Claude | `/sdlc-studio story implement`: all 11 TCs automated in `tests/unit/models/test_item.py` (26 cases incl. parametric expansions) + `tests/unit/sources/test_base.py` (5 cases). 31/31 pass. Automation status table → Done. Spec status Ready → Done. |

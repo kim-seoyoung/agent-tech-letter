@@ -182,7 +182,7 @@ This story closes the loop: with it merged, the pipeline can call `fetch_all` an
 
 | Story | Type | What's Needed | Status |
 |-------|------|---------------|--------|
-| [US0001](US0001-item-model-and-source-adapter-protocol.md) | Schema | `Item` model + `SourceAdapter` protocol | Planned |
+| [US0001](US0001-item-model-and-source-adapter-protocol.md) | Schema | `Item` model + `SourceAdapter` protocol | Done |
 | [US0002](US0002-arxiv-source-adapter.md) | Service | `ArxivAdapter` to register | Draft |
 | [US0003](US0003-github-trending-source-adapter.md) | Service | `GitHubTrendingAdapter` to register | Draft |
 | [US0004](US0004-rss-source-adapter.md) | Service | `RssAdapter` to register | Draft |

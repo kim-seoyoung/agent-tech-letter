@@ -159,7 +159,7 @@ No persistent storage. Result passed to the rank step (US0008) in memory.
 
 | Story | Type | What's Needed | Status |
 |-------|------|---------------|--------|
-| [US0001](US0001-item-model-and-source-adapter-protocol.md) | Schema | `Item` model | Planned |
+| [US0001](US0001-item-model-and-source-adapter-protocol.md) | Schema | `Item` model | Done |
 | [US0006](US0006-llm-client-with-budget-enforcement.md) | Service | `LlmClient` to call | Draft |
 
 ### External Dependencies

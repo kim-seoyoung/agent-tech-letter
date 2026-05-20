@@ -148,7 +148,7 @@ None persistent. Adapter is stateless across calls.
 
 | Story | Type | What's Needed | Status |
 |-------|------|---------------|--------|
-| [US0001](US0001-item-model-and-source-adapter-protocol.md) | Schema | `Item` model + `SourceAdapter` protocol | Planned |
+| [US0001](US0001-item-model-and-source-adapter-protocol.md) | Schema | `Item` model + `SourceAdapter` protocol | Done |
 
 ### External Dependencies
 

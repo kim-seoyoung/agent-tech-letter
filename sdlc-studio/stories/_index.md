@@ -1,15 +1,15 @@
 # Story Registry
 
-**Last Updated:** 2026-05-19
+**Last Updated:** 2026-05-20
 **Personas Reference:** [Personas Index](../personas/index.md)
 
 ## Summary
 
 | Status | Count |
 |--------|-------|
-| Draft | 22 |
+| Draft | 21 |
 | Ready | 0 |
-| Planned | 0 |
+| Planned | 1 |
 | In Progress | 0 |
 | Review | 0 |
 | Done | 0 |
@@ -21,7 +21,7 @@
 
 | ID | Title | Status | Points | Owner |
 |----|-------|--------|--------|-------|
-| [US0001](US0001-item-model-and-source-adapter-protocol.md) | `Item` model + `SourceAdapter` protocol | Draft | 3 | HYL |
+| [US0001](US0001-item-model-and-source-adapter-protocol.md) | `Item` model + `SourceAdapter` protocol | Planned | 3 | HYL |
 | [US0002](US0002-arxiv-source-adapter.md) | arXiv source adapter | Draft | 3 | HYL |
 | [US0003](US0003-github-trending-source-adapter.md) | GitHub Trending source adapter | Draft | 5 | HYL |
 | [US0004](US0004-rss-source-adapter.md) | RSS source adapter | Draft | 2 | HYL |
@@ -81,7 +81,7 @@ _Stories not yet generated. Run `/sdlc-studio story --epic EP0004`._
 
 | ID | Title | Epic | Status | Points | Persona |
 |----|-------|------|--------|--------|---------|
-| [US0001](US0001-item-model-and-source-adapter-protocol.md) | `Item` model + `SourceAdapter` protocol | [EP0001](../epics/EP0001-content-ingestion.md) | Draft | 3 | HYL |
+| [US0001](US0001-item-model-and-source-adapter-protocol.md) | `Item` model + `SourceAdapter` protocol | [EP0001](../epics/EP0001-content-ingestion.md) | Ready | 3 | HYL |
 | [US0002](US0002-arxiv-source-adapter.md) | arXiv source adapter | [EP0001](../epics/EP0001-content-ingestion.md) | Draft | 3 | HYL |
 | [US0003](US0003-github-trending-source-adapter.md) | GitHub Trending source adapter | [EP0001](../epics/EP0001-content-ingestion.md) | Draft | 5 | HYL |
 | [US0004](US0004-rss-source-adapter.md) | RSS source adapter | [EP0001](../epics/EP0001-content-ingestion.md) | Draft | 2 | HYL |

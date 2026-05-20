@@ -1,10 +1,13 @@
 # US0001: Define `Item` model + `SourceAdapter` protocol
 
-> **Status:** Draft
+> **Status:** Planned
 > **Epic:** [EP0001: Content Ingestion](../epics/EP0001-content-ingestion.md)
+> **Plan:** [PL0001](../plans/PL0001-item-model-and-source-adapter-protocol.md)
+> **Test Spec:** [TS0005](../test-specs/TS0005-item-model-and-source-adapter-protocol.md)
 > **Owner:** HYL
 > **Reviewer:** HYL
 > **Created:** 2026-05-19
+> **Last Updated:** 2026-05-20
 
 ## User Story
 
@@ -128,12 +131,16 @@ No persistent storage. Both module files live in the source tree; tests in `test
 
 ## Test Scenarios
 
+> Canonical test cases live in [TS0001](../test-specs/TS0001-content-ingestion.md) TC0001–TC0011. The list below is the high-level coverage sketch this story commits to.
+
 - [ ] Round-trip: construct `Item` via `model_validate(dict)` → `model_dump(mode="json")` → reconstruct via `model_validate` produces an equal `Item`.
 - [ ] All edge cases above raise `ValidationError` with a sensible message.
 - [ ] A `FakeAdapter` fixture passes pyright protocol conformance.
 - [ ] A `FakeAdapter` whose `fetch` returns `[]` is treated as a valid (empty) result.
 - [ ] A frozen `Item` cannot be mutated; attempted mutation raises.
 - [ ] `Item` JSON round-trip preserves tz info on `published_at`.
+- [ ] `Item.url` rejects schemes other than `http`/`https` (e.g., `ftp://`, `file://`) — pydantic `HttpUrl` constraint, AC1.
+- [ ] A `FakeAdapter` declared without a `name` class attribute is reported by pyright as a `SourceAdapter` protocol mismatch — AC3 inverse case.
 
 ---
 
@@ -169,3 +176,5 @@ _None._
 | Date | Author | Change |
 |------|--------|--------|
 | 2026-05-19 | HYL | Initial story created from EP0001. |
+| 2026-05-20 | Claude | `/sdlc-studio story review`: Ready-criteria check passed (5 AC in G/W/T ✓, 8 edge cases ✓, no ambiguous language ✓, no Open Questions ✓, deps identified ✓). Mechanical fix: added 2 test scenarios (HttpUrl scheme rejection, pyright protocol-mismatch detection) to reach the 8-minimum for library stories. Pointed test list at TS0001 TC0001–TC0011 as canonical. Status promoted **Draft → Ready**. |
+| 2026-05-20 | Claude | `/sdlc-studio story plan`: Created [PL0001](../plans/PL0001-item-model-and-source-adapter-protocol.md) (16-task TDD plan; absorbs scaffolding + `SourceFetchError` + `Maturity` Literal alias to pre-empt Wave-2 hub conflicts per `epic plan --agentic` analysis) and [TS0005](../test-specs/TS0005-item-model-and-source-adapter-protocol.md) (story-scoped index into TS0001 TC0001–TC0011). Status promoted **Ready → Planned**. |

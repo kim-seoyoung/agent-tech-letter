@@ -166,7 +166,7 @@ None persistent. Adapter is stateless.
 
 | Story | Type | What's Needed | Status |
 |-------|------|---------------|--------|
-| [US0001](US0001-item-model-and-source-adapter-protocol.md) | Schema | `Item` model + `SourceAdapter` protocol | Draft |
+| [US0001](US0001-item-model-and-source-adapter-protocol.md) | Schema | `Item` model + `SourceAdapter` protocol | Planned |
 
 ### External Dependencies
 

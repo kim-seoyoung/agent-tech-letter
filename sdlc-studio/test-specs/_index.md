@@ -20,6 +20,7 @@
 | [TS0002](TS0002-composition-pipeline.md) | Composition Pipeline | [EP0002](../epics/EP0002-composition-pipeline.md) | US0006–US0011 | TC0056–TC0125 | **Ready** |
 | [TS0003](TS0003-orchestration-and-dx.md) | Orchestration & DX | [EP0003](../epics/EP0003-orchestration-and-dx.md) | US0012–US0017 | TC0126–TC0197 | **Ready** |
 | [TS0004](TS0004-multichannel-delivery.md) | Multichannel Delivery | [EP0004](../epics/EP0004-multichannel-delivery.md) | US0018–US0022 | TC0198–TC0260 | **Ready** |
+| [TS0005](TS0005-item-model-and-source-adapter-protocol.md) | _Story view:_ `Item` + `SourceAdapter` protocol | [EP0001](../epics/EP0001-content-ingestion.md) | US0001 only | indexes TC0001–TC0011 (canonical in TS0001) | **Ready** |
 
 ## Statistics
 

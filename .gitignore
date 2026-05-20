@@ -1,0 +1,77 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# --- Packaging / build ---
+build/
+dist/
+*.egg
+*.egg-info/
+wheels/
+pip-wheel-metadata/
+
+# --- Virtual environments (uv default is .venv) ---
+.venv/
+venv/
+env/
+.python-version
+
+# --- Test + coverage ---
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.hypothesis/
+.tox/
+
+# --- Lint / typecheck caches ---
+.ruff_cache/
+.mypy_cache/
+.pyright_cache/
+
+# --- Project runtime artefacts ---
+# FetchCache + LlmCache (TRD §Caching). CI hard-disables via CI=true /
+# GITHUB_ACTIONS=true; locally this directory is dev-only churn.
+.cache/
+
+# --- sdlc-studio local state ---
+# Review queue / review-state.json — local bookkeeping, not part of the spec set.
+sdlc-studio/.local/
+
+# --- Secrets / env ---
+# Project policy: all real secrets live in GitHub Secrets (ANTHROPIC_API_KEY,
+# SMTP_*, SLACK_WEBHOOK_URLS, TELEGRAM_BOT_TOKEN). .env* is local-dev only and
+# must never be committed.
+.env
+.env.*
+!.env.example
+
+# --- VCR / fixture noise ---
+# Cassettes themselves ARE checked in (they're the source-of-truth for
+# arXiv/GitHub/RSS adapter tests). But ad-hoc recording artefacts are not.
+*.cassette.tmp
+
+# --- IDE / editor ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- Claude Code local session state ---
+.claude/
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Logs ---
+# Runtime stdout/stderr captures. logs/sends.jsonl is the audit log (TRD)
+# and IS tracked — re-include it explicitly below.
+*.log
+logs/
+!logs/sends.jsonl
+!logs/.gitkeep

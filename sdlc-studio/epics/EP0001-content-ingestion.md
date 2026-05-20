@@ -1,6 +1,6 @@
 # EP0001: Content Ingestion
 
-> **Status:** Draft
+> **Status:** Done
 > **Owner:** HYL
 > **Reviewer:** HYL
 > **Created:** 2026-05-19
@@ -146,9 +146,9 @@ Stories generated 2026-05-19. See [Story Index](../stories/_index.md) for full d
 
 - [x] [US0001](../stories/US0001-item-model-and-source-adapter-protocol.md) — `Item` model + `SourceAdapter` protocol (3 pts) **Done**
 - [x] [US0002](../stories/US0002-arxiv-source-adapter.md) — arXiv source adapter (3 pts) **Done**
-- [ ] [US0003](../stories/US0003-github-trending-source-adapter.md) — GitHub Trending source adapter (5 pts)
+- [x] [US0003](../stories/US0003-github-trending-source-adapter.md) — GitHub Trending source adapter (5 pts) **Done**
 - [x] [US0004](../stories/US0004-rss-source-adapter.md) — RSS source adapter (2 pts) **Done**
-- [ ] [US0005](../stories/US0005-source-registry-and-config-loader.md) — Source registry + `config/sources.yaml` loader (3 pts)
+- [x] [US0005](../stories/US0005-source-registry-and-config-loader.md) — Source registry + `config/sources.yaml` loader (3 pts) **Done**
 
 **Total:** 16 story points across 5 stories.
 
@@ -177,3 +177,4 @@ _None._ All decisions inherited from PRD v0.4.0 and TRD v0.3.0.
 | 2026-05-19 | HYL | Initial epic created from PRD v0.4.0 F-01. |
 | 2026-05-19 | HYL | Story breakdown linked: 5 stories (US0001–US0005, 16 pts total). |
 | 2026-05-19 | HYL | Test plan linked to [TS0001](../test-specs/TS0001-content-ingestion.md) — 55 TCs, 31/31 ACs covered. |
+| 2026-05-20 | Claude | EP0001 complete via `/sdlc-studio epic implement --epic EP0001 --agentic`. All 5 stories shipped: 5 adapters/registry totaling ~700 LOC + 84 tests (31 + 12 + 15 + 12 + 14). pytest 84/84, pyright 0/0/0, ruff lint+format clean. Wave 1 single-session (US0001), Wave 2 attempted parallel agents (fell back to sequential — worktree unavailable in harness), Waves 3-4 sequential. Status Draft → **Done**. |

@@ -8,11 +8,11 @@
 | Status | Count |
 |--------|-------|
 | Draft | 17 |
-| Ready | 2 |
+| Ready | 0 |
 | Planned | 0 |
 | In Progress | 0 |
 | Review | 0 |
-| Done | 3 |
+| Done | 5 |
 | **Total** | **22** |
 
 ## Stories by Epic
@@ -23,9 +23,9 @@
 |----|-------|--------|--------|-------|
 | [US0001](US0001-item-model-and-source-adapter-protocol.md) | `Item` model + `SourceAdapter` protocol | Done | 3 | HYL |
 | [US0002](US0002-arxiv-source-adapter.md) | arXiv source adapter | Done | 3 | HYL |
-| [US0003](US0003-github-trending-source-adapter.md) | GitHub Trending source adapter | Ready | 5 | HYL |
+| [US0003](US0003-github-trending-source-adapter.md) | GitHub Trending source adapter | Done | 5 | HYL |
 | [US0004](US0004-rss-source-adapter.md) | RSS source adapter | Done | 2 | HYL |
-| [US0005](US0005-source-registry-and-config-loader.md) | Source registry + `config/sources.yaml` loader | Ready | 3 | HYL |
+| [US0005](US0005-source-registry-and-config-loader.md) | Source registry + `config/sources.yaml` loader | Done | 3 | HYL |
 
 **EP0001 subtotal:** 5 stories, 16 points
 
@@ -83,9 +83,9 @@ _Stories not yet generated. Run `/sdlc-studio story --epic EP0004`._
 |----|-------|------|--------|--------|---------|
 | [US0001](US0001-item-model-and-source-adapter-protocol.md) | `Item` model + `SourceAdapter` protocol | [EP0001](../epics/EP0001-content-ingestion.md) | Done | 3 | HYL |
 | [US0002](US0002-arxiv-source-adapter.md) | arXiv source adapter | [EP0001](../epics/EP0001-content-ingestion.md) | Done | 3 | HYL |
-| [US0003](US0003-github-trending-source-adapter.md) | GitHub Trending source adapter | [EP0001](../epics/EP0001-content-ingestion.md) | Ready | 5 | HYL |
+| [US0003](US0003-github-trending-source-adapter.md) | GitHub Trending source adapter | [EP0001](../epics/EP0001-content-ingestion.md) | Done | 5 | HYL |
 | [US0004](US0004-rss-source-adapter.md) | RSS source adapter | [EP0001](../epics/EP0001-content-ingestion.md) | Done | 2 | HYL |
-| [US0005](US0005-source-registry-and-config-loader.md) | Source registry + `config/sources.yaml` loader | [EP0001](../epics/EP0001-content-ingestion.md) | Ready | 3 | HYL |
+| [US0005](US0005-source-registry-and-config-loader.md) | Source registry + `config/sources.yaml` loader | [EP0001](../epics/EP0001-content-ingestion.md) | Done | 3 | HYL |
 | [US0006](US0006-llm-client-with-budget-enforcement.md) | LLM client + budget enforcement | [EP0002](../epics/EP0002-composition-pipeline.md) | Draft | 3 | HYL |
 | [US0007](US0007-cluster-prompt-and-step.md) | Cluster prompt + step | [EP0002](../epics/EP0002-composition-pipeline.md) | Draft | 5 | HYL |
 | [US0008](US0008-rank-prompt-and-step.md) | Rank prompt + step | [EP0002](../epics/EP0002-composition-pipeline.md) | Draft | 5 | HYL |

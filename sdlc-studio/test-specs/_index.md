@@ -23,6 +23,8 @@
 | [TS0005](TS0005-item-model-and-source-adapter-protocol.md) | _Story view:_ `Item` + `SourceAdapter` protocol | [EP0001](../epics/EP0001-content-ingestion.md) | US0001 only | indexes TC0001–TC0011 (canonical in TS0001) | **Done** |
 | [TS0006](TS0006-arxiv-source-adapter.md) | _Story view:_ arXiv source adapter | [EP0001](../epics/EP0001-content-ingestion.md) | US0002 only | indexes TC0012–TC0021 (canonical in TS0001) | **Done** |
 | [TS0007](TS0007-rss-source-adapter.md) | _Story view:_ RSS source adapter | [EP0001](../epics/EP0001-content-ingestion.md) | US0004 only | indexes TC0037–TC0046 (canonical in TS0001) | **Done** |
+| [TS0008](TS0008-github-trending-source-adapter.md) | _Story view:_ GitHub Trending source adapter | [EP0001](../epics/EP0001-content-ingestion.md) | US0003 only | indexes TC0022–TC0036 (canonical in TS0001) | **Done** |
+| [TS0009](TS0009-source-registry-and-config-loader.md) | _Story view:_ Source registry + config loader | [EP0001](../epics/EP0001-content-ingestion.md) | US0005 only | indexes TC0047–TC0055 (canonical in TS0001) | **Done** |
 
 ## Statistics
 

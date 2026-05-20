@@ -1,6 +1,9 @@
 # US0003: Implement GitHub Trending source adapter
 
-> **Status:** Ready
+> **Status:** Done
+> **Plan:** [PL0003](../plans/PL0003-github-trending-source-adapter.md)
+> **Test Spec:** [TS0008](../test-specs/TS0008-github-trending-source-adapter.md)
+> **Last Updated:** 2026-05-20
 > **Epic:** [EP0001: Content Ingestion](../epics/EP0001-content-ingestion.md)
 > **Owner:** HYL
 > **Reviewer:** HYL
@@ -196,3 +199,4 @@ _None._
 | Date | Author | Change |
 |------|--------|--------|
 | 2026-05-19 | HYL | Initial story created from EP0001. |
+| 2026-05-20 | Claude | `/sdlc-studio epic implement --epic EP0001 --agentic` Wave 3: GitHubTrendingAdapter implemented (`techletter/sources/github.py`, ~230 LOC) with HTML scrape via selectolax, REST enrichment, `infer_maturity` rules (production-ready/beta/experimental/unknown), GITHUB_TOKEN auth header support, fail-soft on scrape failure, per-repo enrichment 404 skipped. 15 tests in `tests/unit/sources/test_github.py` mirroring TC0022-TC0036 — all green. pyright 0/0/0, ruff clean. Status Draft → Ready → Planned → **Done**. |

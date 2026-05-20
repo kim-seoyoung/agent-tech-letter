@@ -8,8 +8,8 @@
 | ----------- | ----- |
 | Draft       | 0     |
 | In Progress | 0     |
-| Done        | 3     |
-| **Total**   | **3** |
+| Done        | 5     |
+| **Total**   | **5** |
 
 ## Plans
 
@@ -18,6 +18,8 @@
 | [PL0001](PL0001-item-model-and-source-adapter-protocol.md) | [US0001](../stories/US0001-item-model-and-source-adapter-protocol.md) | `Item` model + `SourceAdapter` protocol         | Done   | TDD      |
 | [PL0002](PL0002-arxiv-source-adapter.md) | [US0002](../stories/US0002-arxiv-source-adapter.md) | arXiv source adapter                            | Done   | TDD      |
 | [PL0004](PL0004-rss-source-adapter.md) | [US0004](../stories/US0004-rss-source-adapter.md) | RSS source adapter                              | Done   | TDD      |
+| [PL0003](PL0003-github-trending-source-adapter.md) | [US0003](../stories/US0003-github-trending-source-adapter.md) | GitHub Trending source adapter                  | Done   | TDD      |
+| [PL0005](PL0005-source-registry-and-config-loader.md) | [US0005](../stories/US0005-source-registry-and-config-loader.md) | Source registry + `config/sources.yaml` loader  | Done   | TDD      |
 
 ## Notes
 

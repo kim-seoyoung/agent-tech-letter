@@ -1,6 +1,9 @@
 # US0005: Source registry + `config/sources.yaml` loader
 
-> **Status:** Ready
+> **Status:** Done
+> **Plan:** [PL0005](../plans/PL0005-source-registry-and-config-loader.md)
+> **Test Spec:** [TS0009](../test-specs/TS0009-source-registry-and-config-loader.md)
+> **Last Updated:** 2026-05-20
 > **Epic:** [EP0001: Content Ingestion](../epics/EP0001-content-ingestion.md)
 > **Owner:** HYL
 > **Reviewer:** HYL
@@ -184,7 +187,7 @@ This story closes the loop: with it merged, the pipeline can call `fetch_all` an
 |-------|------|---------------|--------|
 | [US0001](US0001-item-model-and-source-adapter-protocol.md) | Schema | `Item` model + `SourceAdapter` protocol | Done |
 | [US0002](US0002-arxiv-source-adapter.md) | Service | `ArxivAdapter` to register | Done |
-| [US0003](US0003-github-trending-source-adapter.md) | Service | `GitHubTrendingAdapter` to register | Ready |
+| [US0003](US0003-github-trending-source-adapter.md) | Service | `GitHubTrendingAdapter` to register | Done |
 | [US0004](US0004-rss-source-adapter.md) | Service | `RssAdapter` to register | Done |
 
 (Strictly the registry only needs US0001 to exist for type checking. US0002–US0004 only need to be merged before the registry can be exercised end-to-end, but the registry itself can be written against a fake adapter for unit tests.)
@@ -216,3 +219,4 @@ _None._
 | Date | Author | Change |
 |------|--------|--------|
 | 2026-05-19 | HYL | Initial story created from EP0001. |
+| 2026-05-20 | Claude | `/sdlc-studio epic implement --epic EP0001 --agentic` Wave 4: SourceRegistry + config loader implemented. `techletter/config/sources.py` (pydantic SourcesConfig with extra=forbid), `techletter/config/__init__.py` (load_sources + ConfigLoadError chaining), `techletter/sources/registry.py` (build_registry + fetch_all with per-source isolation + URL dedup + stable order). `config/sources.yaml` ships with the 4 default RSS feeds. 14 tests covering TC0047-TC0055 + extras — all green. Status Draft → Ready → Planned → **Done**. |

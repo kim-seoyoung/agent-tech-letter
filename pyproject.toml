@@ -8,6 +8,12 @@ authors = [{ name = "HYL" }]
 license = { text = "MIT" }
 dependencies = [
     "pydantic>=2.6,<3",
+    "arxiv>=2.1",        # US0002 arXiv adapter
+    "feedparser>=6.0",   # US0004 RSS adapter
+    "httpx>=0.27",       # US0003 GitHub adapter + US0004 RSS fetch wrapping
+    "selectolax>=0.3",   # US0003 GitHub trending HTML parsing
+    "tenacity>=9",       # shared retry decorator across US0002/US0003/US0004
+    "pyyaml>=6",         # US0005 config loader
 ]
 
 [project.optional-dependencies]

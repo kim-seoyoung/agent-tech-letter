@@ -1,6 +1,6 @@
 # CR-0001: Common HTML Rendering (Web + Email)
 
-> **Status:** In Progress
+> **Status:** Complete -- EP0005 (Done)
 > **Priority:** P2
 > **Type:** feature-request
 > **Requester:** HYL
@@ -132,7 +132,7 @@ None.
 
 | Epic | Title | Status |
 | --- | --- | --- |
-| [EP0005](../epics/EP0005-common-html-rendering.md) | Common HTML Rendering (Web + Email) | Draft |
+| [EP0005](../epics/EP0005-common-html-rendering.md) | Common HTML Rendering (Web + Email) | Done |
 
 **Linked Stories:** US0023 (sidecar JSON), US0024 (tokens + components), US0025 (`html_web` + golden), US0026 (`html_email` + premailer), US0027 (`EmailAdapter` swap).
 
@@ -159,7 +159,8 @@ None.
 
 ## Close Reason
 
-> *Filled when CR is closed*
+**Outcome:** Complete
+**Rationale:** EP0005 reached Done on 2026-05-21. All 5 stories (US0023–US0027) implemented and tested (50 new tests, all green). Email adapter swap shipped — `<pre>`-wrapped raw markdown replaced with `html_email.render()` producing properly typeset HTML for the inbox. Web renderer (`html_web.render()`) is ready for CR-0002 to consume. AC9 manual cross-client smoke check remains HYL-owned (not blocking close).
 
 ---
 
@@ -169,3 +170,4 @@ None.
 | --- | --- | --- |
 | 2026-05-21 | HYL | CR proposed. Draft epic content preserved at `sdlc-studio/.local/draft-epic-content/EP0005-common-html-rendering.md` for reference when `cr action` generates the formal epic. |
 | 2026-05-21 | HYL | CR actioned via `/sdlc-studio cr action --cr CR-0001` — 1 epic (EP0005), 5 stories (US0023–US0027) created. Status: Proposed → In Progress. PRD F-05 description updated with CR reference. |
+| 2026-05-21 | Claude (via /sdlc-studio epic implement --epic EP0005) | EP0005 cascaded to Done; all AC verified by tests. CR closed Complete. |

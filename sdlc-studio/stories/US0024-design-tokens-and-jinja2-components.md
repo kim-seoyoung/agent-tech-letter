@@ -1,6 +1,6 @@
 # US0024: Design tokens + Jinja2 component partials
 
-> **Status:** Ready
+> **Status:** Done
 > **Epic:** [EP0005: Common HTML Rendering (Web + Email)](../epics/EP0005-common-html-rendering.md)
 > **Change Request:** [CR-0001](../change-requests/CR0001-common-html-rendering.md) (Item 2)
 > **Owner:** HYL

@@ -1,0 +1,13 @@
+{#- US0024 shared deep-dive component.
+    Context: dd (DeepDive with .body_html precomputed), colors, font, layout.
+    Both web (html_web) and email (html_email) include this partial. -#}
+<section class="deep-dive" style="margin-bottom: {{ layout.padding }};">
+  <h2 style="font-size: {{ font.size_h2 }}; color: {{ colors.fg }}; margin: 0 0 8px 0;">{{ dd.title }}</h2>
+  <p class="meta" style="color: {{ colors.muted }}; font-size: {{ font.size_body }}; margin: 0 0 16px 0;">
+    <span class="tag" style="background: {{ colors.tag_bg }}; padding: 2px 8px; border-radius: 4px; font-size: 12px;">{{ dd.item_kind }}</span>
+    {% if dd.maturity %}<span class="tag" style="background: {{ colors.tag_bg }}; padding: 2px 8px; border-radius: 4px; font-size: 12px;">{{ dd.maturity }}</span>{% endif %}
+    &middot; <a href="{{ dd.primary_url }}" style="color: {{ colors.accent }};">원문</a>
+    &middot; {{ dd.source_count }} source{{ 's' if dd.source_count != 1 else '' }}
+  </p>
+  <div class="body" style="color: {{ colors.fg }}; font-size: {{ font.size_body }}; line-height: 1.6;">{{ dd.body_html|safe }}</div>
+</section>

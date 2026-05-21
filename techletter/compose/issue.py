@@ -24,14 +24,42 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from techletter.compose.types import DeepDive, QuickMention
 
-__all__ = ["RenderedIssue", "assemble_issue", "content_hash"]
+__all__ = [
+    "IssueStructure",
+    "RenderedIssue",
+    "assemble_issue",
+    "content_hash",
+]
+
+
+class IssueStructure(BaseModel):
+    """Sidecar JSON schema: full `RenderedIssue` minus `body_md` (cross-checked).
+
+    Per US0023: written alongside `drafts/<issue_id>.md` so `send` can
+    reconstruct structured `DeepDive` / `QuickMention` data — channel
+    renderers can then operate on structure instead of regex-parsing the
+    Markdown body. `content_sha256` MUST remain derived from `body_md`
+    alone; this sidecar does not participate in the idempotency hash.
+    """
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    version: int = 1
+    issue_id: str
+    issue_date: datetime
+    body_md: str  # mirror of the .md content for the cross-check (AC6)
+    deep_dives: list[DeepDive]
+    quick_mentions: list[QuickMention]
+    meta: dict[str, Any] = Field(default_factory=lambda: {})
+    content_sha256: str
 
 
 class RenderedIssue(BaseModel):
     """A fully-rendered weekly issue, ready for delivery.
 
     `body_md` is the canonical Markdown body the channel adapters consume.
-    `meta` includes issue_id, date, token usage, source counts, etc.
+    `deep_dives` / `quick_mentions` carry the structured data (post-US0023);
+    empty lists are the legacy fallback path when no sidecar JSON exists.
     """
 
     model_config = ConfigDict(frozen=True, extra="forbid")
@@ -39,8 +67,50 @@ class RenderedIssue(BaseModel):
     issue_id: str
     issue_date: datetime
     body_md: str
+    deep_dives: list[DeepDive] = Field(default_factory=lambda: [])
+    quick_mentions: list[QuickMention] = Field(default_factory=lambda: [])
     meta: dict[str, Any] = Field(default_factory=lambda: {})
     content_sha256: str
+
+    def to_sidecar_json(self) -> str:
+        """Serialise to the sidecar JSON format (US0023 AC2)."""
+        s = IssueStructure(
+            issue_id=self.issue_id,
+            issue_date=self.issue_date,
+            body_md=self.body_md,
+            deep_dives=list(self.deep_dives),
+            quick_mentions=list(self.quick_mentions),
+            meta=dict(self.meta),
+            content_sha256=self.content_sha256,
+        )
+        return s.model_dump_json(indent=2)
+
+    @classmethod
+    def from_sidecar_json(
+        cls, json_str: str, *, body_md: str
+    ) -> tuple[RenderedIssue, list[str]]:
+        """Reconstruct from sidecar JSON; `body_md` is authoritative (.md wins).
+
+        Returns `(issue, warnings)`. Warnings are non-fatal — caller logs them.
+        """
+        warnings: list[str] = []
+        s = IssueStructure.model_validate_json(json_str)
+        if s.body_md != body_md:
+            warnings.append(
+                "sidecar body_md does not match .md file; using .md (sidecar may be stale)"
+            )
+        return (
+            cls(
+                issue_id=s.issue_id,
+                issue_date=s.issue_date,
+                body_md=body_md,
+                deep_dives=list(s.deep_dives),
+                quick_mentions=list(s.quick_mentions),
+                meta=dict(s.meta),
+                content_sha256=s.content_sha256,
+            ),
+            warnings,
+        )
 
 
 def assemble_issue(
@@ -98,6 +168,8 @@ def assemble_issue(
         issue_id=issue_id,
         issue_date=issue_date,
         body_md=body_md,
+        deep_dives=list(deep_dives),
+        quick_mentions=list(quick_mentions),
         meta={
             "issue_id": issue_id,
             "issue_date": iso_date,

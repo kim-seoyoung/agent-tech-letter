@@ -8,11 +8,11 @@
 | Status | Count |
 |--------|-------|
 | Draft | 0 |
-| Ready | 5 |
+| Ready | 0 |
 | Planned | 0 |
 | In Progress | 0 |
 | Review | 0 |
-| Done | 22 |
+| Done | 27 |
 | **Total** | **27** |
 
 ## Stories by Epic
@@ -73,13 +73,13 @@
 
 | ID | Title | Status | Points | Owner |
 |----|-------|--------|--------|-------|
-| [US0023](US0023-sidecar-json-persistence.md) | Sidecar JSON persistence for `RenderedIssue` structure | Ready | 4 | HYL |
-| [US0024](US0024-design-tokens-and-jinja2-components.md) | Design tokens + Jinja2 component partials | Ready | 2 | HYL |
-| [US0025](US0025-html-web-renderer-and-golden-fixture.md) | `html_web` renderer + golden fixture | Ready | 3 | HYL |
-| [US0026](US0026-html-email-renderer-and-premailer-inlining.md) | `html_email` renderer + premailer CSS inlining | Ready | 4 | HYL |
-| [US0027](US0027-email-adapter-swap.md) | `EmailAdapter` swap (drop `_wrap_html`) | Ready | 3 | HYL |
+| [US0023](US0023-sidecar-json-persistence.md) | Sidecar JSON persistence for `RenderedIssue` structure | Done | 4 | HYL |
+| [US0024](US0024-design-tokens-and-jinja2-components.md) | Design tokens + Jinja2 component partials | Done | 2 | HYL |
+| [US0025](US0025-html-web-renderer-and-golden-fixture.md) | `html_web` renderer + golden fixture | Done | 3 | HYL |
+| [US0026](US0026-html-email-renderer-and-premailer-inlining.md) | `html_email` renderer + premailer CSS inlining | Done | 4 | HYL |
+| [US0027](US0027-email-adapter-swap.md) | `EmailAdapter` swap (drop `_wrap_html`) | Done | 3 | HYL |
 
-**EP0005 subtotal:** 5 stories, 16 points (all Ready)
+**EP0005 subtotal:** 5 stories, 16 points (all Done)
 
 ---
 
@@ -117,11 +117,11 @@ _Stories not yet generated. Run `/sdlc-studio story --epic EP0004`._
 | [US0020](US0020-slack-channel-adapter.md) | Slack adapter | [EP0004](../epics/EP0004-multichannel-delivery.md) | Done | 3 | HYL/Researcher |
 | [US0021](US0021-telegram-channel-adapter.md) | Telegram adapter | [EP0004](../epics/EP0004-multichannel-delivery.md) | Done | 3 | HYL/Researcher |
 | [US0022](US0022-channel-registry-and-send-aggregation.md) | Channel registry + aggregation | [EP0004](../epics/EP0004-multichannel-delivery.md) | Done | 3 | HYL |
-| [US0023](US0023-sidecar-json-persistence.md) | Sidecar JSON persistence | [EP0005](../epics/EP0005-common-html-rendering.md) | Ready | 4 | HYL/Researcher |
-| [US0024](US0024-design-tokens-and-jinja2-components.md) | Design tokens + Jinja2 components | [EP0005](../epics/EP0005-common-html-rendering.md) | Ready | 2 | HYL |
-| [US0025](US0025-html-web-renderer-and-golden-fixture.md) | `html_web` renderer + golden fixture | [EP0005](../epics/EP0005-common-html-rendering.md) | Ready | 3 | HYL/Researcher |
-| [US0026](US0026-html-email-renderer-and-premailer-inlining.md) | `html_email` renderer + premailer | [EP0005](../epics/EP0005-common-html-rendering.md) | Ready | 4 | Researcher |
-| [US0027](US0027-email-adapter-swap.md) | `EmailAdapter` swap | [EP0005](../epics/EP0005-common-html-rendering.md) | Ready | 3 | Researcher/HYL |
+| [US0023](US0023-sidecar-json-persistence.md) | Sidecar JSON persistence | [EP0005](../epics/EP0005-common-html-rendering.md) | Done | 4 | HYL/Researcher |
+| [US0024](US0024-design-tokens-and-jinja2-components.md) | Design tokens + Jinja2 components | [EP0005](../epics/EP0005-common-html-rendering.md) | Done | 2 | HYL |
+| [US0025](US0025-html-web-renderer-and-golden-fixture.md) | `html_web` renderer + golden fixture | [EP0005](../epics/EP0005-common-html-rendering.md) | Done | 3 | HYL/Researcher |
+| [US0026](US0026-html-email-renderer-and-premailer-inlining.md) | `html_email` renderer + premailer | [EP0005](../epics/EP0005-common-html-rendering.md) | Done | 4 | Researcher |
+| [US0027](US0027-email-adapter-swap.md) | `EmailAdapter` swap | [EP0005](../epics/EP0005-common-html-rendering.md) | Done | 3 | Researcher/HYL |
 
 ## Dependency Graph for EP0001
 

@@ -1,0 +1,7 @@
+{#- US0024 shared quick-mention component.
+    Context: qm (QuickMention), colors, font, layout. -#}
+<li style="margin-bottom: 6px; color: {{ colors.fg }}; font-size: {{ font.size_body }};">
+  <span class="tag" style="background: {{ colors.tag_bg }}; padding: 2px 8px; border-radius: 4px; font-size: 12px;">{{ qm.item_kind }}</span>
+  <a href="{{ qm.url }}" style="color: {{ colors.accent }};">{{ qm.title }}</a>
+  <span style="color: {{ colors.muted }};"> &mdash; {{ qm.one_liner }}</span>
+</li>

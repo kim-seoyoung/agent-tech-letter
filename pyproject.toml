@@ -16,6 +16,9 @@ dependencies = [
     "pyyaml>=6",         # US0005 config loader
     "anthropic>=0.40",   # US0006 LLM client (EP0002)
     "click>=8.1",        # US0012 CLI (EP0003)
+    "jinja2>=3.1",        # US0024 shared HTML templates (EP0005)
+    "markdown-it-py>=3",  # US0025 DeepDive.body_md → HTML (EP0005)
+    "premailer>=3.10",    # US0026 email CSS inlining (EP0005)
 ]
 
 [project.scripts]

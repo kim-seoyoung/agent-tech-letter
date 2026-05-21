@@ -8,11 +8,11 @@
 
 | Status | Count |
 |--------|-------|
-| Draft | 1 |
+| Draft | 0 |
 | Ready | 0 |
 | Approved | 0 |
 | In Progress | 0 |
-| Done | 4 |
+| Done | 5 |
 | **Total** | **5** |
 
 ## Epics
@@ -23,7 +23,7 @@
 | [EP0002](EP0002-composition-pipeline.md) | Composition Pipeline | Done | HYL | 6 | F-02, F-03 | PRD |
 | [EP0003](EP0003-orchestration-and-dx.md) | Orchestration & Developer Experience | Done | HYL | 6 | F-04, F-09, F-10, F-11 | PRD |
 | [EP0004](EP0004-multichannel-delivery.md) | Multi-channel Delivery | Done | HYL | 5 | F-05, F-06, F-07, F-08 | PRD |
-| [EP0005](EP0005-common-html-rendering.md) | Common HTML Rendering (Web + Email) | Draft | HYL | 5 | F-05 (enhanced) | [CR-0001](../change-requests/CR0001-common-html-rendering.md) |
+| [EP0005](EP0005-common-html-rendering.md) | Common HTML Rendering (Web + Email) | Done | HYL | 5 | F-05 (enhanced) | [CR-0001](../change-requests/CR0001-common-html-rendering.md) |
 
 **Total estimated stories:** ~27
 

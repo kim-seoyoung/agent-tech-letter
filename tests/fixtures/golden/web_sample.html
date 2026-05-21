@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Tech-Letter — 2026-05-21</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; color: #1a1a1a; background: #ffffff; margin: 0; padding: 0; }
+.container { max-width: 680px; margin: 0 auto; padding: 32px; }
+header { border-bottom: 1px solid #e5e5e5; padding-bottom: 16px; margin-bottom: 32px; }
+h1 { font-size: 28px; margin: 0 0 4px 0; color: #1a1a1a; }
+.date { color: #6b6b6b; margin: 0; font-size: 16px; }
+h2 { font-size: 20px; }
+h3 { font-size: 17px; }
+a { color: #0066cc; text-decoration: none; }
+a:hover { text-decoration: underline; }
+code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; background: #f3f4f6; padding: 1px 4px; border-radius: 3px; }
+pre { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; background: #f3f4f6; padding: 12px; border-radius: 6px; overflow-x: auto; }
+.quick-mentions { padding-left: 20px; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>Tech-Letter</h1>
+<p class="date">2026-05-21</p>
+</header>
+<main><section class="deep-dive" style="margin-bottom: 32px;">
+  <h2 style="font-size: 20px; color: #1a1a1a; margin: 0 0 8px 0;">Diffusion-as-Optimizer 논문</h2>
+  <p class="meta" style="color: #6b6b6b; font-size: 16px; margin: 0 0 16px 0;">
+    <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
+    &middot; <a href="https://arxiv.org/abs/2505.10001" style="color: #0066cc;">원문</a>
+    &middot; 3 sources
+  </p>
+  <div class="body" style="color: #1a1a1a; font-size: 16px; line-height: 1.6;"><p>Diffusion 모델을 일반 비볼록 최적화 문제의 sampler로 재해석한다.
+<strong>핵심 결과:</strong> ImageNet-scale 벤치마크에서 5% 개선.
+주의: production 환경에서 latency가 1.6x 늘어남.</p></div>
+</section><section class="deep-dive" style="margin-bottom: 32px;">
+  <h2 style="font-size: 20px; color: #1a1a1a; margin: 0 0 8px 0;">vLLM v0.7 릴리스</h2>
+  <p class="meta" style="color: #6b6b6b; font-size: 16px; margin: 0 0 16px 0;">
+    <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">repo</span>
+<span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">production-ready</span>    &middot; <a href="https://github.com/vllm-project/vllm" style="color: #0066cc;">원문</a>
+    &middot; 2 sources
+  </p>
+  <div class="body" style="color: #1a1a1a; font-size: 16px; line-height: 1.6;"><p>PagedAttention의 NUMA-aware variant 추가. continuous batching이 default가 됐고 throughput이 14% 향상.</p>
+<ul>
+<li>신규 <code>--enable-numa-paging</code> 플래그</li>
+<li>KV-cache eviction policy 교체 가능</li>
+</ul></div>
+</section><section class="deep-dive" style="margin-bottom: 32px;">
+  <h2 style="font-size: 20px; color: #1a1a1a; margin: 0 0 8px 0;">MoE routing 블로그</h2>
+  <p class="meta" style="color: #6b6b6b; font-size: 16px; margin: 0 0 16px 0;">
+    <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">blog_post</span>
+    &middot; <a href="https://latent.space/p/moe-routing-2026" style="color: #0066cc;">원문</a>
+    &middot; 1 source
+  </p>
+  <div class="body" style="color: #1a1a1a; font-size: 16px; line-height: 1.6;"><p>Expert routing의 entropy-collapse 문제에 대한 분석. auxiliary loss 없이도 안정적으로 학습되는 변형 제안.</p></div>
+</section><h2 style="font-size: 20px; color: #1a1a1a;">Quick Mentions</h2>
+<ul class="quick-mentions"><li style="margin-bottom: 6px; color: #1a1a1a; font-size: 16px;">
+  <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
+  <a href="https://example.com/q/0" style="color: #0066cc;">Quick item 0</a>
+  <span style="color: #6b6b6b;"> &mdash; A one-line summary for item 0.</span>
+</li><li style="margin-bottom: 6px; color: #1a1a1a; font-size: 16px;">
+  <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
+  <a href="https://example.com/q/1" style="color: #0066cc;">Quick item 1</a>
+  <span style="color: #6b6b6b;"> &mdash; A one-line summary for item 1.</span>
+</li><li style="margin-bottom: 6px; color: #1a1a1a; font-size: 16px;">
+  <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
+  <a href="https://example.com/q/2" style="color: #0066cc;">Quick item 2</a>
+  <span style="color: #6b6b6b;"> &mdash; A one-line summary for item 2.</span>
+</li><li style="margin-bottom: 6px; color: #1a1a1a; font-size: 16px;">
+  <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
+  <a href="https://example.com/q/3" style="color: #0066cc;">Quick item 3</a>
+  <span style="color: #6b6b6b;"> &mdash; A one-line summary for item 3.</span>
+</li><li style="margin-bottom: 6px; color: #1a1a1a; font-size: 16px;">
+  <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
+  <a href="https://example.com/q/4" style="color: #0066cc;">Quick item 4</a>
+  <span style="color: #6b6b6b;"> &mdash; A one-line summary for item 4.</span>
+</li></ul>
+</main>
+</div>
+</body>
+</html>

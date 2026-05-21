@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<title>Tech-Letter — {{ issue_date_iso }}</title>
+<style>
+body { font-family: {{ font.family|safe }}; color: {{ colors.fg|safe }}; background: #f5f5f5; margin: 0; padding: 0; }
+h1 { font-size: {{ font.size_h1|safe }}; color: {{ colors.fg|safe }}; margin: 0 0 4px 0; }
+h2 { font-size: {{ font.size_h2|safe }}; color: {{ colors.fg|safe }}; margin: 24px 0 8px 0; }
+.deep-dive { margin-bottom: 32px; }
+.deep-dive h2 { font-size: {{ font.size_h2|safe }}; color: {{ colors.fg|safe }}; }
+.meta { color: {{ colors.muted|safe }}; font-size: {{ font.size_body|safe }}; margin: 0 0 16px 0; }
+.body { color: {{ colors.fg|safe }}; font-size: {{ font.size_body|safe }}; line-height: 1.6; }
+.date { color: {{ colors.muted|safe }}; margin: 0; font-size: {{ font.size_body|safe }}; }
+.tag { background: {{ colors.tag_bg|safe }}; padding: 2px 8px; border-radius: 4px; font-size: 12px; }
+a { color: {{ colors.accent|safe }}; text-decoration: none; }
+code { font-family: {{ font.mono|safe }}; background: {{ colors.tag_bg|safe }}; padding: 1px 4px; border-radius: 3px; }
+.qm { margin-bottom: 6px; color: {{ colors.fg|safe }}; font-size: {{ font.size_body|safe }}; }
+</style>
+</head>
+<body style="margin:0; padding:0; background:#f5f5f5;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td align="center" style="padding: 24px 0;">
+<table role="presentation" width="680" cellpadding="0" cellspacing="0" border="0" style="background: {{ colors.bg|safe }}; max-width: {{ layout.max_width|safe }};">
+<tr><td style="padding: {{ layout.padding|safe }};">
+<h1>Tech-Letter</h1>
+<p class="date">{{ issue_date_iso }}</p>
+{%- for dd in deep_dives %}
+{% include "components/deep_dive.html.j2" %}
+{%- endfor %}
+<h2>Quick Mentions</h2>
+<ul style="padding-left: 20px; margin: 0;">
+{%- for qm in quick_mentions %}
+{% include "components/quick_mention.html.j2" %}
+{%- endfor %}
+</ul>
+</td></tr>
+</table>
+</td></tr>
+</table>
+</body>
+</html>

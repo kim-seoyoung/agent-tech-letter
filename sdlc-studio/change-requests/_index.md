@@ -9,8 +9,8 @@
 |--------|-------|
 | Proposed | 1 |
 | Approved | 0 |
-| In Progress | 1 |
-| Complete | 0 |
+| In Progress | 0 |
+| Complete | 1 |
 | Rejected | 0 |
 | Deferred | 0 |
 | **Total** | **2** |
@@ -28,7 +28,7 @@
 
 | ID | Title | Priority | Status | Type | Date | Affects |
 |----|-------|----------|--------|------|------|---------|
-| [CR-0001](CR0001-common-html-rendering.md) | Common HTML Rendering (Web + Email) | P2 | In Progress | feature-request | 2026-05-21 | F-05 (+ enables CR-0002) |
+| [CR-0001](CR0001-common-html-rendering.md) | Common HTML Rendering (Web + Email) | P2 | Complete | feature-request | 2026-05-21 | F-05 (+ enables CR-0002) |
 | [CR-0002](CR0002-github-pages-and-telegram-link-mode.md) | GitHub Pages Publisher + Telegram Link Mode | P2 | Proposed | feature-request | 2026-05-21 | F-07 (+ new web archive capability) |
 
 ## Actioned CRs → Epics

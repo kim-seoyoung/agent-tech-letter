@@ -1,0 +1,3 @@
+# Auto-generated sidecar JSON files alongside drafts (US0023).
+# Reviewer reads the .md; the .json is machine-only metadata.
+drafts/*.json linguist-generated=true

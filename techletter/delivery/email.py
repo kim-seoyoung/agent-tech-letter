@@ -33,6 +33,7 @@ from techletter.delivery.base import (
     SendReport,
 )
 from techletter.delivery.escaping import strip_markdown
+from techletter.delivery.renderers import html_email
 
 __all__ = ["EmailAdapter", "SmtpFactory"]
 
@@ -121,7 +122,10 @@ class EmailAdapter:
         try:
             subject = f"Tech-Letter — {issue.issue_id}"
             plain_body = strip_markdown(issue.body_md)
-            html_body = self._wrap_html(issue.body_md)
+            # US0027: html_email.render() invoked exactly once per send(),
+            # reused across all recipients (TC0214 privacy preserved — one
+            # MIME per recipient, no BCC).
+            html_body = html_email.render(issue)
 
             for r in recipients:
                 try:
@@ -175,20 +179,6 @@ class EmailAdapter:
         msg.attach(MIMEText(plain, "plain", "utf-8"))
         msg.attach(MIMEText(html, "html", "utf-8"))
         return msg
-
-    @staticmethod
-    def _wrap_html(body_md: str) -> str:
-        """Minimal HTML wrapper around the markdown body.
-
-        We escape the body for safety (no template engine needed for v1).
-        """
-        body_escaped = body_md.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-        return (
-            "<!DOCTYPE html><html><head><meta charset='utf-8'></head>"
-            "<body><pre style='font-family: monospace; white-space: pre-wrap;'>"
-            f"{body_escaped}"
-            "</pre></body></html>"
-        )
 
     @staticmethod
     def _derive_status(success: int, failure: int, total: int) -> str:

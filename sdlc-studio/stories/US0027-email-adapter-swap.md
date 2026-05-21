@@ -1,6 +1,6 @@
 # US0027: `EmailAdapter` swap (drop `_wrap_html`)
 
-> **Status:** Ready
+> **Status:** Done
 > **Epic:** [EP0005: Common HTML Rendering (Web + Email)](../epics/EP0005-common-html-rendering.md)
 > **Change Request:** [CR-0001](../change-requests/CR0001-common-html-rendering.md) (Item 5)
 > **Owner:** HYL

@@ -212,12 +212,43 @@ def send(
     except ValueError:
         issue_date = datetime.now(UTC)
 
-    issue = RenderedIssue(
-        issue_id=issue_id,
-        issue_date=issue_date,
-        body_md=body_md,
-        content_sha256=content_hash(body_md),
-    )
+    # US0023: auto-load matching sidecar to reconstruct structured data.
+    # Missing sidecar is a warning, not an error (legacy fallback).
+    sidecar_path = draft_path.with_suffix(".json")
+    if sidecar_path.exists():
+        try:
+            issue, warnings = RenderedIssue.from_sidecar_json(
+                sidecar_path.read_text(encoding="utf-8"), body_md=body_md
+            )
+            click.echo(
+                f"send: loaded sidecar {sidecar_path} "
+                f"({len(issue.deep_dives)} deep dives, {len(issue.quick_mentions)} quick mentions)"
+            )
+            for w in warnings:
+                click.echo(f"send: warning: {w}", err=True)
+        except Exception as e:
+            click.echo(
+                f"send: warning: sidecar at {sidecar_path} unreadable ({e}); "
+                f"falling back to body_md only",
+                err=True,
+            )
+            issue = RenderedIssue(
+                issue_id=issue_id,
+                issue_date=issue_date,
+                body_md=body_md,
+                content_sha256=content_hash(body_md),
+            )
+    else:
+        click.echo(
+            f"send: warning: no sidecar found for {issue_id}; falling back to body_md only",
+            err=True,
+        )
+        issue = RenderedIssue(
+            issue_id=issue_id,
+            issue_date=issue_date,
+            body_md=body_md,
+            content_sha256=content_hash(body_md),
+        )
 
     for channel_name, adapter in registry.adapters.items():
         if already_sent(issue_id=issue_id, channel=channel_name):
@@ -293,6 +324,13 @@ def _run_pipeline(
     out_path = output_dir / f"{issue.issue_id}.md"
     out_path.write_text(issue.body_md, encoding="utf-8")
     click.echo(f"wrote draft: {out_path}")
+
+    # US0023: sidecar JSON carries the structured DeepDive/QuickMention data
+    # across the draft → PR-merge → send boundary so channel renderers don't
+    # have to regex-parse the markdown body. Not part of content_sha256.
+    sidecar_path = output_dir / f"{issue.issue_id}.json"
+    sidecar_path.write_text(issue.to_sidecar_json(), encoding="utf-8")
+    click.echo(f"wrote sidecar: {sidecar_path}")
 
     usage = llm.usage_report()
     click.echo(

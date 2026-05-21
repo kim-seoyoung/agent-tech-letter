@@ -1,6 +1,6 @@
 # EP0005: Common HTML Rendering (Web + Email)
 
-> **Status:** Draft
+> **Status:** Done
 > **Owner:** HYL
 > **Reviewer:** HYL
 > **Created:** 2026-05-21
@@ -191,11 +191,11 @@ techletter/
 
 Stories generated 2026-05-21 from CR-0001 via `/sdlc-studio cr action`. See [Story Index](../stories/_index.md) for full details.
 
-- [ ] [US0023](../stories/US0023-sidecar-json-persistence.md) — Sidecar JSON persistence for `RenderedIssue` structure (4 pts)
-- [ ] [US0024](../stories/US0024-design-tokens-and-jinja2-components.md) — Design tokens + Jinja2 component partials (2 pts)
-- [ ] [US0025](../stories/US0025-html-web-renderer-and-golden-fixture.md) — `html_web` renderer + golden fixture (3 pts)
-- [ ] [US0026](../stories/US0026-html-email-renderer-and-premailer-inlining.md) — `html_email` renderer + premailer CSS inlining (4 pts)
-- [ ] [US0027](../stories/US0027-email-adapter-swap.md) — `EmailAdapter` swap (drop `_wrap_html`) (3 pts)
+- [x] [US0023](../stories/US0023-sidecar-json-persistence.md) — Sidecar JSON persistence for `RenderedIssue` structure (4 pts)
+- [x] [US0024](../stories/US0024-design-tokens-and-jinja2-components.md) — Design tokens + Jinja2 component partials (2 pts)
+- [x] [US0025](../stories/US0025-html-web-renderer-and-golden-fixture.md) — `html_web` renderer + golden fixture (3 pts)
+- [x] [US0026](../stories/US0026-html-email-renderer-and-premailer-inlining.md) — `html_email` renderer + premailer CSS inlining (4 pts)
+- [x] [US0027](../stories/US0027-email-adapter-swap.md) — `EmailAdapter` swap (drop `_wrap_html`) (3 pts)
 
 **Total:** 16 story points across 5 stories.
 
@@ -227,3 +227,4 @@ Stories generated 2026-05-21 from CR-0001 via `/sdlc-studio cr action`. See [Sto
 | Date | Author | Change |
 |------|--------|--------|
 | 2026-05-21 | HYL | Epic created from CR-0001 via `/sdlc-studio cr action`. 5 stories generated (US0023–US0027), 16 pts total. |
+| 2026-05-21 | Claude (via /sdlc-studio epic implement --epic EP0005) | All 5 stories implemented and cascaded to Done. 50 new tests added (0 failing), 340 pass total (1 unrelated pre-existing failure). Ruff clean. Deps added: jinja2, markdown-it-py, premailer. AC9 manual smoke check (US0027) remains HYL-owned. |

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Tech-Letter — {{ issue_date_iso }}</title>
+<style>
+body { font-family: {{ font.family|safe }}; color: {{ colors.fg|safe }}; background: {{ colors.bg|safe }}; margin: 0; padding: 0; }
+.container { max-width: {{ layout.max_width|safe }}; margin: 0 auto; padding: {{ layout.padding|safe }}; }
+header { border-bottom: 1px solid {{ colors.border|safe }}; padding-bottom: 16px; margin-bottom: 32px; }
+h1 { font-size: {{ font.size_h1|safe }}; margin: 0 0 4px 0; color: {{ colors.fg|safe }}; }
+.date { color: {{ colors.muted|safe }}; margin: 0; font-size: {{ font.size_body|safe }}; }
+h2 { font-size: {{ font.size_h2|safe }}; }
+h3 { font-size: {{ font.size_h3|safe }}; }
+a { color: {{ colors.accent|safe }}; text-decoration: none; }
+a:hover { text-decoration: underline; }
+code { font-family: {{ font.mono|safe }}; background: {{ colors.tag_bg|safe }}; padding: 1px 4px; border-radius: 3px; }
+pre { font-family: {{ font.mono|safe }}; background: {{ colors.tag_bg|safe }}; padding: 12px; border-radius: 6px; overflow-x: auto; }
+.quick-mentions { padding-left: 20px; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>Tech-Letter</h1>
+<p class="date">{{ issue_date_iso }}</p>
+</header>
+<main>
+{%- for dd in deep_dives %}
+{% include "components/deep_dive.html.j2" %}
+{%- endfor %}
+<h2 style="font-size: {{ font.size_h2 }}; color: {{ colors.fg }};">Quick Mentions</h2>
+<ul class="quick-mentions">
+{%- for qm in quick_mentions %}
+{% include "components/quick_mention.html.j2" %}
+{%- endfor %}
+</ul>
+</main>
+</div>
+</body>
+</html>

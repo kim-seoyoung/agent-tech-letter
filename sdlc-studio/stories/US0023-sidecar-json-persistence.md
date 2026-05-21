@@ -1,6 +1,6 @@
 # US0023: Sidecar JSON persistence for `RenderedIssue` structure
 
-> **Status:** Ready
+> **Status:** Done
 > **Epic:** [EP0005: Common HTML Rendering (Web + Email)](../epics/EP0005-common-html-rendering.md)
 > **Change Request:** [CR-0001](../change-requests/CR0001-common-html-rendering.md) (Item 1)
 > **Owner:** HYL

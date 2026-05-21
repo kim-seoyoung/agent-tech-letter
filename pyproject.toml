@@ -18,6 +18,9 @@ dependencies = [
     "click>=8.1",        # US0012 CLI (EP0003)
 ]
 
+[project.scripts]
+techletter = "techletter.orchestration.cli:main"
+
 [project.optional-dependencies]
 dev = [
     "pytest>=8",

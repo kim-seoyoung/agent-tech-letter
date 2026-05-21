@@ -164,34 +164,87 @@ def dry_run(ctx: click.Context, window_days: int, config: Path, output_dir: Path
     required=True,
     help="Path to the merged draft markdown.",
 )
+@click.option(
+    "--channels-config",
+    type=click.Path(exists=True, dir_okay=False, path_type=Path),
+    default=Path("config/channels.yaml"),
+    help="Path to channels.yaml (default: config/channels.yaml).",
+)
+@click.option(
+    "--subscribers-config",
+    type=click.Path(exists=True, dir_okay=False, path_type=Path),
+    default=Path("config/subscribers.yaml"),
+    help="Path to subscribers.yaml (default: config/subscribers.yaml).",
+)
 @click.pass_context
-def send(ctx: click.Context, issue_id: str, draft_path: Path) -> None:
-    """Read the merged draft and fan out to enabled channels (idempotent).
+def send(
+    ctx: click.Context,
+    issue_id: str,
+    draft_path: Path,
+    channels_config: Path,
+    subscribers_config: Path,
+) -> None:
+    """Read the merged draft and fan out to enabled channels (idempotent)."""
+    from techletter.audit import already_sent, append_send_record, make_record
+    from techletter.compose.issue import RenderedIssue, content_hash
+    from techletter.config import ConfigLoadError, load_channels, load_subscribers
+    from techletter.delivery.registry import build_channel_registry
 
-    NOTE: real channel adapters arrive in EP0004. This command currently
-    only verifies idempotency check semantics — calling it with no
-    registered adapters logs "no channels" and exits 0.
-    """
-    from techletter.audit import already_sent
-
-    _ = ctx  # CLI context not needed for stub
-    # In v0 (pre-EP0004), no channels are registered. The send command
-    # exists so US0016 (send.yml) can wire it up without further code changes.
+    _ = ctx
     body_md = draft_path.read_text(encoding="utf-8")
     click.echo(f"send: read {len(body_md)} chars from {draft_path}")
 
-    # The actual channel iteration happens in EP0004:
-    channels_to_send: list[ChannelAdapter] = []  # populated by build_channel_registry()
-    if not channels_to_send:
-        click.echo("send: no channels registered (EP0004 not yet implemented); exiting 0")
+    try:
+        channels_cfg = load_channels(channels_config)
+        subscribers_cfg = load_subscribers(subscribers_config)
+    except ConfigLoadError as e:
+        click.echo(f"config error: {e}", err=True)
+        sys.exit(EXIT_CONFIG_ERROR)
+
+    registry = build_channel_registry(channels_cfg, subscribers_cfg)
+    if not registry.adapters:
+        click.echo("send: no channels enabled in channels.yaml; exiting 0")
         sys.exit(EXIT_OK)
 
-    for ch in channels_to_send:
-        if already_sent(issue_id=issue_id, channel=ch.name):
-            click.echo(f"send: {ch.name} already_sent for {issue_id}; skipping")
+    try:
+        date_part = issue_id.removeprefix("issue-")
+        issue_date = datetime.strptime(date_part, "%Y-%m-%d").replace(tzinfo=UTC)
+    except ValueError:
+        issue_date = datetime.now(UTC)
+
+    issue = RenderedIssue(
+        issue_id=issue_id,
+        issue_date=issue_date,
+        body_md=body_md,
+        content_sha256=content_hash(body_md),
+    )
+
+    for channel_name, adapter in registry.adapters.items():
+        if already_sent(issue_id=issue_id, channel=channel_name):
+            click.echo(f"send: {channel_name} already_sent for {issue_id}; skipping")
             continue
-        # ch.send(issue) + audit.append_send_record(...) goes here
-        click.echo(f"send: would send via {ch.name}")
+
+        recipients = registry.recipients.get(channel_name, [])
+        report = adapter.send(issue, recipients)
+        click.echo(
+            f"send: {channel_name} → {report.status} "
+            f"({report.success_count}/{report.recipient_count} ok, "
+            f"{report.failure_count} failed)"
+        )
+        for err in report.errors:
+            click.echo(f"  ! {err}", err=True)
+
+        append_send_record(
+            make_record(
+                issue_id=issue_id,
+                channel=channel_name,
+                status=report.status,
+                recipient_count=report.recipient_count,
+                error="; ".join(report.errors) if report.errors else None,
+            )
+        )
+
+    sys.exit(EXIT_OK)
 
 
 def _run_pipeline(

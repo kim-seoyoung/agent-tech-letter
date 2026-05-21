@@ -1,0 +1,11 @@
+# Per-channel enable flags. Schema: techletter/delivery/config.py :: ChannelsConfig
+# Subscribers live in config/subscribers.yaml (gitignored).
+
+email:
+  enabled: true
+
+slack:
+  enabled: false
+
+telegram:
+  enabled: false

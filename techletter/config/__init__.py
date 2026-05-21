@@ -14,14 +14,19 @@ from techletter.config.sources import (
     RssConfig,
     SourcesConfig,
 )
+from techletter.delivery.config import ChannelsConfig, SubscribersConfig
 
 __all__ = [
     "ArxivConfig",
+    "ChannelsConfig",
     "ConfigLoadError",
     "GithubConfig",
     "RssConfig",
     "SourcesConfig",
+    "SubscribersConfig",
+    "load_channels",
     "load_sources",
+    "load_subscribers",
 ]
 
 
@@ -62,3 +67,41 @@ def load_sources(path: Path) -> SourcesConfig:
         return SourcesConfig.model_validate(data)
     except ValidationError as e:
         raise ConfigLoadError(f"sources config {path} failed validation: {e}") from e
+
+
+def _load_yaml_mapping(path: Path, label: str) -> dict[str, Any]:
+    try:
+        raw = path.read_text(encoding="utf-8")
+    except FileNotFoundError as e:
+        raise ConfigLoadError(f"{label} config file not found: {path}") from e
+    except OSError as e:
+        raise ConfigLoadError(f"could not read {label} config {path}: {e}") from e
+
+    try:
+        data: Any = yaml.safe_load(raw)
+    except yaml.YAMLError as e:
+        raise ConfigLoadError(f"malformed YAML in {path}: {e}") from e
+
+    if data is None:
+        data = {}
+    if not isinstance(data, dict):
+        raise ConfigLoadError(f"{label} config {path} must be a mapping at the top level")
+    return data
+
+
+def load_channels(path: Path) -> ChannelsConfig:
+    """Load and validate `config/channels.yaml`."""
+    data = _load_yaml_mapping(path, "channels")
+    try:
+        return ChannelsConfig.model_validate(data)
+    except ValidationError as e:
+        raise ConfigLoadError(f"channels config {path} failed validation: {e}") from e
+
+
+def load_subscribers(path: Path) -> SubscribersConfig:
+    """Load and validate `config/subscribers.yaml`."""
+    data = _load_yaml_mapping(path, "subscribers")
+    try:
+        return SubscribersConfig.model_validate(data)
+    except ValidationError as e:
+        raise ConfigLoadError(f"subscribers config {path} failed validation: {e}") from e

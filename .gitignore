@@ -49,6 +49,10 @@ sdlc-studio/.local/
 .env.*
 !.env.example
 
+# Subscribers list contains Slack webhook URLs (anyone with the URL can post).
+# Keep local; CI builds its own from secrets.
+config/subscribers.yaml
+
 # --- VCR / fixture noise ---
 # Cassettes themselves ARE checked in (they're the source-of-truth for
 # arXiv/GitHub/RSS adapter tests). But ad-hoc recording artefacts are not.
@@ -75,3 +79,9 @@ Thumbs.db
 logs/
 !logs/sends.jsonl
 !logs/.gitkeep
+
+_demo_sends/
+drafts/.local/
+docs/
+samples/
+scripts/

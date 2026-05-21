@@ -86,7 +86,5 @@ docs/
 samples/
 scripts/
 
-# GitHubPagesPublisher worktree (EP0006 / US0029) — the publisher checks
-# out the gh-pages branch here at publish time. Local-only; never tracked
-# on main.
+# GitHubPagesPublisher worktree — local checkout of the gh-pages branch.
 .gh-pages-publish/

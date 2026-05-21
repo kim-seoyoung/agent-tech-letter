@@ -1,6 +1,6 @@
 # US0020: Slack channel adapter (Incoming Webhook, message splitting)
 
-> **Status:** Draft
+> **Status:** Done
 > **Epic:** [EP0004: Multi-channel Delivery](../epics/EP0004-multichannel-delivery.md)
 > **Owner:** HYL
 > **Reviewer:** HYL

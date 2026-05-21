@@ -1,6 +1,6 @@
 # US0021: Telegram channel adapter (Bot API, 4096-char splitting, HTML escape)
 
-> **Status:** Draft
+> **Status:** Done
 > **Epic:** [EP0004: Multi-channel Delivery](../epics/EP0004-multichannel-delivery.md)
 > **Owner:** HYL
 > **Reviewer:** HYL

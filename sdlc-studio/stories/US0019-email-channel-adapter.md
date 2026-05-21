@@ -1,6 +1,6 @@
 # US0019: Email channel adapter (SMTP, HTML + plain-text multipart)
 
-> **Status:** Draft
+> **Status:** Done
 > **Epic:** [EP0004: Multi-channel Delivery](../epics/EP0004-multichannel-delivery.md)
 > **Owner:** HYL
 > **Reviewer:** HYL

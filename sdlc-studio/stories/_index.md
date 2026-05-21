@@ -7,12 +7,12 @@
 
 | Status | Count |
 |--------|-------|
-| Draft | 5 |
+| Draft | 0 |
 | Ready | 0 |
 | Planned | 0 |
 | In Progress | 0 |
 | Review | 0 |
-| Done | 17 |
+| Done | 22 |
 | **Total** | **22** |
 
 ## Stories by Epic
@@ -59,11 +59,11 @@
 
 | ID | Title | Status | Points | Owner |
 |----|-------|--------|--------|-------|
-| [US0018](US0018-channel-adapter-protocol-and-config-loaders.md) | `ChannelAdapter` protocol + config loaders | Draft | 3 | HYL |
-| [US0019](US0019-email-channel-adapter.md) | Email channel adapter (SMTP multipart) | Draft | 5 | HYL |
-| [US0020](US0020-slack-channel-adapter.md) | Slack channel adapter (webhook + split) | Draft | 3 | HYL |
-| [US0021](US0021-telegram-channel-adapter.md) | Telegram channel adapter (Bot API + split) | Draft | 3 | HYL |
-| [US0022](US0022-channel-registry-and-send-aggregation.md) | Channel registry + `SendReport` aggregation | Draft | 3 | HYL |
+| [US0018](US0018-channel-adapter-protocol-and-config-loaders.md) | `ChannelAdapter` protocol + config loaders | Done | 3 | HYL |
+| [US0019](US0019-email-channel-adapter.md) | Email channel adapter (SMTP multipart) | Done | 5 | HYL |
+| [US0020](US0020-slack-channel-adapter.md) | Slack channel adapter (webhook + split) | Done | 3 | HYL |
+| [US0021](US0021-telegram-channel-adapter.md) | Telegram channel adapter (Bot API + split) | Done | 3 | HYL |
+| [US0022](US0022-channel-registry-and-send-aggregation.md) | Channel registry + `SendReport` aggregation | Done | 3 | HYL |
 
 **EP0004 subtotal:** 5 stories, 17 points
 
@@ -98,11 +98,11 @@ _Stories not yet generated. Run `/sdlc-studio story --epic EP0004`._
 | [US0015](US0015-draft-workflow-yaml.md) | `draft.yml` workflow | [EP0003](../epics/EP0003-orchestration-and-dx.md) | Done | 3 | HYL |
 | [US0016](US0016-send-workflow-yaml.md) | `send.yml` workflow | [EP0003](../epics/EP0003-orchestration-and-dx.md) | Done | 5 | HYL |
 | [US0017](US0017-readme-quickstart-and-dev-loop.md) | README + dev loop docs | [EP0003](../epics/EP0003-orchestration-and-dx.md) | Done | 2 | HYL |
-| [US0018](US0018-channel-adapter-protocol-and-config-loaders.md) | `ChannelAdapter` protocol + config | [EP0004](../epics/EP0004-multichannel-delivery.md) | Draft | 3 | HYL |
-| [US0019](US0019-email-channel-adapter.md) | Email adapter | [EP0004](../epics/EP0004-multichannel-delivery.md) | Draft | 5 | HYL/Researcher |
-| [US0020](US0020-slack-channel-adapter.md) | Slack adapter | [EP0004](../epics/EP0004-multichannel-delivery.md) | Draft | 3 | HYL/Researcher |
-| [US0021](US0021-telegram-channel-adapter.md) | Telegram adapter | [EP0004](../epics/EP0004-multichannel-delivery.md) | Draft | 3 | HYL/Researcher |
-| [US0022](US0022-channel-registry-and-send-aggregation.md) | Channel registry + aggregation | [EP0004](../epics/EP0004-multichannel-delivery.md) | Draft | 3 | HYL |
+| [US0018](US0018-channel-adapter-protocol-and-config-loaders.md) | `ChannelAdapter` protocol + config | [EP0004](../epics/EP0004-multichannel-delivery.md) | Done | 3 | HYL |
+| [US0019](US0019-email-channel-adapter.md) | Email adapter | [EP0004](../epics/EP0004-multichannel-delivery.md) | Done | 5 | HYL/Researcher |
+| [US0020](US0020-slack-channel-adapter.md) | Slack adapter | [EP0004](../epics/EP0004-multichannel-delivery.md) | Done | 3 | HYL/Researcher |
+| [US0021](US0021-telegram-channel-adapter.md) | Telegram adapter | [EP0004](../epics/EP0004-multichannel-delivery.md) | Done | 3 | HYL/Researcher |
+| [US0022](US0022-channel-registry-and-send-aggregation.md) | Channel registry + aggregation | [EP0004](../epics/EP0004-multichannel-delivery.md) | Done | 3 | HYL |
 
 ## Dependency Graph for EP0001
 

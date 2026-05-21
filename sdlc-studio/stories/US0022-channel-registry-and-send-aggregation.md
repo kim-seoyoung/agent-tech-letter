@@ -1,6 +1,6 @@
 # US0022: Channel registry + enable flags + `SendReport` aggregation
 
-> **Status:** Draft
+> **Status:** Done
 > **Epic:** [EP0004: Multi-channel Delivery](../epics/EP0004-multichannel-delivery.md)
 > **Owner:** HYL
 > **Reviewer:** HYL

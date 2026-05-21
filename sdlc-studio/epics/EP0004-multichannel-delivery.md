@@ -1,6 +1,6 @@
 # EP0004: Multi-channel Delivery
 
-> **Status:** Draft
+> **Status:** Done
 > **Owner:** HYL
 > **Reviewer:** HYL
 > **Created:** 2026-05-19
@@ -149,11 +149,11 @@ This epic implements the **delivery-side adapter pattern** symmetric to EP0001's
 
 Stories generated 2026-05-19. See [Story Index](../stories/_index.md) for full details.
 
-- [ ] [US0018](../stories/US0018-channel-adapter-protocol-and-config-loaders.md) — `ChannelAdapter` protocol + config loaders (3 pts)
-- [ ] [US0019](../stories/US0019-email-channel-adapter.md) — Email adapter (SMTP multipart, Jinja2) (5 pts)
-- [ ] [US0020](../stories/US0020-slack-channel-adapter.md) — Slack adapter (webhook + splitter) (3 pts)
-- [ ] [US0021](../stories/US0021-telegram-channel-adapter.md) — Telegram adapter (Bot API + splitter) (3 pts)
-- [ ] [US0022](../stories/US0022-channel-registry-and-send-aggregation.md) — Channel registry + `SendReport` aggregation (3 pts)
+- [x] [US0018](../stories/US0018-channel-adapter-protocol-and-config-loaders.md) — `ChannelAdapter` protocol + config loaders (3 pts)
+- [x] [US0019](../stories/US0019-email-channel-adapter.md) — Email adapter (SMTP multipart, Jinja2) (5 pts)
+- [x] [US0020](../stories/US0020-slack-channel-adapter.md) — Slack adapter (webhook + splitter) (3 pts)
+- [x] [US0021](../stories/US0021-telegram-channel-adapter.md) — Telegram adapter (Bot API + splitter) (3 pts)
+- [x] [US0022](../stories/US0022-channel-registry-and-send-aggregation.md) — Channel registry + `SendReport` aggregation (3 pts)
 
 **Total:** 17 story points across 5 stories.
 

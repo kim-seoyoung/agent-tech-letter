@@ -153,11 +153,21 @@ list must be private, swap the publisher (see `Publisher` Protocol).
 
    ```bash
    git switch --orphan gh-pages
-   git rm -rf .
    git commit --allow-empty -m "init gh-pages"
    git push -u origin gh-pages
    git switch -                                 # back to your working branch
    ```
+
+   > `git switch --orphan` already empties the index, so **no `git rm -rf .`
+   > step is needed**. Files from your previous branch remain in the working
+   > tree as untracked during this flow; `git commit --allow-empty` ignores
+   > them (the new root commit on `gh-pages` has zero tracked files), and
+   > `git switch -` reconciles them when you return.
+   >
+   > Older guides that include `git rm -rf .` were written for
+   > `git checkout --orphan`, which leaves the index full of "to-be-deleted"
+   > entries. With `git switch --orphan`, that step errors out
+   > (`fatal: pathspec '.' did not match any files`) and is redundant.
 
 2. **Enable Pages in the GitHub UI:** `Settings → Pages → Build and deployment →
    Source: gh-pages branch / root`.

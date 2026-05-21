@@ -41,19 +41,13 @@ def render(
 
     date_iso = issue.issue_date.strftime("%Y-%m-%d")
     safe_url = escape_telegram_html(url)
-    dd_count = len(issue.deep_dives)
-    qm_count = len(issue.quick_mentions)
 
-    header = f"🗞 <b>AI Agent Weekly — {date_iso}</b>"
-    if dd_count == 0 and qm_count == 0:
-        summary = "이번 주: 새 콘텐츠 없음"
-    else:
-        summary = f"이번 주 Deep Dives {dd_count}편 + Quick Mentions {qm_count}건"
-    link_line = f'<b>전문 보기 ▶</b> <a href="{safe_url}">github.io 페이지 열기</a>'
+    header = f"🤖 <b>AI Agent Weekly — {date_iso}</b>"
+    link_line = f'<b>전문 보기 ▶</b> <a href="{safe_url}">페이지 열기</a>'
 
     titles_block = _render_titles(issue, max_titles)
 
-    parts = [header, "", summary, ""]
+    parts = [header, ""]
     if titles_block:
         parts.append(titles_block)
         parts.append("")
@@ -71,7 +65,7 @@ def _render_titles(issue: RenderedIssue, max_titles: int) -> str:
         return ""
     # Available budget for the titles block (rough — accuracy ensured by final defensive truncate).
     per_title_budget = max(40, (_TELEGRAM_MAX_CHARS - _FIXED_BUDGET) // max(max_titles, 1))
-    lines = ["— Deep Dives —"]
+    lines: list[str] = ["✨ <b>이번 주 주요 소식</b>"]
     for dd in issue.deep_dives[:max_titles]:
         safe_title = escape_telegram_html(dd.title)
         if len(safe_title) > per_title_budget:

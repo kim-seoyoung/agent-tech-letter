@@ -1,6 +1,6 @@
 # Story Registry
 
-**Last Updated:** 2026-05-20
+**Last Updated:** 2026-05-21
 **Personas Reference:** [Personas Index](../personas/index.md)
 
 ## Summary
@@ -8,12 +8,12 @@
 | Status | Count |
 |--------|-------|
 | Draft | 0 |
-| Ready | 0 |
+| Ready | 5 |
 | Planned | 0 |
 | In Progress | 0 |
 | Review | 0 |
 | Done | 22 |
-| **Total** | **22** |
+| **Total** | **27** |
 
 ## Stories by Epic
 
@@ -67,9 +67,23 @@
 
 **EP0004 subtotal:** 5 stories, 17 points
 
+### [EP0005: Common HTML Rendering (Web + Email)](../epics/EP0005-common-html-rendering.md)
+
+> Source: [CR-0001](../change-requests/CR0001-common-html-rendering.md) (post-launch enhancement)
+
+| ID | Title | Status | Points | Owner |
+|----|-------|--------|--------|-------|
+| [US0023](US0023-sidecar-json-persistence.md) | Sidecar JSON persistence for `RenderedIssue` structure | Ready | 4 | HYL |
+| [US0024](US0024-design-tokens-and-jinja2-components.md) | Design tokens + Jinja2 component partials | Ready | 2 | HYL |
+| [US0025](US0025-html-web-renderer-and-golden-fixture.md) | `html_web` renderer + golden fixture | Ready | 3 | HYL |
+| [US0026](US0026-html-email-renderer-and-premailer-inlining.md) | `html_email` renderer + premailer CSS inlining | Ready | 4 | HYL |
+| [US0027](US0027-email-adapter-swap.md) | `EmailAdapter` swap (drop `_wrap_html`) | Ready | 3 | HYL |
+
+**EP0005 subtotal:** 5 stories, 16 points (all Ready)
+
 ---
 
-**Project totals:** 22 stories, 83 story points across 4 epics.
+**Project totals:** 27 stories, 99 story points across 5 epics.
 
 ### EP0003: Orchestration & Developer Experience
 _Stories not yet generated. Run `/sdlc-studio story --epic EP0003`._
@@ -103,6 +117,11 @@ _Stories not yet generated. Run `/sdlc-studio story --epic EP0004`._
 | [US0020](US0020-slack-channel-adapter.md) | Slack adapter | [EP0004](../epics/EP0004-multichannel-delivery.md) | Done | 3 | HYL/Researcher |
 | [US0021](US0021-telegram-channel-adapter.md) | Telegram adapter | [EP0004](../epics/EP0004-multichannel-delivery.md) | Done | 3 | HYL/Researcher |
 | [US0022](US0022-channel-registry-and-send-aggregation.md) | Channel registry + aggregation | [EP0004](../epics/EP0004-multichannel-delivery.md) | Done | 3 | HYL |
+| [US0023](US0023-sidecar-json-persistence.md) | Sidecar JSON persistence | [EP0005](../epics/EP0005-common-html-rendering.md) | Ready | 4 | HYL/Researcher |
+| [US0024](US0024-design-tokens-and-jinja2-components.md) | Design tokens + Jinja2 components | [EP0005](../epics/EP0005-common-html-rendering.md) | Ready | 2 | HYL |
+| [US0025](US0025-html-web-renderer-and-golden-fixture.md) | `html_web` renderer + golden fixture | [EP0005](../epics/EP0005-common-html-rendering.md) | Ready | 3 | HYL/Researcher |
+| [US0026](US0026-html-email-renderer-and-premailer-inlining.md) | `html_email` renderer + premailer | [EP0005](../epics/EP0005-common-html-rendering.md) | Ready | 4 | Researcher |
+| [US0027](US0027-email-adapter-swap.md) | `EmailAdapter` swap | [EP0005](../epics/EP0005-common-html-rendering.md) | Ready | 3 | Researcher/HYL |
 
 ## Dependency Graph for EP0001
 
@@ -156,6 +175,19 @@ US0018 (protocol + config) ─┬─► US0019 (email)   ──┐
 ```
 
 **EP0004 execution order:** US0018 → {US0019, US0020, US0021 in parallel} → US0022. Symmetric to EP0001: the registry can be unit-tested against fake adapters in parallel with the real adapter stories.
+
+## Dependency Graph for EP0005
+
+```
+US0023 (sidecar JSON) ──┐
+                        │
+US0024 (tokens + components) ──┬─► US0025 (html_web + golden)
+                               │
+                               └─► US0026 (html_email + premailer) ─► US0027 (EmailAdapter swap)
+```
+
+**EP0005 execution order:** {US0023, US0024 in parallel} → US0025 → US0026 → US0027.
+US0027 is the user-visible flip (email finally renders); ship it last after both renderers are golden.
 
 ## Notes
 

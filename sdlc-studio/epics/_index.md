@@ -1,6 +1,6 @@
 # Epic Registry
 
-**Last Updated:** 2026-05-19
+**Last Updated:** 2026-05-21
 **PRD Reference:** [PRD v0.4.0](../prd.md)
 **TRD Reference:** [TRD v0.3.0](../trd.md)
 
@@ -8,23 +8,24 @@
 
 | Status | Count |
 |--------|-------|
-| Draft | 0 |
+| Draft | 1 |
 | Ready | 0 |
 | Approved | 0 |
 | In Progress | 0 |
 | Done | 4 |
-| **Total** | **4** |
+| **Total** | **5** |
 
 ## Epics
 
-| ID | Title | Status | Owner | Stories (est.) | PRD Features |
-|----|-------|--------|-------|----------------|--------------|
-| [EP0001](EP0001-content-ingestion.md) | Content Ingestion | Done | HYL | 5 | F-01 |
-| [EP0002](EP0002-composition-pipeline.md) | Composition Pipeline | Done | HYL | 6 | F-02, F-03 |
-| [EP0003](EP0003-orchestration-and-dx.md) | Orchestration & Developer Experience | Done | HYL | 6 | F-04, F-09, F-10, F-11 |
-| [EP0004](EP0004-multichannel-delivery.md) | Multi-channel Delivery | Done | HYL | 5 | F-05, F-06, F-07, F-08 |
+| ID | Title | Status | Owner | Stories (est.) | PRD Features | Source |
+|----|-------|--------|-------|----------------|--------------|--------|
+| [EP0001](EP0001-content-ingestion.md) | Content Ingestion | Done | HYL | 5 | F-01 | PRD |
+| [EP0002](EP0002-composition-pipeline.md) | Composition Pipeline | Done | HYL | 6 | F-02, F-03 | PRD |
+| [EP0003](EP0003-orchestration-and-dx.md) | Orchestration & Developer Experience | Done | HYL | 6 | F-04, F-09, F-10, F-11 | PRD |
+| [EP0004](EP0004-multichannel-delivery.md) | Multi-channel Delivery | Done | HYL | 5 | F-05, F-06, F-07, F-08 | PRD |
+| [EP0005](EP0005-common-html-rendering.md) | Common HTML Rendering (Web + Email) | Draft | HYL | 5 | F-05 (enhanced) | [CR-0001](../change-requests/CR0001-common-html-rendering.md) |
 
-**Total estimated stories:** ~22
+**Total estimated stories:** ~27
 
 ## Dependency Graph
 

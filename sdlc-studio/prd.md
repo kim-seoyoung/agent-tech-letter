@@ -62,7 +62,7 @@ The LLM-agent space moves fast across disconnected venues (arXiv, GitHub, vendor
 | F-02 | LLM topic clustering & ranking | Cluster fetched items by topic, rank by cross-source significance + novelty | Not Started | Must |
 | F-03 | Issue composer (3 + 10) | Produce 3 deep-dive summaries and 10 quick mentions in a single issue | Not Started | Must |
 | F-04 | Draft-as-PR approval gate | Commit draft markdown to a branch and open a PR; merging signals approval | Not Started | Must |
-| F-05 | Email delivery (SMTP) | Send issue to email list via SMTP (Gmail/SES) | Not Started | Must |
+| F-05 | Email delivery (SMTP) | Send issue to email list via SMTP (Gmail/SES). HTML rendering quality enhanced via [CR-0001](change-requests/CR0001-common-html-rendering.md) (shared Jinja2 renderer, premailer-inlined CSS, replaces `<pre>` wrapping). | Not Started | Must |
 | F-06 | Slack delivery | Post issue to a Slack channel via Incoming Webhook | Not Started | Must |
 | F-07 | Telegram delivery | Post issue to a Telegram channel/chat via Bot API | Not Started | Must |
 | F-08 | Subscriber config (static) | Recipients defined in `subscribers.yaml` (per-channel) | Not Started | Must |

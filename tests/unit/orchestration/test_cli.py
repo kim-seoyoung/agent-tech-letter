@@ -163,12 +163,38 @@ def test_dry_run_subcommand_uses_local_output(
 
 
 def test_send_no_channels_registered_exits_ok(runner: CliRunner, tmp_path: Path) -> None:
-    """In v0 (pre-EP0004), no channels are registered; send exits 0."""
+    """All channels disabled → `send` exits 0 with a clear message.
+
+    Uses isolated channels.yaml / subscribers.yaml so this test does not
+    depend on the operator's on-disk dev config.
+    """
     draft = tmp_path / "draft.md"
     draft.write_text("# Issue body\n")
-    result = runner.invoke(cli, ["send", "--issue", "issue-2026-05-20", "--draft-path", str(draft)])
+    channels = tmp_path / "channels.yaml"
+    channels.write_text(
+        "email:\n  enabled: false\n"
+        "slack:\n  enabled: false\n"
+        "telegram:\n  enabled: false\n",
+        encoding="utf-8",
+    )
+    subscribers = tmp_path / "subscribers.yaml"
+    subscribers.write_text("email: []\nslack: []\ntelegram: []\n", encoding="utf-8")
+    result = runner.invoke(
+        cli,
+        [
+            "send",
+            "--issue",
+            "issue-2026-05-20",
+            "--draft-path",
+            str(draft),
+            "--channels-config",
+            str(channels),
+            "--subscribers-config",
+            str(subscribers),
+        ],
+    )
     assert result.exit_code == EXIT_OK
-    assert "no channels registered" in result.output
+    assert "no channels enabled" in result.output
 
 
 # --- Env var defaults ----------------------------------------------------------

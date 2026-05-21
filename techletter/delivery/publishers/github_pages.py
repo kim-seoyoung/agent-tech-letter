@@ -98,10 +98,13 @@ class GitHubPagesPublisher:
         self.author_name = author_name
         self.author_email = author_email
         self.branch = branch
+        # Default worktree path must be OUTSIDE `.git/` — git stores worktree
+        # metadata at `.git/worktrees/<name>/`, which collides with the
+        # contents we'd check out there.
         self.worktree_path = (
             Path(worktree_path)
             if worktree_path is not None
-            else self.repo_path / ".git" / "worktrees" / "gh-pages-publish"
+            else self.repo_path / ".gh-pages-publish"
         )
         self._runner: GitRunner = runner or _default_git_runner
 

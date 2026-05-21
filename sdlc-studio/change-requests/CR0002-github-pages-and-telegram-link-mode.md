@@ -1,6 +1,6 @@
 # CR-0002: GitHub Pages Publisher + Telegram Link Mode
 
-> **Status:** Proposed
+> **Status:** Complete -- EP0006 (Done)
 > **Priority:** P2
 > **Type:** feature-request
 > **Requester:** HYL
@@ -140,7 +140,11 @@ Define `techletter/delivery/publishers/base.py` with `Publisher` Protocol (`name
 
 ## Linked Epics
 
-> *Populated when CR is actioned via `/sdlc-studio cr action`*
+| Epic | Title | Status |
+| --- | --- | --- |
+| [EP0006](../epics/EP0006-github-pages-and-telegram-link-mode.md) | GitHub Pages Publisher + Telegram Link Mode | Done |
+
+**Linked Stories:** US0028 (Publisher Protocol), US0029 (GitHubPagesPublisher), US0030 (telegram_teaser), US0031 (Telegram mode + wiring), US0032 (SendRecord + README + E2E).
 
 ---
 
@@ -167,7 +171,8 @@ Define `techletter/delivery/publishers/base.py` with `Publisher` Protocol (`name
 
 ## Close Reason
 
-> *Filled when CR is closed*
+**Outcome:** Complete
+**Rationale:** EP0006 reached Done on 2026-05-21. All 5 stories (US0028–US0032) implemented and tested (49 new tests, all green). `Publisher` Protocol + `PublisherError` shipped, `GitHubPagesPublisher` with idempotent push + secret scrubbing landed, `telegram_teaser` renderer with property-tested length invariant added, `TelegramAdapter` gained `teaser_link` mode (default for new installs) while preserving `inline_html` legacy path bit-equivalent. `SendRecord.published_url` flows from publisher → adapter → audit log. README updated with one-time `gh-pages` setup. AC9 manual cross-client E2E smoke (US0032) remains HYL-owned (needs real `TELEGRAM_BOT_TOKEN` + `gh-pages` branch + subscriber `chat_id`).
 
 ---
 
@@ -176,3 +181,5 @@ Define `techletter/delivery/publishers/base.py` with `Publisher` Protocol (`name
 | Date | Author | Change |
 | --- | --- | --- |
 | 2026-05-21 | HYL | CR proposed. Depends on CR-0001. Draft epic content preserved at `sdlc-studio/.local/draft-epic-content/EP0006-github-pages-and-telegram-link-mode.md` for reference when `cr action` generates the formal epic. |
+| 2026-05-21 | HYL | CR actioned via `/sdlc-studio cr action --cr CR-0002` — 1 epic (EP0006), 5 stories (US0028–US0032) created. Status: Proposed → In Progress. PRD F-07 description updated with CR reference. |
+| 2026-05-21 | Claude (via /sdlc-studio epic implement --epic EP0006) | EP0006 cascaded to Done; all AC verified by tests (modulo HYL-owned manual E2E). CR closed Complete. |

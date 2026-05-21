@@ -12,8 +12,8 @@
 | Planned | 0 |
 | In Progress | 0 |
 | Review | 0 |
-| Done | 27 |
-| **Total** | **27** |
+| Done | 32 |
+| **Total** | **32** |
 
 ## Stories by Epic
 
@@ -81,9 +81,23 @@
 
 **EP0005 subtotal:** 5 stories, 16 points (all Done)
 
+### [EP0006: GitHub Pages Publisher + Telegram Link Mode](../epics/EP0006-github-pages-and-telegram-link-mode.md)
+
+> Source: [CR-0002](../change-requests/CR0002-github-pages-and-telegram-link-mode.md) (depends on CR-0001)
+
+| ID | Title | Status | Points | Owner |
+|----|-------|--------|--------|-------|
+| [US0028](US0028-publisher-protocol-and-publish-result.md) | `Publisher` Protocol + `PublishResult` model | Done | 2 | HYL |
+| [US0029](US0029-github-pages-publisher.md) | `GitHubPagesPublisher` (worktree + git push) | Done | 5 | HYL |
+| [US0030](US0030-telegram-teaser-renderer.md) | `telegram_teaser` renderer | Done | 2 | HYL |
+| [US0031](US0031-telegram-adapter-mode-and-publisher-wiring.md) | Telegram adapter `mode` + publisher wiring | Done | 3 | HYL |
+| [US0032](US0032-send-record-published-url-and-readme-and-e2e.md) | `SendRecord.published_url` + README + E2E smoke | Done | 2 | HYL |
+
+**EP0006 subtotal:** 5 stories, 14 points (all Done)
+
 ---
 
-**Project totals:** 27 stories, 99 story points across 5 epics.
+**Project totals:** 32 stories, 113 story points across 6 epics.
 
 ### EP0003: Orchestration & Developer Experience
 _Stories not yet generated. Run `/sdlc-studio story --epic EP0003`._
@@ -122,6 +136,11 @@ _Stories not yet generated. Run `/sdlc-studio story --epic EP0004`._
 | [US0025](US0025-html-web-renderer-and-golden-fixture.md) | `html_web` renderer + golden fixture | [EP0005](../epics/EP0005-common-html-rendering.md) | Done | 3 | HYL/Researcher |
 | [US0026](US0026-html-email-renderer-and-premailer-inlining.md) | `html_email` renderer + premailer | [EP0005](../epics/EP0005-common-html-rendering.md) | Done | 4 | Researcher |
 | [US0027](US0027-email-adapter-swap.md) | `EmailAdapter` swap | [EP0005](../epics/EP0005-common-html-rendering.md) | Done | 3 | Researcher/HYL |
+| [US0028](US0028-publisher-protocol-and-publish-result.md) | `Publisher` Protocol + `PublishResult` | [EP0006](../epics/EP0006-github-pages-and-telegram-link-mode.md) | Done | 2 | HYL |
+| [US0029](US0029-github-pages-publisher.md) | `GitHubPagesPublisher` | [EP0006](../epics/EP0006-github-pages-and-telegram-link-mode.md) | Done | 5 | HYL |
+| [US0030](US0030-telegram-teaser-renderer.md) | `telegram_teaser` renderer | [EP0006](../epics/EP0006-github-pages-and-telegram-link-mode.md) | Done | 2 | Researcher/HYL |
+| [US0031](US0031-telegram-adapter-mode-and-publisher-wiring.md) | Telegram adapter `mode` + publisher wiring | [EP0006](../epics/EP0006-github-pages-and-telegram-link-mode.md) | Done | 3 | Researcher |
+| [US0032](US0032-send-record-published-url-and-readme-and-e2e.md) | `SendRecord.published_url` + README + E2E | [EP0006](../epics/EP0006-github-pages-and-telegram-link-mode.md) | Done | 2 | HYL |
 
 ## Dependency Graph for EP0001
 
@@ -188,6 +207,20 @@ US0024 (tokens + components) ──┬─► US0025 (html_web + golden)
 
 **EP0005 execution order:** {US0023, US0024 in parallel} → US0025 → US0026 → US0027.
 US0027 is the user-visible flip (email finally renders); ship it last after both renderers are golden.
+
+## Dependency Graph for EP0006
+
+```
+US0028 (Publisher Protocol) ─┬─► US0029 (GitHubPagesPublisher) ─┐
+                             │                                  │
+                             │                                  ▼
+                             │                          US0031 (Telegram mode + wiring) ─► US0032 (SendRecord + README + E2E)
+                             │                                  ▲
+                             └─► US0030 (telegram_teaser) ──────┘
+```
+
+**EP0006 execution order:** US0028 → {US0029, US0030 in parallel} → US0031 → US0032.
+US0032 is the user-visible flip (Telegram becomes teaser+link) and contains the manual E2E smoke gate.
 
 ## Notes
 

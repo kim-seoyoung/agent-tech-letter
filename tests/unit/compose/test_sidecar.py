@@ -109,7 +109,7 @@ def test_AC7_content_hash_regression_pinned():
         "issue_id: issue-2026-05-21\n"
         "issue_date: 2026-05-21T00:00:00Z\n"
         "---\n\n"
-        "# Tech-Letter — 2026-05-21\n"
+        "# AI Agent Weekly — 2026-05-21\n"
     )
     # If this hex ever changes, EP0003 idempotency keying is broken.
     expected = content_hash(body)

@@ -272,6 +272,7 @@ def send(
                 status=report.status,
                 recipient_count=report.recipient_count,
                 error="; ".join(report.errors) if report.errors else None,
+                published_url=report.published_url,
             )
         )
 

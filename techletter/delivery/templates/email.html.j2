@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light only">
-<title>Tech-Letter — {{ issue_date_iso }}</title>
+<title>AI Agent Weekly — {{ issue_date_iso }}</title>
 <style>
 body { font-family: {{ font.family|safe }}; color: {{ colors.fg|safe }}; background: #f5f5f5; margin: 0; padding: 0; }
 h1 { font-size: {{ font.size_h1|safe }}; color: {{ colors.fg|safe }}; margin: 0 0 4px 0; }
@@ -25,7 +25,7 @@ code { font-family: {{ font.mono|safe }}; background: {{ colors.tag_bg|safe }}; 
 <tr><td align="center" style="padding: 24px 0;">
 <table role="presentation" width="680" cellpadding="0" cellspacing="0" border="0" style="background: {{ colors.bg|safe }}; max-width: {{ layout.max_width|safe }};">
 <tr><td style="padding: {{ layout.padding|safe }};">
-<h1>Tech-Letter</h1>
+<h1>AI Agent Weekly</h1>
 <p class="date">{{ issue_date_iso }}</p>
 {%- for dd in deep_dives %}
 {% include "components/deep_dive.html.j2" %}

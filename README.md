@@ -138,6 +138,87 @@ uv run pytest tests/unit/workflows/    # YAML structural checks
 uv run pytest --cov=techletter --cov-report=term-missing
 ```
 
+## GitHub Pages setup (EP0006 — for `teaser_link` Telegram mode)
+
+The Telegram adapter's `teaser_link` mode (default for new installs)
+publishes each issue to a GitHub Pages site and sends a short Telegram
+message with the URL. **The published pages are world-readable** on
+GitHub Free + public-repo plans — the URL contains a 16-hex
+`content_sha256` slug, but it is NOT authenticated. If your subscriber
+list must be private, swap the publisher (see `Publisher` Protocol).
+
+### First-time setup (one operator action)
+
+1. **Create the `gh-pages` orphan branch:**
+
+   ```bash
+   git switch --orphan gh-pages
+   git rm -rf .
+   git commit --allow-empty -m "init gh-pages"
+   git push -u origin gh-pages
+   git switch -                                 # back to your working branch
+   ```
+
+2. **Enable Pages in the GitHub UI:** `Settings → Pages → Build and deployment →
+   Source: gh-pages branch / root`.
+
+3. **Verify the base URL resolves:** `https://<user>.github.io/<repo>/`
+   (404 until the first publish, which is expected).
+
+4. **Set runtime env vars** (or GitHub Actions Secrets for CI):
+   - `TELEGRAM_BOT_TOKEN` — your bot's API token.
+   - `GITHUB_TOKEN` — push credentials; locally an SSH key in `~/.ssh/` works.
+   - `SMTP_HOST` / `SMTP_USER` / `SMTP_PASS` / `SMTP_FROM` if email is enabled.
+
+5. **Update `config/channels.yaml`** to opt in:
+
+   ```yaml
+   publishers:
+     github_pages:
+       enabled: true
+       repo_path: "."
+       branch: "gh-pages"
+       base_url: "https://<user>.github.io/<repo>"
+       author_name: "tech-letter-bot"
+       author_email: "bot@example.com"
+
+   telegram:
+     enabled: true
+     mode: teaser_link        # or "inline_html" for the legacy split-message path
+     publisher: github_pages
+   ```
+
+   Old `channels.yaml` files without these blocks load cleanly and
+   default `telegram.mode` to `inline_html`, so the upgrade is opt-in.
+
+### End-to-end smoke (HYL-runnable)
+
+```bash
+uv run techletter draft --output-dir drafts/                    # writes drafts/<id>.md + .json
+# (merge PR or copy directly into your "approved" location)
+uv run techletter send --issue <id> --draft-path drafts/<id>.md
+
+# verify
+grep published_url logs/sends.jsonl                              # latest line has the URL
+open "$(jq -r 'select(.channel=="telegram") | .published_url' logs/sends.jsonl | tail -1)"
+# then check your Telegram bot inbox: a single message with a preview card
+```
+
+### Audit log schema
+
+`logs/sends.jsonl` is append-only; one record per `(issue_id, channel)`
+send attempt. Fields:
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `timestamp` | ISO-8601 datetime | UTC |
+| `issue_id` | string | e.g. `issue-2026-05-21` |
+| `channel` | string | `email` / `slack` / `telegram` |
+| `status` | enum | `ok` / `partial` / `failed` |
+| `recipient_count` | int | per channel |
+| `error` | string \| null | joined error messages on failure |
+| `published_url` | **string \| null** | populated for publisher-backed sends (Telegram `teaser_link`); `null` otherwise |
+
 ## Caveats
 
 - **First-draft prompts.** Every `prompts/*.md` was authored to satisfy
@@ -149,9 +230,9 @@ uv run pytest --cov=techletter --cov-report=term-missing
   `FakeLLMClient` fixture. To exercise the real Anthropic API locally:
   `ANTHROPIC_API_KEY=sk-ant-... uv run techletter dry-run`.
 
-- **Delivery layer (EP0004) not yet implemented.** The `send` command
-  currently exits 0 with "no channels registered". The CLI surface is
-  stable; concrete channel adapters arrive in the next epic.
+- **Telegram `teaser_link` AC9 manual smoke** is HYL-owned (US0032 AC7).
+  Real `TELEGRAM_BOT_TOKEN` + real `gh-pages` branch + real subscriber
+  `chat_id` are required to verify the preview card renders correctly.
 
 ## License
 

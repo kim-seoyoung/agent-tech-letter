@@ -138,7 +138,7 @@ def test_AC7_golden_fixture_matches():
 
 def test_AC8_title_contains_issue_date_iso():
     out = render(_tiny_issue())
-    assert "<title>Tech-Letter — 2026-05-21</title>" in out
+    assert "<title>AI Agent Weekly — 2026-05-21</title>" in out
 
 
 def test_body_md_markdown_constructs_render_to_html():

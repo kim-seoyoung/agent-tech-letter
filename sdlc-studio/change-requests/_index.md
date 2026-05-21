@@ -7,10 +7,10 @@
 
 | Status | Count |
 |--------|-------|
-| Proposed | 1 |
+| Proposed | 0 |
 | Approved | 0 |
 | In Progress | 0 |
-| Complete | 1 |
+| Complete | 2 |
 | Rejected | 0 |
 | Deferred | 0 |
 | **Total** | **2** |
@@ -29,13 +29,14 @@
 | ID | Title | Priority | Status | Type | Date | Affects |
 |----|-------|----------|--------|------|------|---------|
 | [CR-0001](CR0001-common-html-rendering.md) | Common HTML Rendering (Web + Email) | P2 | Complete | feature-request | 2026-05-21 | F-05 (+ enables CR-0002) |
-| [CR-0002](CR0002-github-pages-and-telegram-link-mode.md) | GitHub Pages Publisher + Telegram Link Mode | P2 | Proposed | feature-request | 2026-05-21 | F-07 (+ new web archive capability) |
+| [CR-0002](CR0002-github-pages-and-telegram-link-mode.md) | GitHub Pages Publisher + Telegram Link Mode | P2 | Complete | feature-request | 2026-05-21 | F-07 (+ new web archive capability) |
 
 ## Actioned CRs → Epics
 
 | CR | Linked Epic | Stories |
 |----|-------------|---------|
-| CR-0001 | [EP0005](../epics/EP0005-common-html-rendering.md) (Draft) | US0023–US0027 (5 stories, 16 pts) |
+| CR-0001 | [EP0005](../epics/EP0005-common-html-rendering.md) (Done) | US0023–US0027 (5 stories, 16 pts) |
+| CR-0002 | [EP0006](../epics/EP0006-github-pages-and-telegram-link-mode.md) (Done) | US0028–US0032 (5 stories, 14 pts) |
 
 ## Dependencies
 

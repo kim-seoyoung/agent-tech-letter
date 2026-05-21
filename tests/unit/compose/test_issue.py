@@ -71,7 +71,7 @@ def test_tc0111_returns_rendered_issue() -> None:
     )
     assert isinstance(issue, RenderedIssue)
     assert issue.issue_id == "issue-2026-05-20"
-    assert "Tech-Letter" in issue.body_md
+    assert "AI Agent Weekly" in issue.body_md
     assert "D1" in issue.body_md
     assert "Q0" in issue.body_md
 

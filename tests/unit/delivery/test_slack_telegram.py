@@ -17,7 +17,7 @@ def issue() -> RenderedIssue:
     return RenderedIssue(
         issue_id="issue-2026-05-21",
         issue_date=datetime(2026, 5, 21, tzinfo=UTC),
-        body_md="# Tech-Letter\n\n**Bold** and a [link](https://example.com).",
+        body_md="# AI Agent Weekly\n\n**Bold** and a [link](https://example.com).",
         content_sha256="x" * 64,
     )
 

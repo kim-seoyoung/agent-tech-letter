@@ -148,7 +148,7 @@ def assemble_issue(
     )
 
     body_parts: list[str] = [front_matter, ""]
-    body_parts.append(f"# Tech-Letter — {iso_date[:10]}")
+    body_parts.append(f"# AI Agent Weekly — {iso_date[:10]}")
     body_parts.append("")
     body_parts.append("## Deep Dives")
     body_parts.append("")

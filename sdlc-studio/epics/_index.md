@@ -12,8 +12,8 @@
 | Ready | 0 |
 | Approved | 0 |
 | In Progress | 0 |
-| Done | 5 |
-| **Total** | **5** |
+| Done | 6 |
+| **Total** | **6** |
 
 ## Epics
 
@@ -24,8 +24,9 @@
 | [EP0003](EP0003-orchestration-and-dx.md) | Orchestration & Developer Experience | Done | HYL | 6 | F-04, F-09, F-10, F-11 | PRD |
 | [EP0004](EP0004-multichannel-delivery.md) | Multi-channel Delivery | Done | HYL | 5 | F-05, F-06, F-07, F-08 | PRD |
 | [EP0005](EP0005-common-html-rendering.md) | Common HTML Rendering (Web + Email) | Done | HYL | 5 | F-05 (enhanced) | [CR-0001](../change-requests/CR0001-common-html-rendering.md) |
+| [EP0006](EP0006-github-pages-and-telegram-link-mode.md) | GitHub Pages Publisher + Telegram Link Mode | Done | HYL | 5 | F-07 (enhanced) + new archive | [CR-0002](../change-requests/CR0002-github-pages-and-telegram-link-mode.md) |
 
-**Total estimated stories:** ~27
+**Total estimated stories:** ~32
 
 ## Dependency Graph
 

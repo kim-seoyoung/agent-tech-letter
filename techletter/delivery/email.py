@@ -120,7 +120,7 @@ class EmailAdapter:
         errors: list[str] = []
 
         try:
-            subject = f"Tech-Letter — {issue.issue_id}"
+            subject = f"AI Agent Weekly — {issue.issue_id}"
             plain_body = strip_markdown(issue.body_md)
             # US0027: html_email.render() invoked exactly once per send(),
             # reused across all recipients (TC0214 privacy preserved — one

@@ -60,6 +60,9 @@ class SendReport(BaseModel):
     success_count: int = Field(ge=0)
     failure_count: int = Field(ge=0)
     errors: list[str] = Field(default_factory=lambda: [])
+    # US0031/US0032: populated when the channel used a publisher (e.g.,
+    # Telegram in teaser_link mode); None for inline / non-publisher channels.
+    published_url: str | None = None
 
     def __init__(self, **data: object) -> None:
         super().__init__(**data)

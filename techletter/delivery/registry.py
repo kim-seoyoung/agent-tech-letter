@@ -11,11 +11,14 @@ from __future__ import annotations
 import logging
 from collections.abc import Mapping
 from dataclasses import dataclass, field
+from pathlib import Path
 
 from techletter.compose.issue import RenderedIssue
 from techletter.delivery.base import ChannelAdapter, Recipient, SendReport
 from techletter.delivery.config import ChannelsConfig, SubscribersConfig
 from techletter.delivery.email import EmailAdapter
+from techletter.delivery.publishers import Publisher
+from techletter.delivery.publishers.github_pages import GitHubPagesPublisher
 from techletter.delivery.slack import SlackAdapter
 from techletter.delivery.telegram import TelegramAdapter
 
@@ -98,9 +101,12 @@ def build_channel_registry(
 
     if channels.telegram.enabled:
         try:
+            publisher = _build_publisher_for_telegram(channels)
             adapters["telegram"] = TelegramAdapter(
                 max_chars_per_message=channels.telegram.max_chars_per_message,
                 parse_mode=channels.telegram.parse_mode,
+                mode=channels.telegram.mode,
+                publisher=publisher,
             )
         except Exception as e:
             logger.warning("channel 'telegram' failed to construct: %s", e)
@@ -108,6 +114,28 @@ def build_channel_registry(
             recipients_map["telegram"] = [Recipient(address=c) for c in subscribers.telegram]
 
     return ChannelRegistry(adapters=adapters, recipients=recipients_map)
+
+
+def _build_publisher_for_telegram(channels: ChannelsConfig) -> Publisher | None:
+    """US0031 AC7: resolve `telegram.publisher` reference to a concrete instance.
+
+    Returns None for `mode=inline_html` (no publisher needed).
+    """
+    if channels.telegram.mode != "teaser_link":
+        return None
+    name = channels.telegram.publisher
+    if name == "github_pages":
+        cfg = channels.publishers.github_pages
+        return GitHubPagesPublisher(
+            repo_path=Path(cfg.repo_path),
+            branch=cfg.branch,
+            base_url=cfg.base_url,
+            author_name=cfg.author_name,
+            author_email=cfg.author_email,
+        )
+    # The config validator already rejects unknown references, so this branch
+    # is unreachable in practice.
+    raise ValueError(f"unknown publisher reference: {name}")
 
 
 def aggregate_reports(reports: list[SendReport]) -> dict[str, object]:

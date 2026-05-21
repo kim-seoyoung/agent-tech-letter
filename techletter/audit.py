@@ -49,6 +49,10 @@ class SendRecord(BaseModel):
     status: SendStatus
     recipient_count: int = Field(ge=0)
     error: str | None = None
+    # US0032: populated when the channel used a publisher (e.g., Telegram in
+    # teaser_link mode). None for inline / non-publisher channels. Old JSONL
+    # records without this field load cleanly as None.
+    published_url: str | None = None
 
 
 def append_send_record(record: SendRecord, *, log_path: Path | None = None) -> None:
@@ -107,6 +111,7 @@ def make_record(
     recipient_count: int,
     error: str | None = None,
     timestamp: datetime | None = None,
+    published_url: str | None = None,
 ) -> SendRecord:
     """Convenience constructor with timestamp default = now()."""
     return SendRecord(
@@ -116,4 +121,5 @@ def make_record(
         status=status,
         recipient_count=recipient_count,
         error=error,
+        published_url=published_url,
     )

@@ -64,7 +64,7 @@ The LLM-agent space moves fast across disconnected venues (arXiv, GitHub, vendor
 | F-04 | Draft-as-PR approval gate | Commit draft markdown to a branch and open a PR; merging signals approval | Not Started | Must |
 | F-05 | Email delivery (SMTP) | Send issue to email list via SMTP (Gmail/SES). HTML rendering quality enhanced via [CR-0001](change-requests/CR0001-common-html-rendering.md) (shared Jinja2 renderer, premailer-inlined CSS, replaces `<pre>` wrapping). | Not Started | Must |
 | F-06 | Slack delivery | Post issue to a Slack channel via Incoming Webhook | Not Started | Must |
-| F-07 | Telegram delivery | Post issue to a Telegram channel/chat via Bot API | Not Started | Must |
+| F-07 | Telegram delivery | Post issue to a Telegram channel/chat via Bot API. Enhanced via [CR-0002](change-requests/CR0002-github-pages-and-telegram-link-mode.md): default mode becomes `teaser_link` — adapter publishes the rendered page to GitHub Pages and sends a one-message teaser with the URL (replaces the multi-part `[Part 1/3]` split). Legacy `inline_html` mode preserved for safety. | Not Started | Must |
 | F-08 | Subscriber config (static) | Recipients defined in `subscribers.yaml` (per-channel) | Not Started | Must |
 | F-09 | Scheduled execution | GitHub Actions cron triggers weekly draft workflow | Not Started | Must |
 | F-10 | Send log / audit trail | Append a record of each send (issue id, channel, recipient count, timestamp) | Not Started | Should |

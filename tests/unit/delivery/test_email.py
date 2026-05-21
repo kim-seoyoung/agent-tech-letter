@@ -37,7 +37,7 @@ def issue() -> RenderedIssue:
     return RenderedIssue(
         issue_id="issue-2026-05-21",
         issue_date=datetime(2026, 5, 21, tzinfo=UTC),
-        body_md="# Tech-Letter\n\n**Bold** content here.",
+        body_md="# AI Agent Weekly\n\n**Bold** content here.",
         content_sha256="x" * 64,
     )
 
@@ -194,6 +194,6 @@ def test_plain_text_is_markdown_stripped(issue: RenderedIssue) -> None:
     msg = fake.sent_messages[0]
     plain_part = msg.get_payload()[0]  # type: ignore[index]
     plain_text = plain_part.get_payload(decode=True).decode("utf-8")  # type: ignore[union-attr]
-    assert "Tech-Letter" in plain_text
+    assert "AI Agent Weekly" in plain_text
     assert "Bold" in plain_text
     assert "**Bold**" not in plain_text  # bold markers stripped

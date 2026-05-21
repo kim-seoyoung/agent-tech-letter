@@ -1,6 +1,6 @@
 # US0017: README quickstart + dry-run developer loop docs
 
-> **Status:** Draft
+> **Status:** Done
 > **Epic:** [EP0003: Orchestration & Developer Experience](../epics/EP0003-orchestration-and-dx.md)
 > **Owner:** HYL
 > **Reviewer:** HYL

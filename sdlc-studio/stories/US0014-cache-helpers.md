@@ -1,6 +1,6 @@
 # US0014: `.cache/` helpers — fetch cache + LLM response cache, CI-disabled
 
-> **Status:** Draft
+> **Status:** Done
 > **Epic:** [EP0003: Orchestration & Developer Experience](../epics/EP0003-orchestration-and-dx.md)
 > **Owner:** HYL
 > **Reviewer:** HYL

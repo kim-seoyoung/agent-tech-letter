@@ -7,12 +7,12 @@
 
 | Status | Count |
 |--------|-------|
-| Draft | 11 |
+| Draft | 5 |
 | Ready | 0 |
 | Planned | 0 |
 | In Progress | 0 |
 | Review | 0 |
-| Done | 11 |
+| Done | 17 |
 | **Total** | **22** |
 
 ## Stories by Epic
@@ -46,12 +46,12 @@
 
 | ID | Title | Status | Points | Owner |
 |----|-------|--------|--------|-------|
-| [US0012](US0012-techletter-cli-scaffolding.md) | `techletter` CLI scaffolding (`draft` / `send` / `dry-run`) | Draft | 3 | HYL |
-| [US0013](US0013-sends-jsonl-and-idempotency.md) | `logs/sends.jsonl` schema + idempotency | Draft | 3 | HYL |
-| [US0014](US0014-cache-helpers.md) | `.cache/` helpers, CI-disabled | Draft | 5 | HYL |
-| [US0015](US0015-draft-workflow-yaml.md) | `.github/workflows/draft.yml` | Draft | 3 | HYL |
-| [US0016](US0016-send-workflow-yaml.md) | `.github/workflows/send.yml` | Draft | 5 | HYL |
-| [US0017](US0017-readme-quickstart-and-dev-loop.md) | README quickstart + dev loop docs | Draft | 2 | HYL |
+| [US0012](US0012-techletter-cli-scaffolding.md) | `techletter` CLI scaffolding (`draft` / `send` / `dry-run`) | Done | 3 | HYL |
+| [US0013](US0013-sends-jsonl-and-idempotency.md) | `logs/sends.jsonl` schema + idempotency | Done | 3 | HYL |
+| [US0014](US0014-cache-helpers.md) | `.cache/` helpers, CI-disabled | Done | 5 | HYL |
+| [US0015](US0015-draft-workflow-yaml.md) | `.github/workflows/draft.yml` | Done | 3 | HYL |
+| [US0016](US0016-send-workflow-yaml.md) | `.github/workflows/send.yml` | Done | 5 | HYL |
+| [US0017](US0017-readme-quickstart-and-dev-loop.md) | README quickstart + dev loop docs | Done | 2 | HYL |
 
 **EP0003 subtotal:** 6 stories, 21 points
 
@@ -92,12 +92,12 @@ _Stories not yet generated. Run `/sdlc-studio story --epic EP0004`._
 | [US0009](US0009-compose-prompt-for-paper-items.md) | Compose prompt for paper items | [EP0002](../epics/EP0002-composition-pipeline.md) | Done | 5 | HYL/Researcher |
 | [US0010](US0010-compose-prompt-for-repo-items.md) | Compose prompt for repo items | [EP0002](../epics/EP0002-composition-pipeline.md) | Done | 3 | HYL/Researcher |
 | [US0011](US0011-compose-blog-quick-mentions-and-issue-assembly.md) | Compose blog + quick mentions + assembly | [EP0002](../epics/EP0002-composition-pipeline.md) | Done | 8 | HYL |
-| [US0012](US0012-techletter-cli-scaffolding.md) | CLI scaffolding | [EP0003](../epics/EP0003-orchestration-and-dx.md) | Draft | 3 | HYL |
-| [US0013](US0013-sends-jsonl-and-idempotency.md) | `sends.jsonl` + idempotency | [EP0003](../epics/EP0003-orchestration-and-dx.md) | Draft | 3 | HYL |
-| [US0014](US0014-cache-helpers.md) | `.cache/` helpers | [EP0003](../epics/EP0003-orchestration-and-dx.md) | Draft | 5 | HYL |
-| [US0015](US0015-draft-workflow-yaml.md) | `draft.yml` workflow | [EP0003](../epics/EP0003-orchestration-and-dx.md) | Draft | 3 | HYL |
-| [US0016](US0016-send-workflow-yaml.md) | `send.yml` workflow | [EP0003](../epics/EP0003-orchestration-and-dx.md) | Draft | 5 | HYL |
-| [US0017](US0017-readme-quickstart-and-dev-loop.md) | README + dev loop docs | [EP0003](../epics/EP0003-orchestration-and-dx.md) | Draft | 2 | HYL |
+| [US0012](US0012-techletter-cli-scaffolding.md) | CLI scaffolding | [EP0003](../epics/EP0003-orchestration-and-dx.md) | Done | 3 | HYL |
+| [US0013](US0013-sends-jsonl-and-idempotency.md) | `sends.jsonl` + idempotency | [EP0003](../epics/EP0003-orchestration-and-dx.md) | Done | 3 | HYL |
+| [US0014](US0014-cache-helpers.md) | `.cache/` helpers | [EP0003](../epics/EP0003-orchestration-and-dx.md) | Done | 5 | HYL |
+| [US0015](US0015-draft-workflow-yaml.md) | `draft.yml` workflow | [EP0003](../epics/EP0003-orchestration-and-dx.md) | Done | 3 | HYL |
+| [US0016](US0016-send-workflow-yaml.md) | `send.yml` workflow | [EP0003](../epics/EP0003-orchestration-and-dx.md) | Done | 5 | HYL |
+| [US0017](US0017-readme-quickstart-and-dev-loop.md) | README + dev loop docs | [EP0003](../epics/EP0003-orchestration-and-dx.md) | Done | 2 | HYL |
 | [US0018](US0018-channel-adapter-protocol-and-config-loaders.md) | `ChannelAdapter` protocol + config | [EP0004](../epics/EP0004-multichannel-delivery.md) | Draft | 3 | HYL |
 | [US0019](US0019-email-channel-adapter.md) | Email adapter | [EP0004](../epics/EP0004-multichannel-delivery.md) | Draft | 5 | HYL/Researcher |
 | [US0020](US0020-slack-channel-adapter.md) | Slack adapter | [EP0004](../epics/EP0004-multichannel-delivery.md) | Draft | 3 | HYL/Researcher |

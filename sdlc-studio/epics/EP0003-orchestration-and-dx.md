@@ -1,6 +1,6 @@
 # EP0003: Orchestration & Developer Experience
 
-> **Status:** Draft
+> **Status:** Done
 > **Owner:** HYL
 > **Reviewer:** HYL
 > **Created:** 2026-05-19
@@ -148,12 +148,12 @@ This epic implements ADR-001 (Actions as runtime), ADR-003 (git as store), and A
 
 Stories generated 2026-05-19. See [Story Index](../stories/_index.md) for full details.
 
-- [ ] [US0012](../stories/US0012-techletter-cli-scaffolding.md) — `techletter` CLI scaffolding (3 pts)
-- [ ] [US0013](../stories/US0013-sends-jsonl-and-idempotency.md) — `logs/sends.jsonl` + idempotency (3 pts)
-- [ ] [US0014](../stories/US0014-cache-helpers.md) — `.cache/` helpers, CI-disabled (5 pts)
-- [ ] [US0015](../stories/US0015-draft-workflow-yaml.md) — `.github/workflows/draft.yml` (3 pts)
-- [ ] [US0016](../stories/US0016-send-workflow-yaml.md) — `.github/workflows/send.yml` (5 pts)
-- [ ] [US0017](../stories/US0017-readme-quickstart-and-dev-loop.md) — README quickstart + dev loop docs (2 pts)
+- [x] [US0012](../stories/US0012-techletter-cli-scaffolding.md) — `techletter` CLI scaffolding (3 pts) **Done**
+- [x] [US0013](../stories/US0013-sends-jsonl-and-idempotency.md) — `logs/sends.jsonl` + idempotency (3 pts) **Done**
+- [x] [US0014](../stories/US0014-cache-helpers.md) — `.cache/` helpers, CI-disabled (5 pts) **Done**
+- [x] [US0015](../stories/US0015-draft-workflow-yaml.md) — `.github/workflows/draft.yml` (3 pts) **Done**
+- [x] [US0016](../stories/US0016-send-workflow-yaml.md) — `.github/workflows/send.yml` (5 pts) **Done**
+- [x] [US0017](../stories/US0017-readme-quickstart-and-dev-loop.md) — README quickstart + dev loop docs (2 pts) **Done**
 
 **Total:** 21 story points across 6 stories.
 

@@ -1,6 +1,6 @@
 # US0016: `.github/workflows/send.yml` — on PR merge, fan out, commit log
 
-> **Status:** Draft
+> **Status:** Done
 > **Epic:** [EP0003: Orchestration & Developer Experience](../epics/EP0003-orchestration-and-dx.md)
 > **Owner:** HYL
 > **Reviewer:** HYL

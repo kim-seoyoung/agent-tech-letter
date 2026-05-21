@@ -1,6 +1,6 @@
 # US0012: `techletter` CLI scaffolding with `draft` / `send` / `dry-run`
 
-> **Status:** Draft
+> **Status:** Done
 > **Epic:** [EP0003: Orchestration & Developer Experience](../epics/EP0003-orchestration-and-dx.md)
 > **Owner:** HYL
 > **Reviewer:** HYL

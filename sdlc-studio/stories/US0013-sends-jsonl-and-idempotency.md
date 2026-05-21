@@ -1,6 +1,6 @@
 # US0013: `logs/sends.jsonl` schema, append helper, and idempotency check
 
-> **Status:** Draft
+> **Status:** Done
 > **Epic:** [EP0003: Orchestration & Developer Experience](../epics/EP0003-orchestration-and-dx.md)
 > **Owner:** HYL
 > **Reviewer:** HYL

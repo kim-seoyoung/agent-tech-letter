@@ -1,0 +1,84 @@
+name: send
+
+# Triggered when a draft PR is merged into main.
+# CRITICAL: the `if:` predicate below MUST include
+# `github.event.pull_request.merged == true` so the workflow only fires
+# on actual merges, NOT on close-without-merge events.
+# This is the single most important guard in the project (TC0179).
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: send-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  send:
+    # TC0179 — the load-bearing predicate. Do NOT remove or weaken.
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      SMTP_HOST: ${{ secrets.SMTP_HOST }}
+      SMTP_USER: ${{ secrets.SMTP_USER }}
+      SMTP_PASS: ${{ secrets.SMTP_PASS }}
+      SMTP_FROM: ${{ secrets.SMTP_FROM }}
+      SLACK_WEBHOOK_URLS: ${{ secrets.SLACK_WEBHOOK_URLS }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+    steps:
+      - name: Checkout main (post-merge state)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.11
+
+      - name: Install dependencies
+        run: uv sync --all-extras
+
+      - name: Detect draft path
+        id: draft
+        run: |
+          # Find the most recent draft file added by the merged PR
+          DRAFT=$(git diff --name-only HEAD^ HEAD -- 'drafts/*.md' | head -1)
+          if [ -z "$DRAFT" ]; then
+            echo "::error::No draft file found in merged PR diff"
+            exit 1
+          fi
+          ISSUE_ID=$(basename "$DRAFT" .md)
+          echo "draft_path=$DRAFT" >> "$GITHUB_OUTPUT"
+          echo "issue_id=$ISSUE_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Send to channels
+        run: |
+          uv run techletter send \
+            --issue "${{ steps.draft.outputs.issue_id }}" \
+            --draft-path "${{ steps.draft.outputs.draft_path }}"
+
+      - name: Commit sends.jsonl
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if git diff --quiet logs/sends.jsonl 2>/dev/null; then
+            echo "No new audit log entries to commit"
+            exit 0
+          fi
+          git config user.name "techletter-bot"
+          git config user.email "bot@techletter.local"
+          git pull --rebase origin main
+          git add logs/sends.jsonl
+          git commit -m "audit: send for ${{ steps.draft.outputs.issue_id }}"
+          git push origin main

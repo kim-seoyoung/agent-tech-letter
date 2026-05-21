@@ -1,0 +1,85 @@
+name: draft
+
+# Weekly scheduled run that produces a draft issue and opens a PR for HYL approval.
+# Also dispatchable manually for backfill / catch-up runs.
+
+on:
+  schedule:
+    # Monday 00:00 UTC = Monday 09:00 KST (per PRD §F-04)
+    - cron: "0 0 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: draft
+  cancel-in-progress: false
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      LLM_BUDGET_TOKENS: "200000"
+      LLM_MODEL: "claude-sonnet-4-6"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.11
+
+      - name: Install dependencies
+        run: uv sync --all-extras
+
+      - name: Compute issue date
+        id: date
+        run: echo "issue_date=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+
+      - name: Run techletter draft
+        id: draft
+        run: |
+          set -o pipefail
+          uv run techletter draft \
+            --window-days 7 \
+            --config config/sources.yaml \
+            --output-dir drafts \
+            2> >(tee draft-stderr.log >&2)
+
+      - name: Detect budget overrun
+        if: failure()
+        run: |
+          if grep -q "BUDGET_EXCEEDED" draft-stderr.log; then
+            echo "::error::Token budget exceeded — see stderr for details"
+            exit 1
+          fi
+
+      - name: Create branch and commit draft
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BRANCH="draft/issue-${{ steps.date.outputs.issue_date }}"
+          git config user.name "techletter-bot"
+          git config user.email "bot@techletter.local"
+          git checkout -b "$BRANCH"
+          git add drafts/
+          git commit -m "draft: issue-${{ steps.date.outputs.issue_date }}"
+          git push origin "$BRANCH"
+
+      - name: Open PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --title "Issue ${{ steps.date.outputs.issue_date }}" \
+            --body "Automated weekly draft. Merge to send." \
+            --base main \
+            --head "draft/issue-${{ steps.date.outputs.issue_date }}"

@@ -15,6 +15,7 @@ dependencies = [
     "tenacity>=9",       # shared retry decorator across US0002/US0003/US0004
     "pyyaml>=6",         # US0005 config loader
     "anthropic>=0.40",   # US0006 LLM client (EP0002)
+    "click>=8.1",        # US0012 CLI (EP0003)
 ]
 
 [project.optional-dependencies]

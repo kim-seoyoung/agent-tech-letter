@@ -6,18 +6,26 @@
 <meta name="robots" content="noindex, nofollow">
 <title>AI Agent Weekly — 2026-05-21</title>
 <style>
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; color: #1a1a1a; background: #ffffff; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; color: #1a1a1a; background: #ffffff; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
 .container { max-width: 680px; margin: 0 auto; padding: 32px; }
-header { border-bottom: 1px solid #e5e5e5; padding-bottom: 16px; margin-bottom: 32px; }
-h1 { font-size: 28px; margin: 0 0 4px 0; color: #1a1a1a; }
-.date { color: #6b6b6b; margin: 0; font-size: 16px; }
-h2 { font-size: 20px; }
-h3 { font-size: 17px; }
+header { border-bottom: 1px solid #e5e5e5; padding-bottom: 20px; margin-bottom: 40px; }
+h1 { font-size: 28px; margin: 0 0 4px 0; color: #1a1a1a; letter-spacing: -0.02em; }
+.date { color: #6b6b6b; margin: 0; font-size: 13px; letter-spacing: 0.02em; }
+h2 { font-size: 24px; }
+h3 { font-size: 18px; }
 a { color: #0066cc; text-decoration: none; }
 a:hover { text-decoration: underline; }
-code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; background: #f3f4f6; padding: 1px 4px; border-radius: 3px; }
+code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; background: #f3f4f6; padding: 1px 4px; border-radius: 3px; font-size: 0.92em; }
 pre { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; background: #f3f4f6; padding: 12px; border-radius: 6px; overflow-x: auto; }
-.quick-mentions { padding-left: 20px; }
+.body p { margin: 0 0 14px 0; }
+.body h3, .body h4 { margin: 32px 0 10px 0; font-size: 18px; font-weight: 600; color: #1a1a1a; line-height: 1.4; }
+.body ul, .body ol { margin: 0 0 16px 0; padding-left: 24px; }
+.body li { margin-bottom: 6px; }
+.body blockquote { margin: 16px 0; padding: 4px 0 4px 16px; border-left: 3px solid #e5e5e5; color: #6b6b6b; }
+.qm-section { margin-top: 64px; padding-top: 32px; border-top: 2px solid #1a1a1a; }
+.qm-kicker { margin: 0 0 6px 0; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #0066cc; font-weight: 700; }
+.qm-section h2 { margin: 0 0 20px 0; font-size: 24px; color: #1a1a1a; letter-spacing: -0.01em; }
+.quick-mentions { padding-left: 20px; margin: 0; }
 </style>
 </head>
 <body>
@@ -26,14 +34,14 @@ pre { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; backgrou
 <h1>AI Agent Weekly</h1>
 <p class="date">2026-05-21</p>
 </header>
-<main><section class="deep-dive" style="margin-bottom: 32px;">
-  <h2 style="font-size: 20px; color: #1a1a1a; margin: 0 0 8px 0;">한 주에 세 곳에서 동시에 뜬 Agent Skills 패키징 포맷</h2>
-  <p class="meta" style="color: #6b6b6b; font-size: 16px; margin: 0 0 16px 0;">
+<main><section class="deep-dive" style="margin: 0; padding-top: 0; margin-top: 0; border-top: none;">
+  <h2 style="font-size: 24px; font-weight: 700; color: #1a1a1a; margin: 0 0 12px 0; line-height: 1.35; letter-spacing: -0.01em;">한 주에 세 곳에서 동시에 뜬 Agent Skills 패키징 포맷</h2>
+  <p class="meta" style="color: #6b6b6b; font-size: 13px; margin: 0 0 24px 0; line-height: 1.5;">
     <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">repo</span>
 <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">beta</span>    &middot; <a href="https://github.com/anthropics/skills" style="color: #0066cc;">원문</a>
     &middot; 3 sources
   </p>
-  <div class="body" style="color: #1a1a1a; font-size: 16px; line-height: 1.6;"><p>이번 주 GitHub Trending에서 같은 패키징 컨셉을 따르는 레포 세 개가 동시에 급상승했습니다. <a href="https://github.com/anthropics/skills"><code>anthropics/skills</code></a>가 138,380 스타로 한 주에 +4,749개, <a href="https://github.com/anthropics/financial-services"><code>anthropics/financial-services</code></a>가 26,286 스타로 +4,136개, <a href="https://github.com/K-Dense-AI/scientific-agent-skills"><code>K-Dense-AI/scientific-agent-skills</code></a>가 24,973 스타로 +3,994개를 추가했습니다. 세 레포 모두 &quot;Agent Skills&quot; 라는 같은 단어를 쓰고, 같은 추상화 — 에이전트 런타임이 마운트해서 디스패치할 수 있는 사전 패키지된 작업 단위 — 를 발행합니다.</p>
+  <div class="body" style="color: #1a1a1a; font-size: 16px; line-height: 1.75;"><p>이번 주 GitHub Trending에서 같은 패키징 컨셉을 따르는 레포 세 개가 동시에 급상승했습니다. <a href="https://github.com/anthropics/skills"><code>anthropics/skills</code></a>가 138,380 스타로 한 주에 +4,749개, <a href="https://github.com/anthropics/financial-services"><code>anthropics/financial-services</code></a>가 26,286 스타로 +4,136개, <a href="https://github.com/K-Dense-AI/scientific-agent-skills"><code>K-Dense-AI/scientific-agent-skills</code></a>가 24,973 스타로 +3,994개를 추가했습니다. 세 레포 모두 &quot;Agent Skills&quot; 라는 같은 단어를 쓰고, 같은 추상화 — 에이전트 런타임이 마운트해서 디스패치할 수 있는 사전 패키지된 작업 단위 — 를 발행합니다.</p>
 <h4>Skill의 구성</h4>
 <p>레포들을 열어보면 하나의 Skill은 대체로 세 가지로 이루어집니다.</p>
 <ol>
@@ -49,14 +57,14 @@ pre { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; backgrou
 <h4>이번 주가 의미하는 것</h4>
 <p>핵심 신호는 어느 한 레포의 스타 수가 아닙니다. 서로 독립된 세 조직(모델 랩 하나, 그 랩의 도메인 사이블링 하나, 외부 커뮤니티 그룹 하나)이 같은 패키징 모양에 수렴했다는 점입니다. 플러그인 시스템을 각자 발명하던 단계는 지나가고, 포맷 자체가 조율 지점이 되기 시작했다고 볼 수 있습니다.</p>
 <p>도입을 고려한다면 <code>anthropics/skills</code>의 매니페스트 두세 개만 먼저 읽어보세요.</p></div>
-</section><section class="deep-dive" style="margin-bottom: 32px;">
-  <h2 style="font-size: 20px; color: #1a1a1a; margin: 0 0 8px 0;">&#34;지루한 프로덕션&#34; 단계로 진입한 코딩 에이전트</h2>
-  <p class="meta" style="color: #6b6b6b; font-size: 16px; margin: 0 0 16px 0;">
+</section><section class="deep-dive" style="margin: 0; padding-top: 48px; margin-top: 48px; border-top: 1px solid #e5e5e5;">
+  <h2 style="font-size: 24px; font-weight: 700; color: #1a1a1a; margin: 0 0 12px 0; line-height: 1.35; letter-spacing: -0.01em;">&#34;지루한 프로덕션&#34; 단계로 진입한 코딩 에이전트</h2>
+  <p class="meta" style="color: #6b6b6b; font-size: 13px; margin: 0 0 24px 0; line-height: 1.5;">
     <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">blog_post</span>
 <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">production-ready</span>    &middot; <a href="https://simonwillison.net/2026/May/19/5-minute-llms/" style="color: #0066cc;">원문</a>
     &middot; 3 sources
   </p>
-  <div class="body" style="color: #1a1a1a; font-size: 16px; line-height: 1.6;"><p>이번 주에 서로 다른 출처의 세 글이 같은 결론에 도달했습니다. 코딩 에이전트가 더 이상 데모 단계가 아니라는 결론입니다.</p>
+  <div class="body" style="color: #1a1a1a; font-size: 16px; line-height: 1.75;"><p>이번 주에 서로 다른 출처의 세 글이 같은 결론에 도달했습니다. 코딩 에이전트가 더 이상 데모 단계가 아니라는 결론입니다.</p>
 <p>Simon Willison의 <a href="https://simonwillison.net/2026/May/19/5-minute-llms/">PyCon 라이트닝 토크</a>는 변곡점을 <strong>2025년 11월</strong>로 명시합니다. TheNewStack의 <a href="https://thenewstack.io/conductor-cloud-ai-coding-agents/">Conductor Cloud 보도</a>는 코딩 에이전트가 호스팅된 환경에서 <strong>수 시간 동안 비감독으로</strong>, 여러 인스턴스가 병렬로 도는 패턴을 묘사합니다. <a href="https://thenewstack.io/openai-codex-chatgpt-mobile/">OpenAI Codex의 ChatGPT 모바일 통합</a>은 데스크톱과 원격 SSH를 휴대폰에서 잇고, 자격증명은 <strong>별도의 보안 릴레이</strong>를 통해 전달됩니다.</p>
 <h4>세 글이 따라가는 사실들</h4>
 <p>Willison은 2025년 11월을 변곡점으로 본 근거를 두 가지로 제시합니다. 첫째, 같은 모델군이 6개월 동안 같은 코드베이스에서 일관된 PR 머지율을 유지했습니다. 둘째, 로컬 모델이 같은 벤치마크에서 클라우드 모델과의 격차를 좁혔습니다. 두 근거 모두 정량적 수치를 제시하지는 않지만, 추세선의 방향은 명확합니다.</p>
@@ -69,14 +77,14 @@ pre { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; backgrou
 <h4>하나 짚고 갈 부분</h4>
 <p>TheNewStack의 두 글은 출시 발표 시점의 클레임을 그대로 옮기고 있고, 독립 벤치마크는 없습니다. Conductor의 &quot;더 긴 자율 작업&quot;에는 공개된 신뢰성 지표가 없고, Codex 모바일 릴레이는 3자 감사 결과가 없습니다.</p>
 <p>자기 인프라에 적용한다면 &quot;자격증명 브로커가 1시간짜리 비감독 작업을 가정하고 설계됐는지&quot; 한 가지부터 확인해보세요.</p></div>
-</section><section class="deep-dive" style="margin-bottom: 32px;">
-  <h2 style="font-size: 20px; color: #1a1a1a; margin: 0 0 8px 0;">평범한 인프라처럼 보이기 시작한 에이전트 인프라</h2>
-  <p class="meta" style="color: #6b6b6b; font-size: 16px; margin: 0 0 16px 0;">
+</section><section class="deep-dive" style="margin: 0; padding-top: 48px; margin-top: 48px; border-top: 1px solid #e5e5e5;">
+  <h2 style="font-size: 24px; font-weight: 700; color: #1a1a1a; margin: 0 0 12px 0; line-height: 1.35; letter-spacing: -0.01em;">평범한 인프라처럼 보이기 시작한 에이전트 인프라</h2>
+  <p class="meta" style="color: #6b6b6b; font-size: 13px; margin: 0 0 24px 0; line-height: 1.5;">
     <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
 <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">experimental</span>    &middot; <a href="https://arxiv.org/abs/2605.20630" style="color: #0066cc;">원문</a>
     &middot; 2 sources
   </p>
-  <div class="body" style="color: #1a1a1a; font-size: 16px; line-height: 1.6;"><p>이번 주에 서로 매우 다른 두 출처가 같은 — 그리고 그동안 방치돼 온 — 레이어를 동시에 두드렸습니다. 에이전트를 굴리는 <strong>비용</strong>과 에이전트가 실행될 때 무엇을 건드리는지의 <strong>권한 모델</strong>입니다.</p>
+  <div class="body" style="color: #1a1a1a; font-size: 16px; line-height: 1.75;"><p>이번 주에 서로 매우 다른 두 출처가 같은 — 그리고 그동안 방치돼 온 — 레이어를 동시에 두드렸습니다. 에이전트를 굴리는 <strong>비용</strong>과 에이전트가 실행될 때 무엇을 건드리는지의 <strong>권한 모델</strong>입니다.</p>
 <p>논문 <a href="https://arxiv.org/abs/2605.20630">&quot;Temporal Semantic Caching and Workflow Optimization in Agentic Plan-Execute Pipelines&quot;</a>는 플래너·실행기 중간 출력을 시맨틱 유사도와 TTL로 캐싱해, 거의 동일한 서브문제를 다시 만나는 LLM 호출을 중복 제거하자고 제안합니다. 산업 쪽에서는 <a href="https://thenewstack.io/nanoco-nanoclaw-sandboxed-agent/">NanoCo의 NanoClaw</a>가 <strong>직원당 하나씩</strong> Docker로 격리된 에이전트를 배치하고, 자격증명을 직원 신원에 바인딩합니다.</p>
 <h4>논문이 실제로 제안하는 메커니즘</h4>
 <p>Temporal Semantic Caching의 작동 방식은 두 단계입니다. 첫째, 플랜-실행 파이프라인의 각 노드 출력(plan, sub-plan, tool call result)을 <strong>임베딩 + TTL</strong> 쌍으로 인덱싱합니다. 둘째, 같은 노드 위치에 새 입력이 들어왔을 때, 유사도가 임계값을 넘고 TTL이 만료되지 않은 캐시 엔트리가 있으면 재사용합니다. 단순히 &quot;같은 쿼리면 재사용&quot;이 아니라 &quot;의미적으로 같은 서브문제&quot;를 잡는다는 점이 핵심입니다.</p>
@@ -97,48 +105,51 @@ pre { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; backgrou
 <h4>아직 풀리지 않은 부분</h4>
 <p>논문은 <strong>적대적 입력 하에서의 캐시 무효화</strong>를 다루지 않습니다. 의도적으로 임베딩 거리에서 가깝지만 의미가 다른 입력을 던지면 잘못된 캐시 히트가 발생할 수 있습니다. NanoCo 보도는 두 직원의 에이전트가 상태를 공유해야 하는 케이스(예: 공유 프로젝트)를 어떻게 처리하는지 다루지 않았습니다.</p>
 <p>자기 시스템에서는 &quot;플래너 출력을 LLM 호출 캐시 위에 한 겹 더 캐싱했을 때 비용이 얼마나 줄어드는지&quot; 한 가지부터 측정해보세요.</p></div>
-</section><h2 style="font-size: 20px; color: #1a1a1a;">Quick Mentions</h2>
-<ul class="quick-mentions"><li style="margin-bottom: 6px; color: #1a1a1a; font-size: 16px;">
+</section><div class="qm-section">
+<p class="qm-kicker">Also this week</p>
+<h2>Quick Mentions</h2>
+<ul class="quick-mentions"><li style="margin-bottom: 10px; color: #1a1a1a; font-size: 16px; line-height: 1.55;">
   <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">blog_post</span>
-  <a href="https://simonwillison.net/2026/May/20/google-io/" style="color: #0066cc;">Gemini Spark, Antigravity (Google I/O)</a>
+  <a href="https://simonwillison.net/2026/May/20/google-io/" style="color: #0066cc; font-weight: 600;">Gemini Spark, Antigravity (Google I/O)</a>
   <span style="color: #6b6b6b;"> &mdash; Google의 Gemini Spark는 Gmail·캘린더와 통합되고 Antigravity로 격리되는 첫 대형 컨슈머 개인 에이전트.</span>
-</li><li style="margin-bottom: 6px; color: #1a1a1a; font-size: 16px;">
+</li><li style="margin-bottom: 10px; color: #1a1a1a; font-size: 16px; line-height: 1.55;">
   <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">blog_post</span>
-  <a href="https://importai.substack.com/p/import-ai-455-automating-ai-research" style="color: #0066cc;">Import AI #455 — AI systems are about to start building themselves</a>
+  <a href="https://importai.substack.com/p/import-ai-455-automating-ai-research" style="color: #0066cc; font-weight: 600;">Import AI #455 — AI systems are about to start building themselves</a>
   <span style="color: #6b6b6b;"> &mdash; 2028년 말까지 AI R&amp;D가 완전 자동화될 확률을 60% 이상으로 잡고, 자율 코딩 증거로 그 숫자를 뒷받침한다.</span>
-</li><li style="margin-bottom: 6px; color: #1a1a1a; font-size: 16px;">
+</li><li style="margin-bottom: 10px; color: #1a1a1a; font-size: 16px; line-height: 1.55;">
   <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
-  <a href="https://arxiv.org/abs/2605.21482" style="color: #0066cc;">DeepWeb-Bench</a>
+  <a href="https://arxiv.org/abs/2605.21482" style="color: #0066cc; font-weight: 600;">DeepWeb-Bench</a>
   <span style="color: #6b6b6b;"> &mdash; 다수의 웹 소스를 가로질러 증거를 모으고 장기간에 걸쳐 답을 유도해야 하는 에이전트를 위한 새 벤치마크.</span>
-</li><li style="margin-bottom: 6px; color: #1a1a1a; font-size: 16px;">
+</li><li style="margin-bottom: 10px; color: #1a1a1a; font-size: 16px; line-height: 1.55;">
   <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
-  <a href="https://arxiv.org/abs/2605.21347" style="color: #0066cc;">Insights Generator</a>
+  <a href="https://arxiv.org/abs/2605.21347" style="color: #0066cc; font-weight: 600;">Insights Generator</a>
   <span style="color: #6b6b6b;"> &mdash; LLM 에이전트 트레이스를 코퍼스 단위로 분석해 반복되는 실패 모드를 뽑아내는 디버깅 도구.</span>
-</li><li style="margin-bottom: 6px; color: #1a1a1a; font-size: 16px;">
+</li><li style="margin-bottom: 10px; color: #1a1a1a; font-size: 16px; line-height: 1.55;">
   <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
-  <a href="https://arxiv.org/abs/2605.20189" style="color: #0066cc;">SOLAR</a>
+  <a href="https://arxiv.org/abs/2605.20189" style="color: #0066cc; font-weight: 600;">SOLAR</a>
   <span style="color: #6b6b6b;"> &mdash; 에피소드를 거치면서 자기 스킬 라이브러리를 유지·정제하는 개방형 자율 에이전트, lifelong agent learning의 구체적 한 안.</span>
-</li><li style="margin-bottom: 6px; color: #1a1a1a; font-size: 16px;">
+</li><li style="margin-bottom: 10px; color: #1a1a1a; font-size: 16px; line-height: 1.55;">
   <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
-  <a href="https://arxiv.org/abs/2605.20833" style="color: #0066cc;">MemGym</a>
+  <a href="https://arxiv.org/abs/2605.20833" style="color: #0066cc; font-weight: 600;">MemGym</a>
   <span style="color: #6b6b6b;"> &mdash; LLM 에이전트의 장기 메모리를 표준 방식으로 평가. 임시 메모리 벤치마크에 막혀 있었다면 유용하다.</span>
-</li><li style="margin-bottom: 6px; color: #1a1a1a; font-size: 16px;">
+</li><li style="margin-bottom: 10px; color: #1a1a1a; font-size: 16px; line-height: 1.55;">
   <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
-  <a href="https://arxiv.org/abs/2605.20618" style="color: #0066cc;">COAgents</a>
+  <a href="https://arxiv.org/abs/2605.20618" style="color: #0066cc; font-weight: 600;">COAgents</a>
   <span style="color: #6b6b6b;"> &mdash; 특화 에이전트들이 협력적으로 라우팅 문제 탐색 공간을 탐사하는 멀티에이전트 프레임워크.</span>
-</li><li style="margin-bottom: 6px; color: #1a1a1a; font-size: 16px;">
+</li><li style="margin-bottom: 10px; color: #1a1a1a; font-size: 16px; line-height: 1.55;">
   <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
-  <a href="https://arxiv.org/abs/2605.20425" style="color: #0066cc;">AgentCo-op</a>
+  <a href="https://arxiv.org/abs/2605.20425" style="color: #0066cc; font-weight: 600;">AgentCo-op</a>
   <span style="color: #6b6b6b;"> &mdash; 멀티에이전트 워크플로를 처음부터 짜는 대신, 기존 워크플로 템플릿을 검색·이어붙여 합성한다.</span>
-</li><li style="margin-bottom: 6px; color: #1a1a1a; font-size: 16px;">
+</li><li style="margin-bottom: 10px; color: #1a1a1a; font-size: 16px; line-height: 1.55;">
   <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">repo</span>
-  <a href="https://github.com/yichuan-w/LEANN" style="color: #0066cc;">LEANN</a>
+  <a href="https://github.com/yichuan-w/LEANN" style="color: #0066cc; font-weight: 600;">LEANN</a>
   <span style="color: #6b6b6b;"> &mdash; 프라이빗 RAG에서 97% 스토리지 절감을 주장. 로컬 배포에서 벡터 인덱스 비용에 막혔다면 한 번 볼 만하다.</span>
-</li><li style="margin-bottom: 6px; color: #1a1a1a; font-size: 16px;">
+</li><li style="margin-bottom: 10px; color: #1a1a1a; font-size: 16px; line-height: 1.55;">
   <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
-  <a href="https://arxiv.org/abs/2605.21082" style="color: #0066cc;">AutoRPA</a>
+  <a href="https://arxiv.org/abs/2605.21082" style="color: #0066cc; font-weight: 600;">AutoRPA</a>
   <span style="color: #6b6b6b;"> &mdash; 추론 시점에 화면 감시 에이전트를 돌리는 대신 LLM으로 RPA 스크립트를 합성해, 런타임 비용을 일회성 합성 비용과 교환한다.</span>
 </li></ul>
+</div>
 </main>
 </div>
 </body>

@@ -1,6 +1,6 @@
 # EP0002: Composition Pipeline
 
-> **Status:** Draft
+> **Status:** Done
 > **Owner:** HYL
 > **Reviewer:** HYL
 > **Created:** 2026-05-19
@@ -147,12 +147,12 @@ This epic sits between EP0001 (sources) and EP0003 (orchestration). It's the mos
 
 Stories generated 2026-05-19. See [Story Index](../stories/_index.md) for full details.
 
-- [ ] [US0006](../stories/US0006-llm-client-with-budget-enforcement.md) — LLM client wrapper + budget enforcement (3 pts)
-- [ ] [US0007](../stories/US0007-cluster-prompt-and-step.md) — Cluster prompt + step (5 pts)
-- [ ] [US0008](../stories/US0008-rank-prompt-and-step.md) — Rank prompt + step (`item_kind`-aware) (5 pts)
-- [ ] [US0009](../stories/US0009-compose-prompt-for-paper-items.md) — Compose prompt for `paper` items (5 pts)
-- [ ] [US0010](../stories/US0010-compose-prompt-for-repo-items.md) — Compose prompt for `repo` items (3 pts)
-- [ ] [US0011](../stories/US0011-compose-blog-quick-mentions-and-issue-assembly.md) — Compose `blog_post` + quick mentions + `RenderedIssue` assembly (8 pts)
+- [x] [US0006](../stories/US0006-llm-client-with-budget-enforcement.md) — LLM client wrapper + budget enforcement (3 pts) **Done**
+- [x] [US0007](../stories/US0007-cluster-prompt-and-step.md) — Cluster prompt + step (5 pts) **Done**
+- [x] [US0008](../stories/US0008-rank-prompt-and-step.md) — Rank prompt + step (`item_kind`-aware) (5 pts) **Done**
+- [x] [US0009](../stories/US0009-compose-prompt-for-paper-items.md) — Compose prompt for `paper` items (5 pts) **Done**
+- [x] [US0010](../stories/US0010-compose-prompt-for-repo-items.md) — Compose prompt for `repo` items (3 pts) **Done**
+- [x] [US0011](../stories/US0011-compose-blog-quick-mentions-and-issue-assembly.md) — Compose `blog_post` + quick mentions + `RenderedIssue` assembly (8 pts) **Done**
 
 **Total:** 29 story points across 6 stories.
 

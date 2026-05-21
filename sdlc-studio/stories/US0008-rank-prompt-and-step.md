@@ -1,6 +1,6 @@
 # US0008: Rank prompt + step (`item_kind`-aware significance)
 
-> **Status:** Draft
+> **Status:** Done
 > **Epic:** [EP0002: Composition Pipeline](../epics/EP0002-composition-pipeline.md)
 > **Owner:** HYL
 > **Reviewer:** HYL

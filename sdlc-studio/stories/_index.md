@@ -7,12 +7,12 @@
 
 | Status | Count |
 |--------|-------|
-| Draft | 17 |
+| Draft | 11 |
 | Ready | 0 |
 | Planned | 0 |
 | In Progress | 0 |
 | Review | 0 |
-| Done | 5 |
+| Done | 11 |
 | **Total** | **22** |
 
 ## Stories by Epic
@@ -33,12 +33,12 @@
 
 | ID | Title | Status | Points | Owner |
 |----|-------|--------|--------|-------|
-| [US0006](US0006-llm-client-with-budget-enforcement.md) | LLM client with token counting + budget enforcement | Draft | 3 | HYL |
-| [US0007](US0007-cluster-prompt-and-step.md) | Cluster prompt + step | Draft | 5 | HYL |
-| [US0008](US0008-rank-prompt-and-step.md) | Rank prompt + step (`item_kind`-aware significance) | Draft | 5 | HYL |
-| [US0009](US0009-compose-prompt-for-paper-items.md) | Compose prompt for `paper` items | Draft | 5 | HYL |
-| [US0010](US0010-compose-prompt-for-repo-items.md) | Compose prompt for `repo` items | Draft | 3 | HYL |
-| [US0011](US0011-compose-blog-quick-mentions-and-issue-assembly.md) | Compose `blog_post` + quick mentions + `RenderedIssue` assembly | Draft | 8 | HYL |
+| [US0006](US0006-llm-client-with-budget-enforcement.md) | LLM client with token counting + budget enforcement | Done | 3 | HYL |
+| [US0007](US0007-cluster-prompt-and-step.md) | Cluster prompt + step | Done | 5 | HYL |
+| [US0008](US0008-rank-prompt-and-step.md) | Rank prompt + step (`item_kind`-aware significance) | Done | 5 | HYL |
+| [US0009](US0009-compose-prompt-for-paper-items.md) | Compose prompt for `paper` items | Done | 5 | HYL |
+| [US0010](US0010-compose-prompt-for-repo-items.md) | Compose prompt for `repo` items | Done | 3 | HYL |
+| [US0011](US0011-compose-blog-quick-mentions-and-issue-assembly.md) | Compose `blog_post` + quick mentions + `RenderedIssue` assembly | Done | 8 | HYL |
 
 **EP0002 subtotal:** 6 stories, 29 points
 
@@ -86,12 +86,12 @@ _Stories not yet generated. Run `/sdlc-studio story --epic EP0004`._
 | [US0003](US0003-github-trending-source-adapter.md) | GitHub Trending source adapter | [EP0001](../epics/EP0001-content-ingestion.md) | Done | 5 | HYL |
 | [US0004](US0004-rss-source-adapter.md) | RSS source adapter | [EP0001](../epics/EP0001-content-ingestion.md) | Done | 2 | HYL |
 | [US0005](US0005-source-registry-and-config-loader.md) | Source registry + `config/sources.yaml` loader | [EP0001](../epics/EP0001-content-ingestion.md) | Done | 3 | HYL |
-| [US0006](US0006-llm-client-with-budget-enforcement.md) | LLM client + budget enforcement | [EP0002](../epics/EP0002-composition-pipeline.md) | Draft | 3 | HYL |
-| [US0007](US0007-cluster-prompt-and-step.md) | Cluster prompt + step | [EP0002](../epics/EP0002-composition-pipeline.md) | Draft | 5 | HYL |
-| [US0008](US0008-rank-prompt-and-step.md) | Rank prompt + step | [EP0002](../epics/EP0002-composition-pipeline.md) | Draft | 5 | HYL |
-| [US0009](US0009-compose-prompt-for-paper-items.md) | Compose prompt for paper items | [EP0002](../epics/EP0002-composition-pipeline.md) | Draft | 5 | HYL/Researcher |
-| [US0010](US0010-compose-prompt-for-repo-items.md) | Compose prompt for repo items | [EP0002](../epics/EP0002-composition-pipeline.md) | Draft | 3 | HYL/Researcher |
-| [US0011](US0011-compose-blog-quick-mentions-and-issue-assembly.md) | Compose blog + quick mentions + assembly | [EP0002](../epics/EP0002-composition-pipeline.md) | Draft | 8 | HYL |
+| [US0006](US0006-llm-client-with-budget-enforcement.md) | LLM client + budget enforcement | [EP0002](../epics/EP0002-composition-pipeline.md) | Done | 3 | HYL |
+| [US0007](US0007-cluster-prompt-and-step.md) | Cluster prompt + step | [EP0002](../epics/EP0002-composition-pipeline.md) | Done | 5 | HYL |
+| [US0008](US0008-rank-prompt-and-step.md) | Rank prompt + step | [EP0002](../epics/EP0002-composition-pipeline.md) | Done | 5 | HYL |
+| [US0009](US0009-compose-prompt-for-paper-items.md) | Compose prompt for paper items | [EP0002](../epics/EP0002-composition-pipeline.md) | Done | 5 | HYL/Researcher |
+| [US0010](US0010-compose-prompt-for-repo-items.md) | Compose prompt for repo items | [EP0002](../epics/EP0002-composition-pipeline.md) | Done | 3 | HYL/Researcher |
+| [US0011](US0011-compose-blog-quick-mentions-and-issue-assembly.md) | Compose blog + quick mentions + assembly | [EP0002](../epics/EP0002-composition-pipeline.md) | Done | 8 | HYL |
 | [US0012](US0012-techletter-cli-scaffolding.md) | CLI scaffolding | [EP0003](../epics/EP0003-orchestration-and-dx.md) | Draft | 3 | HYL |
 | [US0013](US0013-sends-jsonl-and-idempotency.md) | `sends.jsonl` + idempotency | [EP0003](../epics/EP0003-orchestration-and-dx.md) | Draft | 3 | HYL |
 | [US0014](US0014-cache-helpers.md) | `.cache/` helpers | [EP0003](../epics/EP0003-orchestration-and-dx.md) | Draft | 5 | HYL |

@@ -8,11 +8,11 @@
 
 | Status | Count |
 |--------|-------|
-| Draft | 3 |
+| Draft | 2 |
 | Ready | 0 |
 | Approved | 0 |
 | In Progress | 0 |
-| Done | 1 |
+| Done | 2 |
 | **Total** | **4** |
 
 ## Epics
@@ -20,7 +20,7 @@
 | ID | Title | Status | Owner | Stories (est.) | PRD Features |
 |----|-------|--------|-------|----------------|--------------|
 | [EP0001](EP0001-content-ingestion.md) | Content Ingestion | Done | HYL | 5 | F-01 |
-| [EP0002](EP0002-composition-pipeline.md) | Composition Pipeline | Draft | HYL | 6 | F-02, F-03 |
+| [EP0002](EP0002-composition-pipeline.md) | Composition Pipeline | Done | HYL | 6 | F-02, F-03 |
 | [EP0003](EP0003-orchestration-and-dx.md) | Orchestration & Developer Experience | Draft | HYL | 6 | F-04, F-09, F-10, F-11 |
 | [EP0004](EP0004-multichannel-delivery.md) | Multi-channel Delivery | Draft | HYL | 5 | F-05, F-06, F-07, F-08 |
 

@@ -1,6 +1,6 @@
 # US0006: LLM client wrapper with token counting and budget enforcement
 
-> **Status:** Draft
+> **Status:** Done
 > **Epic:** [EP0002: Composition Pipeline](../epics/EP0002-composition-pipeline.md)
 > **Owner:** HYL
 > **Reviewer:** HYL

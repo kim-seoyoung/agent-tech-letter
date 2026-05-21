@@ -1,6 +1,6 @@
 # US0011: Compose `blog_post` deep dives + quick mentions + `RenderedIssue` assembly
 
-> **Status:** Draft
+> **Status:** Done
 > **Epic:** [EP0002: Composition Pipeline](../epics/EP0002-composition-pipeline.md)
 > **Owner:** HYL
 > **Reviewer:** HYL

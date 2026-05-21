@@ -1,6 +1,6 @@
 # US0010: Compose prompt for `repo` items
 
-> **Status:** Draft
+> **Status:** Done
 > **Epic:** [EP0002: Composition Pipeline](../epics/EP0002-composition-pipeline.md)
 > **Owner:** HYL
 > **Reviewer:** HYL

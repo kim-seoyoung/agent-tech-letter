@@ -7,17 +7,23 @@
 <title>AI Agent Weekly — {{ issue_date_iso }}</title>
 <style>
 body { font-family: {{ font.family|safe }}; color: {{ colors.fg|safe }}; background: #f5f5f5; margin: 0; padding: 0; }
-h1 { font-size: {{ font.size_h1|safe }}; color: {{ colors.fg|safe }}; margin: 0 0 4px 0; }
-h2 { font-size: {{ font.size_h2|safe }}; color: {{ colors.fg|safe }}; margin: 24px 0 8px 0; }
-.deep-dive { margin-bottom: 32px; }
-.deep-dive h2 { font-size: {{ font.size_h2|safe }}; color: {{ colors.fg|safe }}; }
-.meta { color: {{ colors.muted|safe }}; font-size: {{ font.size_body|safe }}; margin: 0 0 16px 0; }
-.body { color: {{ colors.fg|safe }}; font-size: {{ font.size_body|safe }}; line-height: 1.6; }
-.date { color: {{ colors.muted|safe }}; margin: 0; font-size: {{ font.size_body|safe }}; }
+h1 { font-size: {{ font.size_h1|safe }}; color: {{ colors.fg|safe }}; margin: 0 0 4px 0; letter-spacing: -0.02em; }
+h2 { font-size: {{ font.size_h2|safe }}; color: {{ colors.fg|safe }}; margin: 0 0 12px 0; letter-spacing: -0.01em; }
+.deep-dive h2 { font-size: {{ font.size_h2|safe }}; color: {{ colors.fg|safe }}; font-weight: 700; }
+.meta { color: {{ colors.muted|safe }}; font-size: {{ font.size_meta|safe }}; margin: 0 0 24px 0; line-height: 1.5; }
+.body { color: {{ colors.fg|safe }}; font-size: {{ font.size_body|safe }}; line-height: 1.75; }
+.body p { margin: 0 0 14px 0; }
+.body h3, .body h4 { margin: 32px 0 10px 0; font-size: {{ font.size_h3|safe }}; font-weight: 600; color: {{ colors.fg|safe }}; line-height: 1.4; }
+.body ul, .body ol { margin: 0 0 16px 0; padding-left: 24px; }
+.body li { margin-bottom: 6px; }
+.body blockquote { margin: 16px 0; padding: 4px 0 4px 16px; border-left: 3px solid {{ colors.border|safe }}; color: {{ colors.muted|safe }}; }
+.date { color: {{ colors.muted|safe }}; margin: 0 0 40px 0; font-size: {{ font.size_meta|safe }}; letter-spacing: 0.02em; }
 .tag { background: {{ colors.tag_bg|safe }}; padding: 2px 8px; border-radius: 4px; font-size: 12px; }
 a { color: {{ colors.accent|safe }}; text-decoration: none; }
-code { font-family: {{ font.mono|safe }}; background: {{ colors.tag_bg|safe }}; padding: 1px 4px; border-radius: 3px; }
-.qm { margin-bottom: 6px; color: {{ colors.fg|safe }}; font-size: {{ font.size_body|safe }}; }
+code { font-family: {{ font.mono|safe }}; background: {{ colors.tag_bg|safe }}; padding: 1px 4px; border-radius: 3px; font-size: 0.92em; }
+.qm { margin-bottom: 10px; color: {{ colors.fg|safe }}; font-size: {{ font.size_body|safe }}; }
+.qm-section { margin-top: 64px; padding-top: 32px; border-top: 2px solid {{ colors.fg|safe }}; }
+.qm-kicker { margin: 0 0 6px 0; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: {{ colors.accent|safe }}; font-weight: 700; }
 </style>
 </head>
 <body style="margin:0; padding:0; background:#f5f5f5;">
@@ -28,14 +34,18 @@ code { font-family: {{ font.mono|safe }}; background: {{ colors.tag_bg|safe }}; 
 <h1>AI Agent Weekly</h1>
 <p class="date">{{ issue_date_iso }}</p>
 {%- for dd in deep_dives %}
+{%- set is_first = loop.first %}
 {% include "components/deep_dive.html.j2" %}
 {%- endfor %}
+<div class="qm-section">
+<p class="qm-kicker">Also this week</p>
 <h2>Quick Mentions</h2>
 <ul style="padding-left: 20px; margin: 0;">
 {%- for qm in quick_mentions %}
 {% include "components/quick_mention.html.j2" %}
 {%- endfor %}
 </ul>
+</div>
 </td></tr>
 </table>
 </td></tr>

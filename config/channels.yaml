@@ -8,4 +8,15 @@ slack:
   enabled: false
 
 telegram:
-  enabled: false
+  enabled: true
+  mode: teaser_link              # publish HTML to GitHub Pages, send teaser+link to Telegram
+  publisher: github_pages
+
+publishers:
+  github_pages:
+    enabled: true
+    repo_path: "."
+    branch: "gh-pages"
+    base_url: "https://kim-seoyoung.github.io/agent-tech-letter"
+    author_name: "tech-letter-bot"
+    author_email: "bestseo02@gmail.com"

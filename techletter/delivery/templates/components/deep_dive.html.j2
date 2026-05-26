@@ -1,13 +1,15 @@
 {#- US0024 shared deep-dive component.
     Context: dd (DeepDive with .body_html precomputed), colors, font, layout.
+    Optional: is_first (set by the parent loop to drop the divider on the first item).
     Both web (html_web) and email (html_email) include this partial. -#}
-<section class="deep-dive" style="margin-bottom: {{ layout.padding }};">
-  <h2 style="font-size: {{ font.size_h2 }}; color: {{ colors.fg }}; margin: 0 0 8px 0;">{{ dd.title }}</h2>
-  <p class="meta" style="color: {{ colors.muted }}; font-size: {{ font.size_body }}; margin: 0 0 16px 0;">
+{%- set _first = is_first|default(true) -%}
+<section class="deep-dive" style="margin: 0; padding-top: {% if _first %}0{% else %}48px{% endif %}; margin-top: {% if _first %}0{% else %}48px{% endif %}; border-top: {% if _first %}none{% else %}1px solid {{ colors.border }}{% endif %};">
+  <h2 style="font-size: {{ font.size_h2 }}; font-weight: 700; color: {{ colors.fg }}; margin: 0 0 12px 0; line-height: 1.35; letter-spacing: -0.01em;">{{ dd.title }}</h2>
+  <p class="meta" style="color: {{ colors.muted }}; font-size: {{ font.size_meta }}; margin: 0 0 24px 0; line-height: 1.5;">
     <span class="tag" style="background: {{ colors.tag_bg }}; padding: 2px 8px; border-radius: 4px; font-size: 12px;">{{ dd.item_kind }}</span>
     {% if dd.maturity %}<span class="tag" style="background: {{ colors.tag_bg }}; padding: 2px 8px; border-radius: 4px; font-size: 12px;">{{ dd.maturity }}</span>{% endif %}
     &middot; <a href="{{ dd.primary_url }}" style="color: {{ colors.accent }};">원문</a>
     &middot; {{ dd.source_count }} source{{ 's' if dd.source_count != 1 else '' }}
   </p>
-  <div class="body" style="color: {{ colors.fg }}; font-size: {{ font.size_body }}; line-height: 1.6;">{{ dd.body_html|safe }}</div>
+  <div class="body" style="color: {{ colors.fg }}; font-size: {{ font.size_body }}; line-height: 1.75;">{{ dd.body_html|safe }}</div>
 </section>

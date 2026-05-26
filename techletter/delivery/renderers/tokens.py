@@ -28,8 +28,9 @@ FONT: dict[str, str] = {
     "mono": "ui-monospace, 'SF Mono', Menlo, Consolas, monospace",
     "size_body": "16px",
     "size_h1": "28px",
-    "size_h2": "20px",
-    "size_h3": "17px",
+    "size_h2": "24px",
+    "size_h3": "18px",
+    "size_meta": "13px",
 }
 
 LAYOUT: dict[str, str] = {

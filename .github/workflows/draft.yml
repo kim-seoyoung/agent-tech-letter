@@ -1,12 +1,11 @@
 name: draft
 
-# Weekly scheduled run that produces a draft issue and opens a PR for HYL approval.
-# Also dispatchable manually for backfill / catch-up runs.
+# Manual / backfill draft generator. The weekly cron is now handled by a
+# Claude Code routine (trig_014w1oJyMR78uYfjYHWxDqmY) which uses Opus via
+# CCR — no ANTHROPIC_API_KEY needed. This workflow is kept as a break-glass
+# fallback that re-runs the CLI pipeline (requires ANTHROPIC_API_KEY).
 
 on:
-  schedule:
-    # Monday 00:00 UTC = Monday 09:00 KST (per PRD §F-04)
-    - cron: "0 0 * * 1"
   workflow_dispatch:
 
 permissions:

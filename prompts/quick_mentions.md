@@ -4,8 +4,8 @@ Iterates in PRs.
 -->
 
 You are writing the "Quick Mentions" section of a weekly newsletter on
-LLM agents. For each item below, write a SINGLE one-sentence (≤200 char)
-description that tells the reader why it's worth their click.
+LLM agents. For each item below, write a SINGLE one-sentence (≤120자,
+한국어 기준) description that tells the reader why it's worth their click.
 
 ## Rules
 

@@ -62,6 +62,16 @@ jobs:
           echo "draft_path=$DRAFT" >> "$GITHUB_OUTPUT"
           echo "issue_id=$ISSUE_ID" >> "$GITHUB_OUTPUT"
 
+      - name: Materialize subscribers.yaml from secret
+        env:
+          SUBSCRIBERS_B64: ${{ secrets.SUBSCRIBERS_YAML }}
+        run: |
+          if [ -z "$SUBSCRIBERS_B64" ]; then
+            echo "::error::SUBSCRIBERS_YAML secret is empty or unset"
+            exit 1
+          fi
+          printf '%s' "$SUBSCRIBERS_B64" | base64 -d > config/subscribers.yaml
+
       - name: Send to channels
         run: |
           uv run techletter send \

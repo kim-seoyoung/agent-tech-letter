@@ -104,13 +104,16 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if git diff --quiet logs/sends.jsonl 2>/dev/null; then
+          # logs/sends.jsonl이 처음 만들어지는 경우(untracked)도 잡으려면
+          # git diff(추적 변경)만으로는 부족하고, staged 상태로 한 번 끌어와서
+          # --cached로 확인해야 함.
+          git add -A logs/sends.jsonl
+          if git diff --cached --quiet -- logs/sends.jsonl; then
             echo "No new audit log entries to commit"
             exit 0
           fi
           git config user.name "techletter-bot"
           git config user.email "bot@techletter.local"
-          git pull --rebase origin main
-          git add logs/sends.jsonl
           git commit -m "audit: send for ${{ steps.draft.outputs.issue_id }}"
+          git pull --rebase origin main
           git push origin main

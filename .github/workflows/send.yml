@@ -10,6 +10,15 @@ on:
   pull_request:
     types: [closed]
     branches: [main]
+  # Manual backfill / re-send for a specific issue. Use when the
+  # PR-merge run failed (missing config, transient channel error)
+  # and the same content needs to ship without re-merging.
+  workflow_dispatch:
+    inputs:
+      issue_id:
+        description: 'Issue ID to (re)send, e.g. issue-2026-05-29'
+        required: true
+        type: string
 
 permissions:
   contents: write
@@ -21,7 +30,9 @@ concurrency:
 jobs:
   send:
     # TC0179 — the load-bearing predicate. Do NOT remove or weaken.
-    if: github.event.pull_request.merged == true
+    # workflow_dispatch is an explicit human trigger, so it bypasses
+    # the merge gate; the pull_request branch still requires merged==true.
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
@@ -51,14 +62,25 @@ jobs:
 
       - name: Detect draft path
         id: draft
+        env:
+          DISPATCH_ISSUE_ID: ${{ inputs.issue_id }}
         run: |
-          # Find the most recent draft file added by the merged PR
-          DRAFT=$(git diff --name-only HEAD^ HEAD -- 'drafts/*.md' | head -1)
-          if [ -z "$DRAFT" ]; then
-            echo "::error::No draft file found in merged PR diff"
-            exit 1
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            ISSUE_ID="$DISPATCH_ISSUE_ID"
+            DRAFT="drafts/${ISSUE_ID}.md"
+            if [ ! -f "$DRAFT" ]; then
+              echo "::error::draft file not found at $DRAFT"
+              exit 1
+            fi
+          else
+            # Find the most recent draft file added by the merged PR
+            DRAFT=$(git diff --name-only HEAD^ HEAD -- 'drafts/*.md' | head -1)
+            if [ -z "$DRAFT" ]; then
+              echo "::error::No draft file found in merged PR diff"
+              exit 1
+            fi
+            ISSUE_ID=$(basename "$DRAFT" .md)
           fi
-          ISSUE_ID=$(basename "$DRAFT" .md)
           echo "draft_path=$DRAFT" >> "$GITHUB_OUTPUT"
           echo "issue_id=$ISSUE_ID" >> "$GITHUB_OUTPUT"
 

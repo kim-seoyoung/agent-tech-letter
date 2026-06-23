@@ -29,3 +29,15 @@ rss:
     - "https://importai.substack.com/feed"
     - "https://www.latent.space/feed"
     - "https://simonwillison.net/atom/everything/"
+    # Frontier-lab research/engineering blogs (official feeds, verified 2026-06-23)
+    - "https://deepmind.google/blog/rss.xml"
+    - "https://www.microsoft.com/en-us/research/feed/"
+    - "https://openai.com/blog/rss.xml"
+    - "https://huggingface.co/blog/feed.xml"
+    # Anthropic & Meta AI have no official RSS — community-maintained scraper
+    # feeds (verified live 2026-06-23). May break if upstream stops updating;
+    # check these first if the lab's items stop showing up.
+    - "https://raw.githubusercontent.com/taobojlen/anthropic-rss-feed/main/anthropic_news_rss.xml"
+    - "https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_meta_ai.xml"
+    # Salesforce AI Research blog feed (salesforce.com/blog/category/ai-research/feed/)
+    # returns HTTP 403 to bots — revisit if a fetchable URL turns up.

@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "issue_id": "issue-2026-07-05",
+  "issue_date": "2026-07-05T00:00:00Z",
+  "body_md": "# AI Agent Weekly — 2026-07-05\n\n이번 주는 Anthropic의 카덴스가 한 주를 밀어붙였어요. 6월 30일 하루에 Claude Sonnet 5와 Claude Science 발표가 함께 열렸어요. 방향은 서로 달라요. Sonnet 5는 프런티어 라인의 미들 티어 값을 내리는 발표예요. Claude Science는 새 모델 없이 도메인 스킬·커넥터를 미리 붙인 워크벤치예요. 같은 주에 Volcengine이 오픈소스 컨텍스트 DB인 OpenViking을 공개했어요. 정리하면 '모델 위에 어떤 계층까지 미리 얹어 파는가'가 이번 주의 공통 질문이었어요.\n\n### 1. Claude Sonnet 5: 에이전트를 겨냥한 프런티어 라인의 더 싼 미들 티어\n\nAnthropic이 6월 30일 Claude Sonnet 5를 공개했어요(<https://www.anthropic.com/news/claude-sonnet-5>). 도입 가격은 100만 토큰당 입력 2달러·출력 10달러예요. 8월 31일까지 이 가격이 유지되고, 이후에는 3달러·15달러로 올라가요. Sonnet 4.6의 3달러·15달러와 견주면 도입기 단가만 놓고 봤을 때 그 절반이 안 되는 수준이에요. 무료·Pro 플랜의 기본 모델로도 편입됐고, Max·Team·Enterprise에서도 골라 쓸 수 있어요.\n\n벤치마크는 세 축에서 움직였어요. 에이전트 코딩 지표인 SWE-bench Pro는 63.2%예요. 직전 세대인 Sonnet 4.6이 58.1%였고, 최상위인 Opus 4.8이 69.2%예요. 컴퓨터 사용 능력을 재는 OSWorld-Verified는 81.2%로 4.6의 78.5%보다 2.7%포인트 위예요. 일반 사무 지식을 재는 GDPval-AA v2는 1,618점이에요. Opus 4.8은 1,615점이라 사실상 동률이에요. 정리하면 코딩 정확도는 여전히 Opus 4.8이 위지만, 오피스형 지식 태스크에서는 Sonnet 5가 상위 티어와 어깨를 맞춰요.\n\nTechCrunch는 이 릴리스를 \"에이전트를 더 싸게 굴리기 위한 미들 티어\"로 요약했어요(<https://techcrunch.com/2026/06/30/anthropic-launches-claude-sonnet-5-as-a-cheaper-way-to-run-agents/>). Anthropic도 다단계 계획·브라우저 조작·터미널 조작 같은 동작을 이전엔 Opus 급 연산이 필요했던 폭까지 처리한다고 적었어요. 다만 한 가지 유의점이 있어요. 이번 릴리스에서 토크나이저가 갱신되어, 같은 입력이 대략 1.0~1.35배의 토큰으로 매핑돼요. MarkTechPost는 콘텐츠 유형에 따라 입력이 최대 35%까지 부풀 수 있다고 인용했어요. 겉으로 보이는 단가는 4.6의 절반 이하지만, 콘텐츠에 따라 체감 비용은 이 배수만큼 상쇄돼요.\n\n선행 흐름과 견주면 두 지점이 눈에 들어와요. 지난주 다룬 Sakana Fugu·GPT-5.6 Sol의 ultra 모드가 \"여러 모델을 학습된 정책으로 묶는 방향\"이었어요. 이번 Sonnet 5는 반대로 \"단일 프런티어 티어를 값싸게 낮춰 파는 방향\"이에요. 다른 하나는 미들 티어가 상위 티어와 어깨를 맞추는 지표가 나오기 시작했다는 점이에요. 자기 팀 스택이 지금 Sonnet 4.6이나 Opus 4.8 위에서 도는 팀이라면, 프로덕션 트래픽의 최근 24시간치 프롬프트를 Sonnet 5의 새 토크나이저로 다시 세어보고 같은 태스크에서 총 토큰 비용이 정말 내려가는지부터 확인해보세요.\n\n### 2. Claude Science: 새 모델 없이 스킬·커넥터를 얹어 과학자를 겨냥한 워크벤치\n\nAnthropic이 같은 6월 30일 Claude Science를 베타로 함께 공개했어요(<https://www.anthropic.com/news/claude-science-ai-workbench>). Pro·Max·Team·Enterprise 플랜 사용자에게 열려 있어요. 회사가 첫 문장에서 강조한 지점은 \"새 모델도 아니고, 생물학용으로 확장된 모델도 아니다\"라는 부분이에요. 안에서 도는 모델은 이미 공개된 Claude Opus 4.8이에요. 별도 접근 게이트도 걸려 있지 않아요.\n\n핵심은 워크벤치 앱 자체예요. 여러 도구와 데이터 커넥터를 미리 붙여 두고 감사 가능한 실행 기록을 남기는 얼개예요. 큐레이션된 스킬·커넥터가 60개 넘게 얹혀 있어요. 60개 이상의 과학 데이터베이스도 미리 등록돼 있어요. 분야는 genomics·single-cell·proteomics·structural biology·cheminformatics 같은 축을 두루 덮어요. 사용자는 한 명의 코디네이터 에이전트를 상대로 대화하고, 그 에이전트가 세부 스킬을 골라 굴려요. 결과 아티팩트로는 3D 단백질 구조와 genome browser 트랙까지 앱 안에서 렌더링해 준다고 적혀 있어요.\n\nTechCrunch는 이 접근을 \"새 모델이 아니라 워크플로에 베팅\"으로 요약했어요(<https://techcrunch.com/2026/06/30/anthropics-claude-science-bets-on-workflow-not-a-new-model-to-win-over-scientists/>). 같은 날 NVIDIA도 자사 BioNeMo Agent Toolkit이 Claude Science 안의 스킬로 실려 있다고 공개했어요(<https://blogs.nvidia.com/blog/claude-science-bionemo-agent-toolkit/>). 즉 \"새 모델은 없지만 도메인 툴킷·데이터·감사 로그는 미리 얹혀 나온다\"라는 그림이에요. Anthropic은 여기에 자금 신호까지 붙였어요. \"AI for Science\" 프로젝트를 최대 50건 뽑아 각 3만 달러 상당의 크레딧을 지원한다고 했어요. 신청은 7월 15일까지, 통보는 7월 31일까지예요.\n\n이 흐름의 인접 사례는 3주 전 다룬 Stack Overflow for Agents나 지난달의 Databricks LTAP처럼 \"모델 위에 지식·컨텍스트 계층을 얹어 파는\" 방향이에요. 다만 Claude Science는 스코프가 생명과학·화학 도메인으로 좁혀져 있어요. 도메인 스킬을 자체 조립해 온 팀에게는 한 가지 검증 지점이 생겨요. 자기 파이프라인에서 자주 도는 도메인 태스크 하나를 Claude Science의 코디네이터 에이전트에 그대로 붙여보고, 감사 로그에서 어떤 스킬·데이터 소스를 실제로 호출했는지부터 대조해보세요. 얼마나 겹치는지가 마이그레이션 계산의 첫 수치가 돼요.\n\n### 3. OpenViking: 메모리·RAG·스킬을 파일시스템 하나로 묶은 자기진화 컨텍스트 DB\n\nVolcengine이 6월 말 OpenViking을 오픈소스로 풀었어요(<https://github.com/volcengine/OpenViking>). 별 2만 6천여 개, 포크 2천여 개 규모예요. 라이선스는 본체가 AGPLv3이에요. CLI와 예제만 Apache 2.0이라 상용 워크로드에 얹으려면 라이선스부터 짚어야 해요. 언어 구성은 Python 75%, Rust 14%, TypeScript 6%예요. 태그라인은 짧아요. \"Self-evolving Context Database for AI Agents. Unify Agent Memory, Knowledge RAG and Skills.\"\n\n핵심 아이디어는 세 가지를 한 저장소로 통합한 지점이에요. 사용자 선호·실행 경험을 담는 에이전트 메모리, 계층 구조 위의 RAG, 그리고 도구·스킬 통합을 한 계층으로 얹었어요. 접근 인터페이스도 벡터 스토어의 평평한 검색이 아니에요. `viking://` URI로 자원을 지정하는 파일시스템 은유를 씁니다. 컨텍스트는 세 단계로 계층 로드해요. L0는 요약, L1은 개요, L2는 세부예요. 상단 요약만으로 결정할 수 있는 상황에서는 전체 문서를 읽을 필요가 없어요. 결과적으로 토큰이 줄어들어요.\n\n설치는 `pip install openviking --upgrade --force-reinstall`로 끝나요. 이후 `openviking-server init`으로 초기 설정을 잡고, `openviking-server`로 서버를 띄운 뒤 `ov status`로 상태를 확인해요. 공개 모듈은 코어 서버 `openviking`, CLI `openviking_cli`, 프로그램 접근용 `sdk`, 그리고 확장용 `.agents/plugins`로 나뉘어 있어요. 벤치마크 수치도 리포에 실려 있어요. LoCoMo 사용자 메모리 태스크는 82% 이상 정확도예요. 지연은 원시 에이전트 대비 59~66% 감소했다고 적혀 있어요. HotpotQA 지식 QA는 top-20 검색에서 91% 정확도에 0.23초예요. Tau2-Bench 멀티턴 태스크는 6~12%포인트 개선이라고 밝혔어요.\n\n가장 가까운 대안은 LangChain·LlamaIndex 같은 오케스트레이션 프레임워크와 mem0·Zep 같은 에이전트 메모리 스토어예요. 다만 그쪽은 메모리·RAG·스킬이 별도 계층으로 얹혀 있고 검색은 대체로 평평해요. OpenViking은 이 셋을 하나의 파일시스템 은유 위에 겹쳐 두고, 리트리벌 궤적도 관측할 수 있게 남겨요. 별 수는 빠르게 붙었지만 첫 릴리스가 이번 여름이라 프로덕션 사례는 아직 리포 안에 축적되는 중이에요. 자기 에이전트에 도입해본다면, 지금 벡터 스토어 하나에 얹혀 있는 문서 코퍼스를 `viking://` 디렉터리 얼개로 옮겨보고 같은 질의에서 L0 요약만 로드했을 때 검색 recall이 얼마나 유지되는지부터 계측해보세요.\n\n## Quick mentions\n\n- [Redeploying Claude Fable 5](https://www.anthropic.com/news/redeploying-fable-5) — 미국의 export control이 풀려 Fable 5가 7월 1일부터 전 세계에 다시 열렸고, Amazon이 찾은 사이버 취약점 유도 프롬프트를 99% 이상 잡아 Opus 4.8로 우회하는 분류기가 함께 붙었어요.\n- [MemSyco-Bench: Benchmarking Sycophancy in Agent Memory](https://arxiv.org/abs/2607.01071) — 검색된 메모리가 사실 정확성보다 사용자 편에 서게 만드는 \"메모리 유도 sycophancy\"를 다섯 태스크로 재는 첫 벤치마크예요.\n- [vectorize-io/hindsight](https://github.com/vectorize-io/hindsight) — 저장·리콜 정책 자체를 학습해 시간에 따라 다듬는다는 \"학습하는 에이전트 메모리\"를 표방하는 오픈소스 라이브러리로, 별 1만 8천 개까지 붙었어요.\n- [DeusData/codebase-memory-mcp](https://github.com/DeusData/codebase-memory-mcp) — 코드베이스를 지식 그래프로 색인해 서브밀리초 질의를 표방하는 MCP 서버로, 158개 언어를 tree-sitter로 파싱하고 단일 정적 바이너리로 배포돼요.\n- [mcp-use/mcp-use](https://github.com/mcp-use/mcp-use) — ChatGPT·Claude용 MCP 앱과 에이전트용 MCP 서버를 한 프레임워크로 짜게 해주는 풀스택 툴킷으로, 최근 두 주 사이 별이 1만 개를 넘었어요.\n- [genlayerlabs/subzeroclaw](https://github.com/genlayerlabs/subzeroclaw) — 프레임워크 없이 스킬 파일·LLM·셸 루프만으로 도는 380줄짜리 C 에이전트 런타임이에요. 54KB 바이너리에 2MB RAM으로 라즈베리 파이급 엣지에서도 돌아요.\n- [fujibee/agmsg](https://github.com/fujibee/agmsg) — Claude Code·Codex·Gemini·Copilot 같은 CLI 에이전트끼리 SQLite와 Bash 스크립트로만 메시지를 주고받게 한 크로스 벤더 팀 프로토콜이에요.\n- [SolaceLabs/solace-agent-mesh](https://github.com/SolaceLabs/solace-agent-mesh) — 이벤트 드리븐 아키텍처 위에 A2A·MCP를 얹어 멀티에이전트를 오케스트레이션하는 프레임워크로, 별 5천 개에 근접했어요.\n- [Release: llm-coding-agent 0.1a0](https://simonwillison.net/2026/Jul/2/llm-coding-agent/) — Simon Willison이 자신의 `llm` 라이브러리 위에 파일 읽기·편집·명령 실행 도구를 얹어 Claude Code 스타일의 코딩 에이전트를 첫 알파로 풀었어요.\n- [elizaOS/eliza](https://github.com/elizaOS/eliza) — Discord·Slack·Telegram 플러그인을 갖춘 \"오픈소스 agentic operating system\"을 표방하며 최근 push 활동이 이어지고 있어요. 별은 1만 8천 개 규모예요.\n",
+  "deep_dives": [
+    {
+      "cluster_id": "dd-2026-07-05-1",
+      "title": "Claude Sonnet 5: 에이전트를 겨냥한 프런티어 라인의 더 싼 미들 티어",
+      "body_md": "Anthropic이 6월 30일 Claude Sonnet 5를 공개했어요(<https://www.anthropic.com/news/claude-sonnet-5>). 도입 가격은 100만 토큰당 입력 2달러·출력 10달러예요. 8월 31일까지 이 가격이 유지되고, 이후에는 3달러·15달러로 올라가요. Sonnet 4.6의 3달러·15달러와 견주면 도입기 단가만 놓고 봤을 때 그 절반이 안 되는 수준이에요. 무료·Pro 플랜의 기본 모델로도 편입됐고, Max·Team·Enterprise에서도 골라 쓸 수 있어요.\n\n벤치마크는 세 축에서 움직였어요. 에이전트 코딩 지표인 SWE-bench Pro는 63.2%예요. 직전 세대인 Sonnet 4.6이 58.1%였고, 최상위인 Opus 4.8이 69.2%예요. 컴퓨터 사용 능력을 재는 OSWorld-Verified는 81.2%로 4.6의 78.5%보다 2.7%포인트 위예요. 일반 사무 지식을 재는 GDPval-AA v2는 1,618점이에요. Opus 4.8은 1,615점이라 사실상 동률이에요. 정리하면 코딩 정확도는 여전히 Opus 4.8이 위지만, 오피스형 지식 태스크에서는 Sonnet 5가 상위 티어와 어깨를 맞춰요.\n\nTechCrunch는 이 릴리스를 \"에이전트를 더 싸게 굴리기 위한 미들 티어\"로 요약했어요(<https://techcrunch.com/2026/06/30/anthropic-launches-claude-sonnet-5-as-a-cheaper-way-to-run-agents/>). Anthropic도 다단계 계획·브라우저 조작·터미널 조작 같은 동작을 이전엔 Opus 급 연산이 필요했던 폭까지 처리한다고 적었어요. 다만 한 가지 유의점이 있어요. 이번 릴리스에서 토크나이저가 갱신되어, 같은 입력이 대략 1.0~1.35배의 토큰으로 매핑돼요. MarkTechPost는 콘텐츠 유형에 따라 입력이 최대 35%까지 부풀 수 있다고 인용했어요. 겉으로 보이는 단가는 4.6의 절반 이하지만, 콘텐츠에 따라 체감 비용은 이 배수만큼 상쇄돼요.\n\n선행 흐름과 견주면 두 지점이 눈에 들어와요. 지난주 다룬 Sakana Fugu·GPT-5.6 Sol의 ultra 모드가 \"여러 모델을 학습된 정책으로 묶는 방향\"이었어요. 이번 Sonnet 5는 반대로 \"단일 프런티어 티어를 값싸게 낮춰 파는 방향\"이에요. 다른 하나는 미들 티어가 상위 티어와 어깨를 맞추는 지표가 나오기 시작했다는 점이에요. 자기 팀 스택이 지금 Sonnet 4.6이나 Opus 4.8 위에서 도는 팀이라면, 프로덕션 트래픽의 최근 24시간치 프롬프트를 Sonnet 5의 새 토크나이저로 다시 세어보고 같은 태스크에서 총 토큰 비용이 정말 내려가는지부터 확인해보세요.",
+      "item_kind": "blog_post",
+      "maturity": null,
+      "primary_url": "https://www.anthropic.com/news/claude-sonnet-5",
+      "source_count": 3
+    },
+    {
+      "cluster_id": "dd-2026-07-05-2",
+      "title": "Claude Science: 새 모델 없이 스킬·커넥터를 얹어 과학자를 겨냥한 워크벤치",
+      "body_md": "Anthropic이 같은 6월 30일 Claude Science를 베타로 함께 공개했어요(<https://www.anthropic.com/news/claude-science-ai-workbench>). Pro·Max·Team·Enterprise 플랜 사용자에게 열려 있어요. 회사가 첫 문장에서 강조한 지점은 \"새 모델도 아니고, 생물학용으로 확장된 모델도 아니다\"라는 부분이에요. 안에서 도는 모델은 이미 공개된 Claude Opus 4.8이에요. 별도 접근 게이트도 걸려 있지 않아요.\n\n핵심은 워크벤치 앱 자체예요. 여러 도구와 데이터 커넥터를 미리 붙여 두고 감사 가능한 실행 기록을 남기는 얼개예요. 큐레이션된 스킬·커넥터가 60개 넘게 얹혀 있어요. 60개 이상의 과학 데이터베이스도 미리 등록돼 있어요. 분야는 genomics·single-cell·proteomics·structural biology·cheminformatics 같은 축을 두루 덮어요. 사용자는 한 명의 코디네이터 에이전트를 상대로 대화하고, 그 에이전트가 세부 스킬을 골라 굴려요. 결과 아티팩트로는 3D 단백질 구조와 genome browser 트랙까지 앱 안에서 렌더링해 준다고 적혀 있어요.\n\nTechCrunch는 이 접근을 \"새 모델이 아니라 워크플로에 베팅\"으로 요약했어요(<https://techcrunch.com/2026/06/30/anthropics-claude-science-bets-on-workflow-not-a-new-model-to-win-over-scientists/>). 같은 날 NVIDIA도 자사 BioNeMo Agent Toolkit이 Claude Science 안의 스킬로 실려 있다고 공개했어요(<https://blogs.nvidia.com/blog/claude-science-bionemo-agent-toolkit/>). 즉 \"새 모델은 없지만 도메인 툴킷·데이터·감사 로그는 미리 얹혀 나온다\"라는 그림이에요. Anthropic은 여기에 자금 신호까지 붙였어요. \"AI for Science\" 프로젝트를 최대 50건 뽑아 각 3만 달러 상당의 크레딧을 지원한다고 했어요. 신청은 7월 15일까지, 통보는 7월 31일까지예요.\n\n이 흐름의 인접 사례는 3주 전 다룬 Stack Overflow for Agents나 지난달의 Databricks LTAP처럼 \"모델 위에 지식·컨텍스트 계층을 얹어 파는\" 방향이에요. 다만 Claude Science는 스코프가 생명과학·화학 도메인으로 좁혀져 있어요. 도메인 스킬을 자체 조립해 온 팀에게는 한 가지 검증 지점이 생겨요. 자기 파이프라인에서 자주 도는 도메인 태스크 하나를 Claude Science의 코디네이터 에이전트에 그대로 붙여보고, 감사 로그에서 어떤 스킬·데이터 소스를 실제로 호출했는지부터 대조해보세요. 얼마나 겹치는지가 마이그레이션 계산의 첫 수치가 돼요.",
+      "item_kind": "blog_post",
+      "maturity": "beta",
+      "primary_url": "https://www.anthropic.com/news/claude-science-ai-workbench",
+      "source_count": 3
+    },
+    {
+      "cluster_id": "dd-2026-07-05-3",
+      "title": "OpenViking: 메모리·RAG·스킬을 파일시스템 하나로 묶은 자기진화 컨텍스트 DB",
+      "body_md": "Volcengine이 6월 말 OpenViking을 오픈소스로 풀었어요(<https://github.com/volcengine/OpenViking>). 별 2만 6천여 개, 포크 2천여 개 규모예요. 라이선스는 본체가 AGPLv3이에요. CLI와 예제만 Apache 2.0이라 상용 워크로드에 얹으려면 라이선스부터 짚어야 해요. 언어 구성은 Python 75%, Rust 14%, TypeScript 6%예요. 태그라인은 짧아요. \"Self-evolving Context Database for AI Agents. Unify Agent Memory, Knowledge RAG and Skills.\"\n\n핵심 아이디어는 세 가지를 한 저장소로 통합한 지점이에요. 사용자 선호·실행 경험을 담는 에이전트 메모리, 계층 구조 위의 RAG, 그리고 도구·스킬 통합을 한 계층으로 얹었어요. 접근 인터페이스도 벡터 스토어의 평평한 검색이 아니에요. `viking://` URI로 자원을 지정하는 파일시스템 은유를 씁니다. 컨텍스트는 세 단계로 계층 로드해요. L0는 요약, L1은 개요, L2는 세부예요. 상단 요약만으로 결정할 수 있는 상황에서는 전체 문서를 읽을 필요가 없어요. 결과적으로 토큰이 줄어들어요.\n\n설치는 `pip install openviking --upgrade --force-reinstall`로 끝나요. 이후 `openviking-server init`으로 초기 설정을 잡고, `openviking-server`로 서버를 띄운 뒤 `ov status`로 상태를 확인해요. 공개 모듈은 코어 서버 `openviking`, CLI `openviking_cli`, 프로그램 접근용 `sdk`, 그리고 확장용 `.agents/plugins`로 나뉘어 있어요. 벤치마크 수치도 리포에 실려 있어요. LoCoMo 사용자 메모리 태스크는 82% 이상 정확도예요. 지연은 원시 에이전트 대비 59~66% 감소했다고 적혀 있어요. HotpotQA 지식 QA는 top-20 검색에서 91% 정확도에 0.23초예요. Tau2-Bench 멀티턴 태스크는 6~12%포인트 개선이라고 밝혔어요.\n\n가장 가까운 대안은 LangChain·LlamaIndex 같은 오케스트레이션 프레임워크와 mem0·Zep 같은 에이전트 메모리 스토어예요. 다만 그쪽은 메모리·RAG·스킬이 별도 계층으로 얹혀 있고 검색은 대체로 평평해요. OpenViking은 이 셋을 하나의 파일시스템 은유 위에 겹쳐 두고, 리트리벌 궤적도 관측할 수 있게 남겨요. 별 수는 빠르게 붙었지만 첫 릴리스가 이번 여름이라 프로덕션 사례는 아직 리포 안에 축적되는 중이에요. 자기 에이전트에 도입해본다면, 지금 벡터 스토어 하나에 얹혀 있는 문서 코퍼스를 `viking://` 디렉터리 얼개로 옮겨보고 같은 질의에서 L0 요약만 로드했을 때 검색 recall이 얼마나 유지되는지부터 계측해보세요.",
+      "item_kind": "repo",
+      "maturity": "beta",
+      "primary_url": "https://github.com/volcengine/OpenViking",
+      "source_count": 1
+    }
+  ],
+  "quick_mentions": [
+    {
+      "title": "Redeploying Claude Fable 5",
+      "url": "https://www.anthropic.com/news/redeploying-fable-5",
+      "source": "rss",
+      "item_kind": "blog_post",
+      "one_liner": "미국의 export control이 풀려 Fable 5가 7월 1일부터 전 세계에 다시 열렸고, Amazon이 찾은 사이버 취약점 유도 프롬프트를 99% 이상 잡아 Opus 4.8로 우회하는 분류기가 함께 붙었어요."
+    },
+    {
+      "title": "MemSyco-Bench: Benchmarking Sycophancy in Agent Memory",
+      "url": "https://arxiv.org/abs/2607.01071",
+      "source": "arxiv",
+      "item_kind": "paper",
+      "one_liner": "검색된 메모리가 사실 정확성보다 사용자 편에 서게 만드는 \"메모리 유도 sycophancy\"를 다섯 태스크로 재는 첫 벤치마크예요."
+    },
+    {
+      "title": "vectorize-io/hindsight",
+      "url": "https://github.com/vectorize-io/hindsight",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "저장·리콜 정책 자체를 학습해 시간에 따라 다듬는다는 \"학습하는 에이전트 메모리\"를 표방하는 오픈소스 라이브러리로, 별 1만 8천 개까지 붙었어요."
+    },
+    {
+      "title": "DeusData/codebase-memory-mcp",
+      "url": "https://github.com/DeusData/codebase-memory-mcp",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "코드베이스를 지식 그래프로 색인해 서브밀리초 질의를 표방하는 MCP 서버로, 158개 언어를 tree-sitter로 파싱하고 단일 정적 바이너리로 배포돼요."
+    },
+    {
+      "title": "mcp-use/mcp-use",
+      "url": "https://github.com/mcp-use/mcp-use",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "ChatGPT·Claude용 MCP 앱과 에이전트용 MCP 서버를 한 프레임워크로 짜게 해주는 풀스택 툴킷으로, 최근 두 주 사이 별이 1만 개를 넘었어요."
+    },
+    {
+      "title": "genlayerlabs/subzeroclaw",
+      "url": "https://github.com/genlayerlabs/subzeroclaw",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "프레임워크 없이 스킬 파일·LLM·셸 루프만으로 도는 380줄짜리 C 에이전트 런타임으로, 54KB 바이너리에 2MB RAM으로 라즈베리 파이급 엣지에서도 돌아요."
+    },
+    {
+      "title": "fujibee/agmsg",
+      "url": "https://github.com/fujibee/agmsg",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "Claude Code·Codex·Gemini·Copilot 같은 CLI 에이전트끼리 SQLite와 Bash 스크립트로만 메시지를 주고받게 한 크로스 벤더 팀 프로토콜이에요."
+    },
+    {
+      "title": "SolaceLabs/solace-agent-mesh",
+      "url": "https://github.com/SolaceLabs/solace-agent-mesh",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "이벤트 드리븐 아키텍처 위에 A2A·MCP를 얹어 멀티에이전트를 오케스트레이션하는 프레임워크로, 별 5천 개에 근접했어요."
+    },
+    {
+      "title": "Release: llm-coding-agent 0.1a0",
+      "url": "https://simonwillison.net/2026/Jul/2/llm-coding-agent/",
+      "source": "rss",
+      "item_kind": "blog_post",
+      "one_liner": "Simon Willison이 자신의 `llm` 라이브러리 위에 파일 읽기·편집·명령 실행 도구를 얹어 Claude Code 스타일의 코딩 에이전트를 첫 알파로 풀었어요."
+    },
+    {
+      "title": "elizaOS/eliza",
+      "url": "https://github.com/elizaOS/eliza",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "Discord·Slack·Telegram 플러그인을 갖춘 \"오픈소스 agentic operating system\"을 표방하며 최근 push 활동이 이어지고 있고, 별은 1만 8천 개 규모예요."
+    }
+  ],
+  "meta": {
+    "sources_considered": 55,
+    "sources_included": 13,
+    "failed_fetches": [
+      "arxiv API export.arxiv.org (HTTP 403; recovered a subset via WebSearch)",
+      "simonwillison atom, anthropic /news direct, openai /news, deepmind /blog, thenewstack, huggingface, importai, latent.space (HTTP 403; anthropic recovered via community RSS scraper + WebSearch)"
+    ]
+  },
+  "content_sha256": "f3121130bcec7ad28118cd1f178f20b625079e91a93e8d9e0be0714782629dbf"
+}

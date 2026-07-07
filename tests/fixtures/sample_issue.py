@@ -5,7 +5,7 @@ from __future__ import annotations
 from datetime import UTC, datetime
 
 from techletter.compose.issue import RenderedIssue, assemble_issue
-from techletter.compose.types import DeepDive, QuickMention
+from techletter.compose.types import DeepDive, QuickMention, Source
 
 
 def make_sample_issue() -> RenderedIssue:
@@ -26,6 +26,11 @@ def make_sample_issue() -> RenderedIssue:
             item_kind="paper",
             primary_url="https://arxiv.org/abs/2505.10001",  # type: ignore[arg-type]
             source_count=3,
+            sources=(
+                Source(url="https://arxiv.org/abs/2505.10001", label="arXiv 원문"),  # type: ignore[arg-type]
+                Source(url="https://github.com/example/diffopt", label="레퍼런스 구현"),  # type: ignore[arg-type]
+                Source(url="https://latent.space/p/diffusion-optimizer", label="해설 글"),  # type: ignore[arg-type]
+            ),
         ),
         DeepDive(
             cluster_id="c2",

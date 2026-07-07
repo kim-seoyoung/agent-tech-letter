@@ -8,22 +8,28 @@
 <style>
 body { font-family: {{ font.family|safe }}; color: {{ colors.fg|safe }}; background: {{ colors.bg|safe }}; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
 .container { max-width: {{ layout.max_width|safe }}; margin: 0 auto; padding: {{ layout.padding|safe }}; }
-header { border-bottom: 1px solid {{ colors.border|safe }}; padding-bottom: 20px; margin-bottom: 40px; }
-h1 { font-size: {{ font.size_h1|safe }}; margin: 0 0 4px 0; color: {{ colors.fg|safe }}; letter-spacing: -0.02em; }
-.date { color: {{ colors.muted|safe }}; margin: 0; font-size: {{ font.size_meta|safe }}; letter-spacing: 0.02em; }
+header { margin-bottom: 44px; }
+.kicker { font-family: {{ font.mono|safe }}; font-size: {{ font.size_kicker|safe }}; letter-spacing: 0.2em; text-transform: uppercase; color: {{ colors.accent|safe }}; margin: 0 0 10px 0; }
+h1 { font-size: {{ font.size_h1|safe }}; font-weight: 800; margin: 0; color: {{ colors.fg|safe }}; letter-spacing: -0.03em; line-height: 1; }
+h1 em { font-style: normal; background: linear-gradient(transparent 62%, {{ colors.accent_wash|safe }} 62%); padding: 0 2px; }
+.rule { height: 3px; background: {{ colors.fg|safe }}; margin: 18px 0 12px 0; }
+.date { color: {{ colors.muted|safe }}; margin: 0; font-family: {{ font.mono|safe }}; font-size: {{ font.size_meta|safe }}; letter-spacing: 0.03em; }
 h2 { font-size: {{ font.size_h2|safe }}; }
 h3 { font-size: {{ font.size_h3|safe }}; }
 a { color: {{ colors.accent|safe }}; text-decoration: none; }
 a:hover { text-decoration: underline; }
 code { font-family: {{ font.mono|safe }}; background: {{ colors.tag_bg|safe }}; padding: 1px 4px; border-radius: 3px; font-size: 0.92em; }
 pre { font-family: {{ font.mono|safe }}; background: {{ colors.tag_bg|safe }}; padding: 12px; border-radius: 6px; overflow-x: auto; }
-.body p { margin: 0 0 14px 0; }
-.body h3, .body h4 { margin: 32px 0 10px 0; font-size: {{ font.size_h3|safe }}; font-weight: 600; color: {{ colors.fg|safe }}; line-height: 1.4; }
+.body p { margin: 0 0 15px 0; }
+.body a { border-bottom: 1px solid {{ colors.accent_wash|safe }}; }
+.body a:hover { text-decoration: none; border-bottom-color: {{ colors.accent|safe }}; }
+.body h3, .body h4 { margin: 32px 0 10px 0; font-family: {{ font.family|safe }}; font-size: {{ font.size_h3|safe }}; font-weight: 600; color: {{ colors.fg|safe }}; line-height: 1.4; }
 .body ul, .body ol { margin: 0 0 16px 0; padding-left: 24px; }
 .body li { margin-bottom: 6px; }
 .body blockquote { margin: 16px 0; padding: 4px 0 4px 16px; border-left: 3px solid {{ colors.border|safe }}; color: {{ colors.muted|safe }}; }
+.sources a:hover { text-decoration: none; border-bottom-color: {{ colors.accent|safe }} !important; color: {{ colors.accent|safe }} !important; }
 .qm-section { margin-top: 64px; padding-top: 32px; border-top: 2px solid {{ colors.fg|safe }}; }
-.qm-kicker { margin: 0 0 6px 0; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: {{ colors.accent|safe }}; font-weight: 700; }
+.qm-kicker { margin: 0 0 6px 0; font-family: {{ font.mono|safe }}; font-size: {{ font.size_kicker|safe }}; letter-spacing: 0.18em; text-transform: uppercase; color: {{ colors.accent|safe }}; }
 .qm-section h2 { margin: 0 0 20px 0; font-size: {{ font.size_h2|safe }}; color: {{ colors.fg|safe }}; letter-spacing: -0.01em; }
 .quick-mentions { padding-left: 20px; margin: 0; }
 </style>
@@ -31,12 +37,15 @@ pre { font-family: {{ font.mono|safe }}; background: {{ colors.tag_bg|safe }}; p
 <body>
 <div class="container">
 <header>
-<h1>AI Agent Weekly</h1>
+<p class="kicker">Weekly intelligence · 에이전트 생태계</p>
+<h1>AI <em>Agent</em> Weekly</h1>
+<div class="rule"></div>
 <p class="date">{{ issue_date_iso }}</p>
 </header>
 <main>
 {%- for dd in deep_dives %}
 {%- set is_first = loop.first %}
+{%- set dd_index = loop.index %}
 {% include "components/deep_dive.html.j2" %}
 {%- endfor %}
 <div class="qm-section">

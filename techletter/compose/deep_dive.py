@@ -16,7 +16,7 @@ import re
 from collections import Counter
 from typing import Any, Literal, cast
 
-from techletter.compose.types import BANNED_HYPE_WORDS, DeepDive
+from techletter.compose.types import BANNED_HYPE_WORDS, DeepDive, Source
 from techletter.llm.client import LlmClient
 from techletter.llm.prompts import load_prompt
 from techletter.models import Item, Maturity
@@ -87,6 +87,7 @@ def compose_deep_dive(
         maturity=maturity,
         primary_url=primary_item.url,  # type: ignore[arg-type]
         source_count=len({it.source for it in cluster.items}),
+        sources=_sources_from_cluster(cluster),
     )
 
 
@@ -129,6 +130,31 @@ def format_shipping_signals(meta: dict[str, Any]) -> str:
 
 
 # --- internals -----------------------------------------------------------
+
+
+_SOURCE_LABEL_MAX = 90
+
+
+def _sources_from_cluster(cluster: Cluster) -> tuple[Source, ...]:
+    """Build the attribution list from the cluster's items.
+
+    The deep-dive is composed from a cluster of items; each item's URL is a
+    citable source. We dedupe by URL (keeping first-seen order) and label each
+    with its item title, so the renderer can show a clickable attribution row
+    instead of the bare `source_count`.
+    """
+    seen: set[str] = set()
+    sources: list[Source] = []
+    for it in cluster.items:
+        url = str(it.url)
+        if url in seen:
+            continue
+        seen.add(url)
+        label = it.title.strip() or url
+        if len(label) > _SOURCE_LABEL_MAX:
+            label = label[: _SOURCE_LABEL_MAX - 1].rstrip() + "…"
+        sources.append(Source(url=it.url, label=label))
+    return tuple(sources)
 
 
 def _dominant_kind(cluster: Cluster) -> Literal["paper", "blog_post", "repo"]:

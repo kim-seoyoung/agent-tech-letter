@@ -100,20 +100,14 @@ jobs:
             --issue "${{ steps.draft.outputs.issue_id }}" \
             --draft-path "${{ steps.draft.outputs.draft_path }}"
 
-      - name: Commit sends.jsonl
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          # logs/sends.jsonl이 처음 만들어지는 경우(untracked)도 잡으려면
-          # git diff(추적 변경)만으로는 부족하고, staged 상태로 한 번 끌어와서
-          # --cached로 확인해야 함.
-          git add -A logs/sends.jsonl
-          if git diff --cached --quiet -- logs/sends.jsonl; then
-            echo "No new audit log entries to commit"
-            exit 0
-          fi
-          git config user.name "techletter-bot"
-          git config user.email "bot@techletter.local"
-          git commit -m "audit: send for ${{ steps.draft.outputs.issue_id }}"
-          git pull --rebase origin main
-          git push origin main
+      # 감사 로그는 public 레포(main)에 커밋하지 않고 Actions 아티팩트로 보존.
+      # 이전 방식(git push origin main)은 (1) logs/가 .gitignore라 add가 exit 1로
+      # 실패했고, (2) main 직접 push라 브랜치 보호와 충돌했음. send 자체는 앞 단계에서
+      # 이미 끝났으므로 여기서 실패해도 발송에는 영향 없음.
+      - name: Upload audit log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sends-${{ steps.draft.outputs.issue_id }}
+          path: logs/sends.jsonl
+          if-no-files-found: ignore

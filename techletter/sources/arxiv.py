@@ -12,6 +12,7 @@ from collections.abc import Callable, Iterable
 from datetime import UTC, datetime, timedelta
 from typing import Any, Protocol
 
+import arxiv  # type: ignore[import-untyped]
 from tenacity import (
     RetryError,
     retry,
@@ -50,9 +51,6 @@ class _ArxivClient(Protocol):
 
 
 def _default_client_factory() -> _ArxivClient:
-    """Lazily import the real arxiv client so tests don't require the lib."""
-    import arxiv  # type: ignore[import-untyped]
-
     return arxiv.Client()
 
 
@@ -140,25 +138,25 @@ class ArxivAdapter:
     @retry(
         stop=stop_after_attempt(5),
         wait=wait_exponential(multiplier=1, min=1, max=30),
-        retry=retry_if_exception_type((ConnectionError, TimeoutError)),
+        # arxiv.HTTPError/UnexpectedEmptyPageError cover export.arxiv.org
+        # 403s and flaky empty pages; the arxiv.Client already retries these
+        # internally (default 3x, 3s apart) before raising, so this adds a
+        # second, longer-backoff layer on top rather than giving up on the
+        # whole week's papers after one blocked burst.
+        retry=retry_if_exception_type(
+            (ConnectionError, TimeoutError, arxiv.HTTPError, arxiv.UnexpectedEmptyPageError)
+        ),
         reraise=False,
     )
     def _fetch_results(self) -> list[Any]:
         client = self._client_factory()
-        # Lazy-import arxiv only when really needed
-        try:
-            import arxiv  # type: ignore[import-untyped]
-
-            query = " OR ".join(f"cat:{c}" for c in self.categories)
-            search = arxiv.Search(
-                query=query,
-                sort_by=arxiv.SortCriterion.SubmittedDate,
-                sort_order=arxiv.SortOrder.Descending,
-                max_results=100,
-            )
-        except ImportError:
-            # In tests with a FakeClient, the real arxiv lib isn't required.
-            search = None
+        query = " OR ".join(f"cat:{c}" for c in self.categories)
+        search = arxiv.Search(
+            query=query,
+            sort_by=arxiv.SortCriterion.SubmittedDate,
+            sort_order=arxiv.SortOrder.Descending,
+            max_results=100,
+        )
         return list(client.results(search))
 
     @staticmethod

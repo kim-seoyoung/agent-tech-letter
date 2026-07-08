@@ -32,10 +32,18 @@ logger = logging.getLogger(__name__)
 
 MAX_SUMMARY_LEN = 1000
 HTTP_TIMEOUT = 10.0
+# Matches github.py's HTTP_USER_AGENT: an unidentified/library-default UA
+# (e.g. "python-httpx/0.x") gets 403'd by Cloudflare-fronted blogs.
+HTTP_USER_AGENT = "techletter-bot/0.1 (+https://github.com/kim-seoyoung/agent-tech-letter)"
 
 
 def _default_fetcher(url: str) -> bytes:
-    response = httpx.get(url, timeout=HTTP_TIMEOUT, follow_redirects=True)
+    response = httpx.get(
+        url,
+        timeout=HTTP_TIMEOUT,
+        follow_redirects=True,
+        headers={"User-Agent": HTTP_USER_AGENT},
+    )
     response.raise_for_status()
     return response.content
 

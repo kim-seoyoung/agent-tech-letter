@@ -234,6 +234,59 @@ def test_tc0018_exhausted_retries_raise_source_fetch_error() -> None:
     assert "arxiv" in str(exc_info.value).lower()
 
 
+# --- Regression: export.arxiv.org 403s must be retried, not just ConnectionError -
+
+
+def test_retry_succeeds_after_transient_http_error() -> None:
+    import arxiv
+
+    from techletter.sources.arxiv import ArxivAdapter
+
+    now = _now_utc()
+    success_results = [
+        FakeResult(
+            entry_id="http://arxiv.org/abs/p1",
+            title="agent paper",
+            summary="abstract",
+            published=now - timedelta(days=1),
+            primary_category="cs.AI",
+        )
+    ]
+
+    class FlakyHTTPClient(FakeClient):
+        def __init__(self) -> None:
+            super().__init__(results=success_results)
+
+        def results(self, search: object) -> Iterable[FakeResult]:
+            self._call_count += 1
+            if self._call_count <= 2:
+                raise arxiv.HTTPError(url="http://export.arxiv.org/api/query", retry=0, status=403)
+            return iter(self._results)
+
+    shared = FlakyHTTPClient()
+    adapter = ArxivAdapter(client_factory=lambda: shared)
+    items = adapter.fetch(window_days=7)
+    assert len(items) == 1
+    assert shared._call_count >= 3  # 2x HTTP 403 + 1 success
+
+
+def test_exhausted_http_error_retries_raise_source_fetch_error() -> None:
+    import arxiv
+
+    from techletter.sources.arxiv import ArxivAdapter
+    from techletter.sources.base import SourceFetchError
+
+    class AlwaysBlockedClient(FakeClient):
+        def results(self, search: object) -> Iterable[FakeResult]:
+            self._call_count += 1
+            raise arxiv.HTTPError(url="http://export.arxiv.org/api/query", retry=0, status=403)
+
+    adapter = ArxivAdapter(client_factory=AlwaysBlockedClient)
+    with pytest.raises(SourceFetchError) as exc_info:
+        adapter.fetch(window_days=7)
+    assert "arxiv" in str(exc_info.value).lower()
+
+
 # --- TC0019: window_days = -1 raises ValueError --------------------------------
 
 

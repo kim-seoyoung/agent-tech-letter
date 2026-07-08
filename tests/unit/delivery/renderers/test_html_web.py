@@ -11,7 +11,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from techletter.compose.issue import RenderedIssue, assemble_issue
-from techletter.compose.types import DeepDive, QuickMention
+from techletter.compose.types import DeepDive, QuickMention, Source
 from techletter.delivery.renderers.html_web import render
 from tests.fixtures.sample_issue import make_sample_issue
 
@@ -192,3 +192,62 @@ def test_raw_html_in_body_md_is_escaped_not_rendered():
     out = render(_tiny_issue(deep_dives=[dd, dd2]))
     assert "<script>alert(1)</script>" not in out
     assert "&lt;script&gt;" in out
+
+
+def test_source_linked_inline_is_not_repeated_in_sources_row():
+    """A source cited inline in the body is shown once — not again in the row."""
+    url = "https://simonwillison.net/2026/Jun/9/claude-fable-5/"
+    dd = DeepDive(
+        cluster_id="c0",
+        title="t0",
+        body_md=f"공개했어요(<{url}>).",  # inline autolink → domain link in body
+        item_kind="blog_post",
+        primary_url=url,  # type: ignore[arg-type]
+        source_count=2,
+        sources=(
+            Source(url=url, label="원출처"),  # type: ignore[arg-type]
+            Source(url="https://other.example.com/x", label="다른 출처"),  # type: ignore[arg-type]
+        ),
+    )
+    filler = DeepDive(
+        cluster_id="c1",
+        title="filler",
+        body_md="x",
+        item_kind="paper",
+        primary_url="https://example.com/filler",  # type: ignore[arg-type]
+        source_count=1,
+    )
+    out = render(_tiny_issue(deep_dives=[dd, filler]))
+    # inline link shows the domain, exactly once
+    assert out.count(f'href="{url}"') == 1
+    assert ">simonwillison.net<" in out
+    assert "원출처" not in out  # the inline source's row label is dropped
+    # the non-inline source still appears in the 관련 출처 row
+    assert "다른 출처" in out
+    assert "관련 출처" in out
+
+
+def test_all_sources_inline_drops_the_row_entirely():
+    url = "https://only.example.com/a"
+    dd = DeepDive(
+        cluster_id="c0",
+        title="t0",
+        body_md=f"참고(<{url}>).",
+        item_kind="paper",
+        primary_url=url,  # type: ignore[arg-type]
+        source_count=1,
+        sources=(Source(url=url, label="유일 출처"),),  # type: ignore[arg-type]
+    )
+    # filler inline-links its own primary so it emits neither a row nor a fallback
+    filler = DeepDive(
+        cluster_id="c1",
+        title="filler",
+        body_md="참고(<https://example.com/filler>).",
+        item_kind="paper",
+        primary_url="https://example.com/filler",  # type: ignore[arg-type]
+        source_count=1,
+    )
+    out = render(_tiny_issue(deep_dives=[dd, filler]))
+    assert "관련 출처" not in out  # nothing left for the row
+    assert "원문 ↗" not in out  # primary is inline too → no fallback
+    assert out.count(f'href="{url}"') == 1

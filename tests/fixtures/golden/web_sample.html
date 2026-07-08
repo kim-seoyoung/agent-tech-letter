@@ -6,87 +6,101 @@
 <meta name="robots" content="noindex, nofollow">
 <title>AI Agent Weekly — 2026-05-21</title>
 <style>
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; color: #1a1a1a; background: #ffffff; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
-.container { max-width: 680px; margin: 0 auto; padding: 32px; }
-header { border-bottom: 1px solid #e5e5e5; padding-bottom: 20px; margin-bottom: 40px; }
-h1 { font-size: 28px; margin: 0 0 4px 0; color: #1a1a1a; letter-spacing: -0.02em; }
-.date { color: #6b6b6b; margin: 0; font-size: 13px; letter-spacing: 0.02em; }
-h2 { font-size: 24px; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; color: #17171c; background: #ffffff; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+.container { max-width: 680px; margin: 0 auto; padding: 44px; }
+header { margin-bottom: 44px; }
+.kicker { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #1e33d6; margin: 0 0 10px 0; }
+h1 { font-size: 30px; font-weight: 800; margin: 0; color: #17171c; letter-spacing: -0.03em; line-height: 1; }
+h1 em { font-style: normal; background: linear-gradient(transparent 62%, #eef0fe 62%); padding: 0 2px; }
+.rule { height: 3px; background: #17171c; margin: 18px 0 12px 0; }
+.date { color: #6b6b74; margin: 0; font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 13px; letter-spacing: 0.03em; }
+h2 { font-size: 22px; }
 h3 { font-size: 18px; }
-a { color: #0066cc; text-decoration: none; }
+a { color: #1e33d6; text-decoration: none; }
 a:hover { text-decoration: underline; }
-code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; background: #f3f4f6; padding: 1px 4px; border-radius: 3px; font-size: 0.92em; }
-pre { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; background: #f3f4f6; padding: 12px; border-radius: 6px; overflow-x: auto; }
-.body p { margin: 0 0 14px 0; }
-.body h3, .body h4 { margin: 32px 0 10px 0; font-size: 18px; font-weight: 600; color: #1a1a1a; line-height: 1.4; }
+code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; background: #f1f1eb; padding: 1px 4px; border-radius: 3px; font-size: 0.92em; }
+pre { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; background: #f1f1eb; padding: 12px; border-radius: 6px; overflow-x: auto; }
+.body p { margin: 0 0 15px 0; }
+.body a { border-bottom: 1px solid #eef0fe; }
+.body a:hover { text-decoration: none; border-bottom-color: #1e33d6; }
+.body h3, .body h4 { margin: 32px 0 10px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; font-size: 18px; font-weight: 600; color: #17171c; line-height: 1.4; }
 .body ul, .body ol { margin: 0 0 16px 0; padding-left: 24px; }
 .body li { margin-bottom: 6px; }
-.body blockquote { margin: 16px 0; padding: 4px 0 4px 16px; border-left: 3px solid #e5e5e5; color: #6b6b6b; }
-.qm-section { margin-top: 64px; padding-top: 32px; border-top: 2px solid #1a1a1a; }
-.qm-kicker { margin: 0 0 6px 0; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #0066cc; font-weight: 700; }
-.qm-section h2 { margin: 0 0 20px 0; font-size: 24px; color: #1a1a1a; letter-spacing: -0.01em; }
+.body blockquote { margin: 16px 0; padding: 4px 0 4px 16px; border-left: 3px solid #e7e6e0; color: #6b6b74; }
+.sources a:hover { text-decoration: none; border-bottom-color: #1e33d6 !important; color: #1e33d6 !important; }
+.qm-section { margin-top: 64px; padding-top: 32px; border-top: 2px solid #17171c; }
+.qm-kicker { margin: 0 0 6px 0; font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #1e33d6; }
+.qm-section h2 { margin: 0 0 20px 0; font-size: 22px; color: #17171c; letter-spacing: -0.01em; }
 .quick-mentions { padding-left: 20px; margin: 0; }
 </style>
 </head>
 <body>
 <div class="container">
 <header>
-<h1>AI Agent Weekly</h1>
+<p class="kicker">Weekly intelligence · 에이전트 생태계</p>
+<h1>AI <em>Agent</em> Weekly</h1>
+<div class="rule"></div>
 <p class="date">2026-05-21</p>
 </header>
 <main><section class="deep-dive" style="margin: 0; padding-top: 0; margin-top: 0; border-top: none;">
-  <h2 style="font-size: 24px; font-weight: 700; color: #1a1a1a; margin: 0 0 12px 0; line-height: 1.35; letter-spacing: -0.01em;">Diffusion-as-Optimizer 논문</h2>
-  <p class="meta" style="color: #6b6b6b; font-size: 13px; margin: 0 0 24px 0; line-height: 1.5;">
-    <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
-    &middot; <a href="https://arxiv.org/abs/2505.10001" style="color: #0066cc;">원문</a>
-    &middot; 3 sources
+  <p class="dd-index" style="font-family: ui-monospace, &#39;SF Mono&#39;, Menlo, Consolas, monospace; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #1e33d6; margin: 0 0 12px 0;">DEEP DIVE 01</p>
+  <h2 style="font-size: 22px; font-weight: 700; color: #17171c; margin: 0 0 14px 0; line-height: 1.35; letter-spacing: -0.01em;">Diffusion-as-Optimizer 논문</h2>
+  <p class="tags" style="margin: 0 0 22px 0; font-family: ui-monospace, &#39;SF Mono&#39;, Menlo, Consolas, monospace; font-size: 13px;">
+    <span class="tag" style="background: #f1f1eb; color: #6b6b74; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
   </p>
-  <div class="body" style="color: #1a1a1a; font-size: 16px; line-height: 1.75;"><p>Diffusion 모델을 일반 비볼록 최적화 문제의 sampler로 재해석한다.
+  <div class="body" style="color: #17171c; font-family: Georgia, &#39;Times New Roman&#39;, &#39;Nanum Myeongjo&#39;, serif; font-size: 16px; line-height: 1.78;"><p>Diffusion 모델을 일반 비볼록 최적화 문제의 sampler로 재해석한다.
 <strong>핵심 결과:</strong> ImageNet-scale 벤치마크에서 5% 개선.
 주의: production 환경에서 latency가 1.6x 늘어남.</p></div>
-</section><section class="deep-dive" style="margin: 0; padding-top: 48px; margin-top: 48px; border-top: 1px solid #e5e5e5;">
-  <h2 style="font-size: 24px; font-weight: 700; color: #1a1a1a; margin: 0 0 12px 0; line-height: 1.35; letter-spacing: -0.01em;">vLLM v0.7 릴리스</h2>
-  <p class="meta" style="color: #6b6b6b; font-size: 13px; margin: 0 0 24px 0; line-height: 1.5;">
-    <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">repo</span>
-<span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">production-ready</span>    &middot; <a href="https://github.com/vllm-project/vllm" style="color: #0066cc;">원문</a>
-    &middot; 2 sources
-  </p>
-  <div class="body" style="color: #1a1a1a; font-size: 16px; line-height: 1.75;"><p>PagedAttention의 NUMA-aware variant 추가. continuous batching이 default가 됐고 throughput이 14% 향상.</p>
+  <p class="sources" style="margin: 22px 0 0 0; padding-top: 14px; border-top: 1px dashed #e7e6e0; font-family: ui-monospace, &#39;SF Mono&#39;, Menlo, Consolas, monospace; font-size: 12px; line-height: 1.9; color: #6b6b74;">
+    <span style="text-transform: uppercase; letter-spacing: 0.1em; font-size: 11px; color: #9a9aa1;">관련 출처</span>
+&nbsp;&nbsp;<a href="https://arxiv.org/abs/2505.10001" style="color: #6b6b74; border-bottom: 1px solid #e7e6e0;">arXiv 원문</a>&nbsp;&nbsp;<a href="https://github.com/example/diffopt" style="color: #6b6b74; border-bottom: 1px solid #e7e6e0;">레퍼런스 구현</a>&nbsp;&nbsp;<a href="https://latent.space/p/diffusion-optimizer" style="color: #6b6b74; border-bottom: 1px solid #e7e6e0;">해설 글</a>  </p>
+</section><section class="deep-dive" style="margin: 0; padding-top: 48px; margin-top: 48px; border-top: 1px solid #e7e6e0;">
+  <p class="dd-index" style="font-family: ui-monospace, &#39;SF Mono&#39;, Menlo, Consolas, monospace; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #1e33d6; margin: 0 0 12px 0;">DEEP DIVE 02</p>
+  <h2 style="font-size: 22px; font-weight: 700; color: #17171c; margin: 0 0 14px 0; line-height: 1.35; letter-spacing: -0.01em;">vLLM v0.7 릴리스</h2>
+  <p class="tags" style="margin: 0 0 22px 0; font-family: ui-monospace, &#39;SF Mono&#39;, Menlo, Consolas, monospace; font-size: 13px;">
+    <span class="tag" style="background: #f1f1eb; color: #6b6b74; padding: 2px 8px; border-radius: 4px; font-size: 12px;">repo</span>
+<span class="tag" style="background: #e7f3ec; color: #0b6b44; padding: 2px 8px; border-radius: 4px; font-size: 12px;">production-ready</span>  </p>
+  <div class="body" style="color: #17171c; font-family: Georgia, &#39;Times New Roman&#39;, &#39;Nanum Myeongjo&#39;, serif; font-size: 16px; line-height: 1.78;"><p>PagedAttention의 NUMA-aware variant 추가. continuous batching이 default가 됐고 throughput이 14% 향상.</p>
 <ul>
 <li>신규 <code>--enable-numa-paging</code> 플래그</li>
 <li>KV-cache eviction policy 교체 가능</li>
 </ul></div>
-</section><section class="deep-dive" style="margin: 0; padding-top: 48px; margin-top: 48px; border-top: 1px solid #e5e5e5;">
-  <h2 style="font-size: 24px; font-weight: 700; color: #1a1a1a; margin: 0 0 12px 0; line-height: 1.35; letter-spacing: -0.01em;">MoE routing 블로그</h2>
-  <p class="meta" style="color: #6b6b6b; font-size: 13px; margin: 0 0 24px 0; line-height: 1.5;">
-    <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">blog_post</span>
-    &middot; <a href="https://latent.space/p/moe-routing-2026" style="color: #0066cc;">원문</a>
-    &middot; 1 source
+  <p class="sources" style="margin: 22px 0 0 0; padding-top: 14px; border-top: 1px dashed #e7e6e0; font-family: ui-monospace, &#39;SF Mono&#39;, Menlo, Consolas, monospace; font-size: 12px; color: #6b6b74;">
+    <a href="https://github.com/vllm-project/vllm" style="color: #1e33d6;">원문 ↗</a>
   </p>
-  <div class="body" style="color: #1a1a1a; font-size: 16px; line-height: 1.75;"><p>Expert routing의 entropy-collapse 문제에 대한 분석. auxiliary loss 없이도 안정적으로 학습되는 변형 제안.</p></div>
+</section><section class="deep-dive" style="margin: 0; padding-top: 48px; margin-top: 48px; border-top: 1px solid #e7e6e0;">
+  <p class="dd-index" style="font-family: ui-monospace, &#39;SF Mono&#39;, Menlo, Consolas, monospace; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #1e33d6; margin: 0 0 12px 0;">DEEP DIVE 03</p>
+  <h2 style="font-size: 22px; font-weight: 700; color: #17171c; margin: 0 0 14px 0; line-height: 1.35; letter-spacing: -0.01em;">MoE routing 블로그</h2>
+  <p class="tags" style="margin: 0 0 22px 0; font-family: ui-monospace, &#39;SF Mono&#39;, Menlo, Consolas, monospace; font-size: 13px;">
+    <span class="tag" style="background: #f1f1eb; color: #6b6b74; padding: 2px 8px; border-radius: 4px; font-size: 12px;">blog_post</span>
+  </p>
+  <div class="body" style="color: #17171c; font-family: Georgia, &#39;Times New Roman&#39;, &#39;Nanum Myeongjo&#39;, serif; font-size: 16px; line-height: 1.78;"><p>Expert routing의 entropy-collapse 문제에 대한 분석. auxiliary loss 없이도 안정적으로 학습되는 변형 제안.</p></div>
+  <p class="sources" style="margin: 22px 0 0 0; padding-top: 14px; border-top: 1px dashed #e7e6e0; font-family: ui-monospace, &#39;SF Mono&#39;, Menlo, Consolas, monospace; font-size: 12px; color: #6b6b74;">
+    <a href="https://latent.space/p/moe-routing-2026" style="color: #1e33d6;">원문 ↗</a>
+  </p>
 </section><div class="qm-section">
 <p class="qm-kicker">Also this week</p>
 <h2>Quick Mentions</h2>
-<ul class="quick-mentions"><li style="margin-bottom: 10px; color: #1a1a1a; font-size: 16px; line-height: 1.55;">
-  <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
-  <a href="https://example.com/q/0" style="color: #0066cc; font-weight: 600;">Quick item 0</a>
-  <span style="color: #6b6b6b;"> &mdash; A one-line summary for item 0.</span>
-</li><li style="margin-bottom: 10px; color: #1a1a1a; font-size: 16px; line-height: 1.55;">
-  <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
-  <a href="https://example.com/q/1" style="color: #0066cc; font-weight: 600;">Quick item 1</a>
-  <span style="color: #6b6b6b;"> &mdash; A one-line summary for item 1.</span>
-</li><li style="margin-bottom: 10px; color: #1a1a1a; font-size: 16px; line-height: 1.55;">
-  <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
-  <a href="https://example.com/q/2" style="color: #0066cc; font-weight: 600;">Quick item 2</a>
-  <span style="color: #6b6b6b;"> &mdash; A one-line summary for item 2.</span>
-</li><li style="margin-bottom: 10px; color: #1a1a1a; font-size: 16px; line-height: 1.55;">
-  <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
-  <a href="https://example.com/q/3" style="color: #0066cc; font-weight: 600;">Quick item 3</a>
-  <span style="color: #6b6b6b;"> &mdash; A one-line summary for item 3.</span>
-</li><li style="margin-bottom: 10px; color: #1a1a1a; font-size: 16px; line-height: 1.55;">
-  <span class="tag" style="background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
-  <a href="https://example.com/q/4" style="color: #0066cc; font-weight: 600;">Quick item 4</a>
-  <span style="color: #6b6b6b;"> &mdash; A one-line summary for item 4.</span>
+<ul class="quick-mentions"><li style="margin-bottom: 10px; color: #17171c; font-size: 16px; line-height: 1.55;">
+  <span class="tag" style="background: #f1f1eb; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
+  <a href="https://example.com/q/0" style="color: #1e33d6; font-weight: 600;">Quick item 0</a>
+  <span style="color: #6b6b74;"> &mdash; A one-line summary for item 0.</span>
+</li><li style="margin-bottom: 10px; color: #17171c; font-size: 16px; line-height: 1.55;">
+  <span class="tag" style="background: #f1f1eb; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
+  <a href="https://example.com/q/1" style="color: #1e33d6; font-weight: 600;">Quick item 1</a>
+  <span style="color: #6b6b74;"> &mdash; A one-line summary for item 1.</span>
+</li><li style="margin-bottom: 10px; color: #17171c; font-size: 16px; line-height: 1.55;">
+  <span class="tag" style="background: #f1f1eb; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
+  <a href="https://example.com/q/2" style="color: #1e33d6; font-weight: 600;">Quick item 2</a>
+  <span style="color: #6b6b74;"> &mdash; A one-line summary for item 2.</span>
+</li><li style="margin-bottom: 10px; color: #17171c; font-size: 16px; line-height: 1.55;">
+  <span class="tag" style="background: #f1f1eb; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
+  <a href="https://example.com/q/3" style="color: #1e33d6; font-weight: 600;">Quick item 3</a>
+  <span style="color: #6b6b74;"> &mdash; A one-line summary for item 3.</span>
+</li><li style="margin-bottom: 10px; color: #17171c; font-size: 16px; line-height: 1.55;">
+  <span class="tag" style="background: #f1f1eb; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
+  <a href="https://example.com/q/4" style="color: #1e33d6; font-weight: 600;">Quick item 4</a>
+  <span style="color: #6b6b74;"> &mdash; A one-line summary for item 4.</span>
 </li></ul>
 </div>
 </main>

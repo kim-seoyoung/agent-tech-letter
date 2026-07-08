@@ -18,6 +18,7 @@ __all__ = [
     "BANNED_HYPE_WORDS",
     "DeepDive",
     "QuickMention",
+    "Source",
 ]
 
 
@@ -51,6 +52,21 @@ BANNED_HYPE_WORDS: frozenset[str] = frozenset(
 )
 
 
+class Source(BaseModel):
+    """One attributed source behind a deep-dive (a clustered item's link).
+
+    The deep-dive is composed from a *cluster* of items; each item is a
+    citable source. `source_count` is the count of these; `sources` (when
+    present) carries the actual URLs + a short human label so the renderer
+    can show a clickable attribution row instead of a bare number.
+    """
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    url: HttpUrl
+    label: str = Field(min_length=1, max_length=100)
+
+
 class DeepDive(BaseModel):
     """A long-form section in the rendered issue (2-5 per issue, target 3).
 
@@ -66,6 +82,10 @@ class DeepDive(BaseModel):
     maturity: Maturity | None = None
     primary_url: HttpUrl
     source_count: int = Field(ge=1)
+    # Optional attribution list. Empty by default so pre-existing drafts (and
+    # the sample fixtures) validate unchanged; the renderer falls back to a
+    # single `primary_url` link when this is empty.
+    sources: tuple[Source, ...] = ()
 
 
 class QuickMention(BaseModel):

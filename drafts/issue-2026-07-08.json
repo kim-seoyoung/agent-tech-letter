@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "issue_id": "issue-2026-07-08",
+  "issue_date": "2026-07-08T00:00:00Z",
+  "body_md": "# AI Agent Weekly — 2026-07-08\n\n이번 주는 에이전트가 무엇을 어떻게 실패하는지 재는 방법이 세 개 나온 한 주였어요. 산업과 학계가 각자 다른 각도에서 같은 질문에 답했어요. Anthropic이 Amazon·Microsoft·Google과 함께 그린 Cyber Jailbreak Severity 척도가 하나예요. arXiv 쪽에서는 도구 호출 실패를 네 갈래로 쪼갠 ToolFailBench와 안전 테스트 케이스를 스스로 조합해 뽑는 Vera가 같이 올라왔어요. 세 흐름 모두 \"최종 성공률 한 숫자로만 채점하지 말자\"는 신호를 겹쳐 던진 한 주였어요.\n\n### 1. Cyber Jailbreak Severity: 네 축과 5개 라벨로 그린 벤더 공유 탈옥 채점 척도\n\nAnthropic이 7월 2일 Cyber Jailbreak Severity(CJS) 프레임워크 초안을 공개했어요(<https://www.anthropic.com/news/fable-safeguards-jailbreak-framework>). Amazon·Microsoft·Google과 함께 짠 척도예요. 등급은 CJS-0부터 CJS-4까지 다섯이에요.\n\n점수는 네 축을 각각 수치로 매겨 합산해 뽑아요. 하나는 capability gain, 곧 이미 있는 도구 대비 공격자가 얼마나 더 나아가는지예요. 둘은 breadth, 같은 기법이 몇 종류의 공격 태스크에 통하는지예요. 셋은 ease of weaponisation, 그 기법을 실제 공격으로 만드는 데 드는 품이에요. 넷은 discoverability, 위협 행위자가 스스로 찾아낼 확률이에요. 넷을 더한 총점이 CJS-1(Low 1–3.5), CJS-2(Medium 4–6.5), CJS-3(High 7–8.5), CJS-4(Critical 9–10)로 매핑돼요. TechTimes는 8월 1일까지 다섯 개 연구소가 이 척도를 채택하기로 했다고 인용했어요(<https://www.techtimes.com/articles/319658/20260703/ai-model-safety-standards-deal-targets-august-1-five-labs-adopt-first-jailbreak-scoring-scale.htm>).\n\n같은 발표에는 Fable 5의 사이버 안전 분류기 세부와 HackerOne 신고 프로그램이 함께 실렸어요. 분류기는 사이버보안 요청을 네 카테고리로 갈라요. 금지 용도로 판정된 요청은 그대로 막혀요. 여기에는 ransomware·wiper·malware 개발·C2 인프라·defense evasion 같은 항목이 들어가요. 나머지 카테고리는 dual-use 성격을 인정해 문맥별로 판정한다고 적혀 있어요. CybersecurityNews는 6월 12일부터 7월 1일까지 19일 동안 미국 상무부 명령으로 Fable 5·Mythos 5가 오프라인이었고, 그 발단이 Amazon 팀이 찾은 취약점 유도 프롬프트였다고 배경을 재정리했어요(<https://cybersecuritynews.com/anthropic-claude-fable-5-cybersecurity/>).\n\n선행 흐름과 견주면 지난주 다룬 Fable 5 재배포는 \"분류기가 붙어 다시 열렸다\" 정도의 사실이었어요. 이번 발표는 그 분류기의 라벨 체계와 벤더 간 공유 방식을 처음 문서로 낸 사례예요. 인접 사례인 CVSS는 결과 버그를 재지만, CJS는 유도 프롬프트 자체를 채점해요. 자기 팀이 사내 레드팀을 굴리고 있다면, 최근 한 달 동안 잡은 프롬프트 인젝션 사례를 CJS의 네 축으로 채점해 총점이 어느 등급에 떨어지는지부터 매겨보세요.\n\n### 2. ToolFailBench: 도구 호출 실패를 네 갈래로 쪼갠 1,000-태스크 진단 벤치마크\n\nToolFailBench는 도구 호출 실패를 진단하는 벤치마크예요. arXiv에 7월 6일 올라왔어요(<https://arxiv.org/abs/2607.04686>). 저자들이 짚은 문제는 짧아요. 최종 정답률 한 숫자로는 \"도구를 아예 안 부른 실패\"와 \"도구를 부르고 결과를 무시한 실패\"가 같은 점수로 뭉쳐 보인다는 점이에요. 그래서 태스크를 tool-required와 control 두 축으로 나눠 각 실패 형태를 따로 세는 얼개를 세웠어요.\n\n구성은 다섯 도메인·1,000 태스크예요. 도메인은 finance, medicine, law, cybersecurity, real estate로 잡았어요. Tool-required 태스크는 도구가 반환하는 값이 모델이 스스로 낼 수 없는 값이라, 모델은 도구를 부르고 그 결과를 그대로 써야 정답이에요. Control 태스크는 같은 도구가 붙어 있지만 직접 답하는 게 맞는 문항이에요. 이 두 축 위에서 실패를 네 갈래로 갈라요. Tool-required 쪽에서는 Tool-Skip(도구 자체를 안 부름), Result-Ignore(부르고 결과를 무시), Output-Fabrication(도구 결과를 지어냄), 그리고 올바른 도구 사용이에요. Control 쪽에서는 Unnecessary-Tool-Use(불필요한 호출), 잘못된 직답, 올바른 직답으로 갈라져요.\n\n평가는 프런티어 모델 19종을 같은 태스크 파일·같은 도구 스키마·같은 시스템 프롬프트·같은 디코딩 설정으로 돌렸어요. 벤치는 아직 saturate되지 않았어요. 최고 Clean Tool-Use Rate가 86.33%예요. 눈에 띄는 발견은 aggregate 점수가 실패 프로파일 차이를 가린다는 점이에요. 예로 같은 스케일의 Llama 모델과 Qwen 모델이 control 태스크 정확도에서 89%포인트 격차를 냈어요. 최종 성적이 비슷해도 두 모델이 실패하는 지점은 완전히 달랐다는 얘기예요.\n\n선행 흐름과 짚어두면 방향이 두 갈래예요. 하나는 지난주 다룬 MemSyco-Bench가 \"메모리가 사실 정확성을 어떻게 훼손하는지\"를 재는 축이었다면, ToolFailBench는 \"도구를 어떻게 잘못 다루는지\"를 실패 형태별로 자른 축이에요. 다른 하나는 ToolBench·API-Bank처럼 도구 호출 정답률 한 숫자로 채점하던 앞선 벤치의 다음 세대예요. 자기 코딩 에이전트가 있다면, 지난주 프로덕션 트레이스에서 도구 결과를 무시한 사례와 도구 자체를 안 부른 사례를 별도 카테고리로 세어보고, 총 실패율 하나로 볼 때는 보이지 않던 차이가 드러나는지부터 확인해보세요.\n\n### 3. Vera: 안전 테스트 케이스를 스스로 조합해 뽑는 3단계 자기 강화 파이프라인\n\nVera는 에이전트 안전 테스트를 자동 생성해 굴리는 프레임워크예요. arXiv에 7월 2일 올라왔고 7월 4일에 개정판이 붙었어요(<https://arxiv.org/abs/2607.01793>). AntGroup·Zhejiang University·Fudan University·Alibaba Group 등이 공동 저자로 이름을 올렸어요. 저자들이 짚은 문제는 짚기 편해요. 기존 안전 테스트는 전문가가 손으로 짠 위반 사례를 하드코딩된 규칙으로 채점해요. 에이전트가 진화할 때마다 새 사례와 새 규칙을 다시 손으로 붙여야 해서 유지비가 커요.\n\n접근은 소프트웨어 테스트 원리를 비결정적 에이전트 위에 얹은 3단계 자기 강화 파이프라인이에요. 첫 단계는 Risk Discovery예요. 문헌 기반 탐색이 새로 등장한 위험을 계속 흡수해 세 종류의 taxonomy로 정리해요. 안전 위험 유형, 공격 기법, 도구 실행 환경이 그 세 축이에요. 둘째 단계는 Combinatorial Generation이에요. 이 taxonomy 축을 조합해 실행 가능한 안전 케이스를 만들어요. 케이스마다 구체적인 안전 목표, 프로그램적으로 구성된 초기 상태, 관측 가능한 아티팩트에 근거한 결정론적 검증 predicate를 함께 담아요. 셋째 단계는 실행과 판정 결과를 taxonomy에 되먹여, 다음 회차의 발견과 생성을 넓히는 self-reinforcing 루프예요.\n\n핵심 설계 결정은 두 가지예요. 하나는 verification predicate가 하드코딩 규칙이 아니라 관측 가능한 아티팩트를 조건절로 쓴다는 점이에요. 에이전트가 어떤 도구를 어떤 인자로 어떤 순서로 부르는지 같은 실제 흔적을 조건으로 잡아요. 다른 하나는 taxonomy가 저자 손이 아니라 문헌에서 자동으로 자라는 구조여서, 새 위험이 등장할 때마다 프레임워크가 그것을 다음 케이스 생성에 그대로 반영해요.\n\n선행 흐름과 견주면 대조가 뚜렷해요. Agent-SafetyBench나 AgentDoG 같은 앞선 안전 평가는 고정된 케이스 셋을 규칙 채점기로 판정했어요. Vera는 케이스 생성 자체를 자동화 축으로 옮겼다는 점이 다른 지점이에요. 같은 호의 ToolFailBench가 \"실패 라벨을 진단으로 정교화\"하는 방향이라면, Vera는 \"안전 테스트 자체를 조합적으로 뽑아내는\" 방향이에요. 자기 에이전트에 도입한다면, 논문 부록의 taxonomy 초안을 그대로 가져와 도구 실행 환경 축만 자기 스택에 맞게 바꾼 뒤 그 축 하나에서 나오는 케이스 수와 통과율을 24시간 안에 재보세요.\n\n## Quick mentions\n\n- [Codex Remote GA + /import from Claude Code](https://developers.openai.com/codex/changelog) — OpenAI Codex Remote가 GA로 풀리면서 ChatGPT 모바일에서 Mac·Windows 호스트 세션을 이어 승인까지 굴릴 수 있고, /import 플로가 Claude Code·Claude Cowork 설정을 흡수해요.\n- [Your Agent's Memories Are Not Its Own: Forged Reasoning Attacks on LLM Agent Memory](https://arxiv.org/abs/2607.05029) — 메모리에 저장된 '기억된 추론'을 위조해 이후 결정을 뒤트는 Forged Amplifying Rationale Memory Attack(FARMA)과 방어책을 함께 제시한 논문이에요.\n- [omnigent-ai/omnigent](https://github.com/omnigent-ai/omnigent) — Claude Code·Codex·Cursor·Pi 같은 여러 코딩 CLI를 한 프레임워크로 오케스트레이션해 정책·샌드박스를 통일하고 하네스를 갈아끼울 수 있게 하는 메타 하네스예요.\n- [eigent-ai/eigent](https://github.com/eigent-ai/eigent) — Claude Cowork의 오픈소스·로컬 대안을 표방하는 데스크톱 Cowork 앱으로 별 1만 4천 개까지 붙었고, TypeScript로 짜여 로컬 머신 안에서만 돌아요.\n- [lobehub/lobehub](https://github.com/lobehub/lobehub) — 여러 에이전트를 팀처럼 편성해 7×24 스케줄·리포트까지 관리하는 'Chief Agent Operator' 표방 플랫폼으로 별 8만 개 규모예요.\n- [Panniantong/Agent-Reach](https://github.com/Panniantong/Agent-Reach) — Twitter·Reddit·YouTube·GitHub·Bilibili를 API 요금 없이 읽고 검색하게 해 주는 에이전트 인터넷 접근 CLI로, MCP 서버 형태로 붙어요.\n- [HKUDS/nanobot](https://github.com/HKUDS/nanobot) — HKUDS가 푼 가벼운 오픈소스 에이전트로, 도구·채팅·워크플로 세 축을 얇게 감싸 별 4만 5천 개까지 붙었어요.\n- [RightNow-AI/openfang](https://github.com/RightNow-AI/openfang) — Rust로 짠 오픈소스 'Agent Operating System'을 표방하며 별 1만 8천 개 규모예요. MCP 위에 스킬·프로세스 모델을 얹는 얼개예요.\n- [farion1231/cc-switch](https://github.com/farion1231/cc-switch) — Claude Code·Codex·OpenCode·Gemini CLI 같은 코딩 CLI 에이전트를 한 데스크톱에서 전환하며 쓰는 도구로, Tauri·Rust 스택 위에 올라 있어요.\n- [googleworkspace/cli](https://github.com/googleworkspace/cli) — Drive·Gmail·Calendar·Sheets를 한 Rust CLI로 묶고 Google Discovery API에서 명령을 동적으로 빌드해요. 각 명령은 에이전트 스킬로도 붙일 수 있어요.\n",
+  "deep_dives": [
+    {
+      "cluster_id": "dd-2026-07-08-1",
+      "title": "Cyber Jailbreak Severity: 네 축과 5개 라벨로 그린 벤더 공유 탈옥 채점 척도",
+      "body_md": "Anthropic이 7월 2일 Cyber Jailbreak Severity(CJS) 프레임워크 초안을 공개했어요(<https://www.anthropic.com/news/fable-safeguards-jailbreak-framework>). Amazon·Microsoft·Google과 함께 짠 척도예요. 등급은 CJS-0부터 CJS-4까지 다섯이에요.\n\n점수는 네 축을 각각 수치로 매겨 합산해 뽑아요. 하나는 capability gain, 곧 이미 있는 도구 대비 공격자가 얼마나 더 나아가는지예요. 둘은 breadth, 같은 기법이 몇 종류의 공격 태스크에 통하는지예요. 셋은 ease of weaponisation, 그 기법을 실제 공격으로 만드는 데 드는 품이에요. 넷은 discoverability, 위협 행위자가 스스로 찾아낼 확률이에요. 넷을 더한 총점이 CJS-1(Low 1–3.5), CJS-2(Medium 4–6.5), CJS-3(High 7–8.5), CJS-4(Critical 9–10)로 매핑돼요. TechTimes는 8월 1일까지 다섯 개 연구소가 이 척도를 채택하기로 했다고 인용했어요(<https://www.techtimes.com/articles/319658/20260703/ai-model-safety-standards-deal-targets-august-1-five-labs-adopt-first-jailbreak-scoring-scale.htm>).\n\n같은 발표에는 Fable 5의 사이버 안전 분류기 세부와 HackerOne 신고 프로그램이 함께 실렸어요. 분류기는 사이버보안 요청을 네 카테고리로 갈라요. 금지 용도로 판정된 요청은 그대로 막혀요. 여기에는 ransomware·wiper·malware 개발·C2 인프라·defense evasion 같은 항목이 들어가요. 나머지 카테고리는 dual-use 성격을 인정해 문맥별로 판정한다고 적혀 있어요. CybersecurityNews는 6월 12일부터 7월 1일까지 19일 동안 미국 상무부 명령으로 Fable 5·Mythos 5가 오프라인이었고, 그 발단이 Amazon 팀이 찾은 취약점 유도 프롬프트였다고 배경을 재정리했어요(<https://cybersecuritynews.com/anthropic-claude-fable-5-cybersecurity/>).\n\n선행 흐름과 견주면 지난주 다룬 Fable 5 재배포는 \"분류기가 붙어 다시 열렸다\" 정도의 사실이었어요. 이번 발표는 그 분류기의 라벨 체계와 벤더 간 공유 방식을 처음 문서로 낸 사례예요. 인접 사례인 CVSS는 결과 버그를 재지만, CJS는 유도 프롬프트 자체를 채점해요. 자기 팀이 사내 레드팀을 굴리고 있다면, 최근 한 달 동안 잡은 프롬프트 인젝션 사례를 CJS의 네 축으로 채점해 총점이 어느 등급에 떨어지는지부터 매겨보세요.",
+      "item_kind": "blog_post",
+      "maturity": "experimental",
+      "primary_url": "https://www.anthropic.com/news/fable-safeguards-jailbreak-framework",
+      "source_count": 3
+    },
+    {
+      "cluster_id": "dd-2026-07-08-2",
+      "title": "ToolFailBench: 도구 호출 실패를 네 갈래로 쪼갠 1,000-태스크 진단 벤치마크",
+      "body_md": "ToolFailBench는 도구 호출 실패를 진단하는 벤치마크예요. arXiv에 7월 6일 올라왔어요(<https://arxiv.org/abs/2607.04686>). 저자들이 짚은 문제는 짧아요. 최종 정답률 한 숫자로는 \"도구를 아예 안 부른 실패\"와 \"도구를 부르고 결과를 무시한 실패\"가 같은 점수로 뭉쳐 보인다는 점이에요. 그래서 태스크를 tool-required와 control 두 축으로 나눠 각 실패 형태를 따로 세는 얼개를 세웠어요.\n\n구성은 다섯 도메인·1,000 태스크예요. 도메인은 finance, medicine, law, cybersecurity, real estate로 잡았어요. Tool-required 태스크는 도구가 반환하는 값이 모델이 스스로 낼 수 없는 값이라, 모델은 도구를 부르고 그 결과를 그대로 써야 정답이에요. Control 태스크는 같은 도구가 붙어 있지만 직접 답하는 게 맞는 문항이에요. 이 두 축 위에서 실패를 네 갈래로 갈라요. Tool-required 쪽에서는 Tool-Skip(도구 자체를 안 부름), Result-Ignore(부르고 결과를 무시), Output-Fabrication(도구 결과를 지어냄), 그리고 올바른 도구 사용이에요. Control 쪽에서는 Unnecessary-Tool-Use(불필요한 호출), 잘못된 직답, 올바른 직답으로 갈라져요.\n\n평가는 프런티어 모델 19종을 같은 태스크 파일·같은 도구 스키마·같은 시스템 프롬프트·같은 디코딩 설정으로 돌렸어요. 벤치는 아직 saturate되지 않았어요. 최고 Clean Tool-Use Rate가 86.33%예요. 눈에 띄는 발견은 aggregate 점수가 실패 프로파일 차이를 가린다는 점이에요. 예로 같은 스케일의 Llama 모델과 Qwen 모델이 control 태스크 정확도에서 89%포인트 격차를 냈어요. 최종 성적이 비슷해도 두 모델이 실패하는 지점은 완전히 달랐다는 얘기예요.\n\n선행 흐름과 짚어두면 방향이 두 갈래예요. 하나는 지난주 다룬 MemSyco-Bench가 \"메모리가 사실 정확성을 어떻게 훼손하는지\"를 재는 축이었다면, ToolFailBench는 \"도구를 어떻게 잘못 다루는지\"를 실패 형태별로 자른 축이에요. 다른 하나는 ToolBench·API-Bank처럼 도구 호출 정답률 한 숫자로 채점하던 앞선 벤치의 다음 세대예요. 자기 코딩 에이전트가 있다면, 지난주 프로덕션 트레이스에서 도구 결과를 무시한 사례와 도구 자체를 안 부른 사례를 별도 카테고리로 세어보고, 총 실패율 하나로 볼 때는 보이지 않던 차이가 드러나는지부터 확인해보세요.",
+      "item_kind": "paper",
+      "maturity": null,
+      "primary_url": "https://arxiv.org/abs/2607.04686",
+      "source_count": 1
+    },
+    {
+      "cluster_id": "dd-2026-07-08-3",
+      "title": "Vera: 안전 테스트 케이스를 스스로 조합해 뽑는 3단계 자기 강화 파이프라인",
+      "body_md": "Vera는 에이전트 안전 테스트를 자동 생성해 굴리는 프레임워크예요. arXiv에 7월 2일 올라왔고 7월 4일에 개정판이 붙었어요(<https://arxiv.org/abs/2607.01793>). AntGroup·Zhejiang University·Fudan University·Alibaba Group 등이 공동 저자로 이름을 올렸어요. 저자들이 짚은 문제는 짚기 편해요. 기존 안전 테스트는 전문가가 손으로 짠 위반 사례를 하드코딩된 규칙으로 채점해요. 에이전트가 진화할 때마다 새 사례와 새 규칙을 다시 손으로 붙여야 해서 유지비가 커요.\n\n접근은 소프트웨어 테스트 원리를 비결정적 에이전트 위에 얹은 3단계 자기 강화 파이프라인이에요. 첫 단계는 Risk Discovery예요. 문헌 기반 탐색이 새로 등장한 위험을 계속 흡수해 세 종류의 taxonomy로 정리해요. 안전 위험 유형, 공격 기법, 도구 실행 환경이 그 세 축이에요. 둘째 단계는 Combinatorial Generation이에요. 이 taxonomy 축을 조합해 실행 가능한 안전 케이스를 만들어요. 케이스마다 구체적인 안전 목표, 프로그램적으로 구성된 초기 상태, 관측 가능한 아티팩트에 근거한 결정론적 검증 predicate를 함께 담아요. 셋째 단계는 실행과 판정 결과를 taxonomy에 되먹여, 다음 회차의 발견과 생성을 넓히는 self-reinforcing 루프예요.\n\n핵심 설계 결정은 두 가지예요. 하나는 verification predicate가 하드코딩 규칙이 아니라 관측 가능한 아티팩트를 조건절로 쓴다는 점이에요. 에이전트가 어떤 도구를 어떤 인자로 어떤 순서로 부르는지 같은 실제 흔적을 조건으로 잡아요. 다른 하나는 taxonomy가 저자 손이 아니라 문헌에서 자동으로 자라는 구조여서, 새 위험이 등장할 때마다 프레임워크가 그것을 다음 케이스 생성에 그대로 반영해요.\n\n선행 흐름과 견주면 대조가 뚜렷해요. Agent-SafetyBench나 AgentDoG 같은 앞선 안전 평가는 고정된 케이스 셋을 규칙 채점기로 판정했어요. Vera는 케이스 생성 자체를 자동화 축으로 옮겼다는 점이 다른 지점이에요. 같은 호의 ToolFailBench가 \"실패 라벨을 진단으로 정교화\"하는 방향이라면, Vera는 \"안전 테스트 자체를 조합적으로 뽑아내는\" 방향이에요. 자기 에이전트에 도입한다면, 논문 부록의 taxonomy 초안을 그대로 가져와 도구 실행 환경 축만 자기 스택에 맞게 바꾼 뒤 그 축 하나에서 나오는 케이스 수와 통과율을 24시간 안에 재보세요.",
+      "item_kind": "paper",
+      "maturity": null,
+      "primary_url": "https://arxiv.org/abs/2607.01793",
+      "source_count": 1
+    }
+  ],
+  "quick_mentions": [
+    {
+      "title": "Codex Remote GA + /import from Claude Code",
+      "url": "https://developers.openai.com/codex/changelog",
+      "source": "rss",
+      "item_kind": "blog_post",
+      "one_liner": "OpenAI Codex Remote가 GA로 풀리면서 ChatGPT 모바일에서 Mac·Windows 호스트 세션을 이어 승인까지 굴릴 수 있고, /import 플로가 Claude Code·Claude Cowork 설정을 흡수해요."
+    },
+    {
+      "title": "Your Agent's Memories Are Not Its Own: Forged Reasoning Attacks on LLM Agent Memory",
+      "url": "https://arxiv.org/abs/2607.05029",
+      "source": "arxiv",
+      "item_kind": "paper",
+      "one_liner": "메모리에 저장된 '기억된 추론'을 위조해 이후 결정을 뒤트는 Forged Amplifying Rationale Memory Attack(FARMA)과 방어책을 함께 제시한 논문이에요."
+    },
+    {
+      "title": "omnigent-ai/omnigent",
+      "url": "https://github.com/omnigent-ai/omnigent",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "Claude Code·Codex·Cursor·Pi 같은 여러 코딩 CLI를 한 프레임워크로 오케스트레이션해 정책·샌드박스를 통일하고 하네스를 갈아끼울 수 있게 하는 메타 하네스예요."
+    },
+    {
+      "title": "eigent-ai/eigent",
+      "url": "https://github.com/eigent-ai/eigent",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "Claude Cowork의 오픈소스·로컬 대안을 표방하는 데스크톱 Cowork 앱으로 별 1만 4천 개까지 붙었고, TypeScript로 짜여 로컬 머신 안에서만 돌아요."
+    },
+    {
+      "title": "lobehub/lobehub",
+      "url": "https://github.com/lobehub/lobehub",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "여러 에이전트를 팀처럼 편성해 7×24 스케줄·리포트까지 관리하는 'Chief Agent Operator' 표방 플랫폼으로 별 8만 개 규모예요."
+    },
+    {
+      "title": "Panniantong/Agent-Reach",
+      "url": "https://github.com/Panniantong/Agent-Reach",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "Twitter·Reddit·YouTube·GitHub·Bilibili를 API 요금 없이 읽고 검색하게 해 주는 에이전트 인터넷 접근 CLI로, MCP 서버 형태로 붙어요."
+    },
+    {
+      "title": "HKUDS/nanobot",
+      "url": "https://github.com/HKUDS/nanobot",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "HKUDS가 푼 가벼운 오픈소스 에이전트로, 도구·채팅·워크플로 세 축을 얇게 감싸 별 4만 5천 개까지 붙었어요."
+    },
+    {
+      "title": "RightNow-AI/openfang",
+      "url": "https://github.com/RightNow-AI/openfang",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "Rust로 짠 오픈소스 'Agent Operating System'을 표방하며 별 1만 8천 개 규모예요. MCP 위에 스킬·프로세스 모델을 얹는 얼개예요."
+    },
+    {
+      "title": "farion1231/cc-switch",
+      "url": "https://github.com/farion1231/cc-switch",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "Claude Code·Codex·OpenCode·Gemini CLI 같은 코딩 CLI 에이전트를 한 데스크톱에서 전환하며 쓰는 도구로, Tauri·Rust 스택 위에 올라 있어요."
+    },
+    {
+      "title": "googleworkspace/cli",
+      "url": "https://github.com/googleworkspace/cli",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "Drive·Gmail·Calendar·Sheets를 한 Rust CLI로 묶고 Google Discovery API에서 명령을 동적으로 빌드해요. 각 명령은 에이전트 스킬로도 붙일 수 있어요."
+    }
+  ],
+  "meta": {
+    "sources_considered": 62,
+    "sources_included": 13,
+    "failed_fetches": [
+      "arxiv API export.arxiv.org (HTTP 403 via WebFetch; recovered via WebSearch)",
+      "8 of 10 RSS feeds (HTTP 403 via WebFetch): thenewstack, importai, latent.space, simonwillison, deepmind, microsoft-research, openai, huggingface; anthropic + meta community scrapers succeeded",
+      "gh CLI not present in sandbox; GitHub Search recovered via mcp__github__search_repositories"
+    ],
+    "fetch_notes": "arXiv API + 8 RSS feeds returned 403 through WebFetch (consistent with last 3 issues); recovered in-window items via WebSearch fallback. github MCP search returned rich agent-tooling repos. Demoted for duplication vs 21-day RECENT_TOPICS: Claude Sonnet 5 / Claude Science / OpenViking / Sakana Fugu / GPT-5.6 / Claude Tag / GLM-5.2 / Vercel eve / Databricks LTAP (already deep-dove within 21 days); MemSyco-Bench / Redeploying Fable 5 / hindsight / codebase-memory-mcp / mcp-use / DeepSeek-Reasonix / microsoft/agent-framework / MemPalace / headroom / Google Gemini Agent Platform (already quick-mentioned within 21 days). Anthropic CJS framework overlaps Fable 5 quick mention from 2026-07-05 but qualifies as a substantively new artifact (5-tier scale, cross-vendor adoption, HackerOne program)."
+  },
+  "content_sha256": "88c871d9e01eaa85422a0c71b8a50bf40755d209aeb43af6e5c381672410a384"
+}

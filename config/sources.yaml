@@ -39,5 +39,8 @@ rss:
     # check these first if the lab's items stop showing up.
     - "https://raw.githubusercontent.com/taobojlen/anthropic-rss-feed/main/anthropic_news_rss.xml"
     - "https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_meta_ai.xml"
+    # Analysis-depth agent/ML blogs (official feeds, verified live 2026-07-13)
+    - "https://lilianweng.github.io/index.xml"
+    - "https://magazine.sebastianraschka.com/feed"
     # Salesforce AI Research blog feed (salesforce.com/blog/category/ai-research/feed/)
     # returns HTTP 403 to bots — revisit if a fetchable URL turns up.

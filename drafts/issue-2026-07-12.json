@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "issue_id": "issue-2026-07-12",
+  "issue_date": "2026-07-12T00:00:00Z",
+  "body_md": "# AI Agent Weekly — 2026-07-12\n\n이번 주는 OpenAI가 워크플로 에이전트 ChatGPT Work를 공개했어요. 지난달 미국 정부 요청으로 신뢰 파트너 명단으로만 열려 있던 GPT-5.6이 같은 발표에서 일반 API로 풀렸어요. Apple은 Safari 안에 MCP 서버를 얹어 브라우저 자체를 에이전트가 직접 조작하는 표면으로 바꿨어요. UC Berkeley는 실제 직업 1,500여 개의 태스크로 최전선 에이전트가 실무를 얼마나 소화하는지 다시 물었어요. 세 흐름 모두 \"에이전트가 무엇을 완성해서 넘길 수 있느냐\"라는 질문을 서로 다른 각도로 밀어붙였어요.\n\n### 1. ChatGPT Work 공개와 GPT-5.6 라인의 일반 API GA\n\nOpenAI가 7월 9일 ChatGPT Work를 공개했어요(<https://openai.com/index/introducing-chatgpt-work/>). 같은 발표에서 GPT-5.6 Sol·Terra·Luna 세 모델이 ChatGPT·Codex·일반 API에 GA로 풀렸어요. 6월 26일 미국 상무부 요청에 따라 \"신뢰 파트너 소그룹\"에만 열려 있던 게이트가 3주 만에 걷힌 셈이에요. 가격은 100만 토큰당 Sol 5달러·30달러, Terra 2.5달러·15달러, Luna 1달러·6달러예요. Plus·Pro·Business·Enterprise 사용자는 세 티어 중 하나를 고르고 요청별로 추론 강도까지 지정할 수 있어요.\n\nChatGPT Work가 이번 발표의 무게 중심이에요. 회사의 정의는 짧아요. \"결과물을 목표로 받고, 여러 앱과 워크플로에서 정보를 모아, 복잡한 프로젝트를 몇 시간짜리 단계로 쪼개 스스로 처리한다\"예요. 산출물이 대화 텍스트가 아니라 완성된 시트·슬라이드·문서·공유 가능한 웹 앱이라는 점이 옛 ChatGPT와 다른 지점이에요. 안에는 Codex가 들어가 있어 코드 편집·리뷰까지 같은 세션 안에서 굴려요. 롤아웃은 Pro·Enterprise·Edu 플랜에 목요일부터 웹·모바일 순으로 열리고, Plus·Business에는 며칠 뒤 붙는다고 밝혔어요. macOS·Windows용 데스크톱 앱도 Chat·Work·Codex 세 모드를 한 창에서 다루도록 다시 묶였어요.\n\n선행 흐름과 견주면 두 지점이 뚜렷해요. 지난주 다룬 Anthropic Claude Sonnet 5가 \"같은 프런티어 티어를 더 싸게\" 방향이었어요. ChatGPT Work는 반대로 \"모델 위에 워크플로 계층을 더 얹어 완성된 산출물을 팔겠다\" 쪽이에요. 함께 발표된 GPT-5.6 GA는 6월 28일 판에서 다룬 \"신뢰 파트너 한정\" 배포의 후속이에요. 3주 만에 케이스별 접근 게이트가 열리며 일반 API·기존 SDK로도 그대로 흘러 들어왔어요. Sol의 ultra 모드가 서브에이전트 협력을 한 호출로 묶는 구조는 6월 28일 판에서 정리한 대로예요.\n\n가장 가까운 비교군은 Anthropic Claude Cowork와 자체 워크플로 파이프라인을 쌓아 온 팀의 직접 스택이에요. Cowork는 세션·파일이 기기 사이를 따라다니는 그림이에요. ChatGPT Work는 앱들과 그 사이 데이터를 직접 읽고 완성된 파일을 뱉는 그림이라 결이 달라요. 완성물 품질을 재는 공식 벤치마크 숫자는 아직 공개되지 않았어요. 지금 Codex나 자체 워크플로 파이프라인을 굴리는 팀이라면, 이번 주 실제 처리한 완성물 태스크 한 건을 그대로 ChatGPT Work에 넘겨보고 산출된 시트·슬라이드 파일이 지금 파이프라인의 출력과 같은 품질로 열리는지부터 확인해보세요.\n\n### 2. Safari Technology Preview 247의 MCP 서버\n\nApple이 7월 1일 Safari Technology Preview 247을 배포하면서 Safari MCP 서버를 안에 얹었어요(<https://thenewstack.io/safari-mcp-platform-infrastructure/>). Safari가 첫 브라우저 벤더의 1차 MCP 엔드포인트가 됐다는 점이 이번 릴리스의 핵심이에요. 지금까지 브라우저를 에이전트가 조작하는 통로는 대부분 Playwright·Selenium을 감싼 커뮤니티 MCP 서버였어요. 벤더가 직접 붙이지 않으니 인증·권한·개인정보 경계가 클라이언트마다 달랐어요. Safari는 이 경계를 브라우저 자체에서 그어 놓은 셈이에요.\n\n노출되는 도구는 16개예요. 스크린샷 캡처, DOM 검사, JavaScript 실행, 콘솔 출력 읽기, 네트워크 요청 관측, 뷰포트 크기 조정, CSS media 에뮬레이션, 접근성 검사가 들어가요. 접속 인터페이스는 표준 MCP라 Claude·ChatGPT·Gemini 등 MCP를 이해하는 어떤 클라이언트든 그대로 붙일 수 있어요. 서버는 로컬 머신에서만 돌고 자기 스스로는 외부 네트워크 요청을 내지 않아요. 브라우징 히스토리·AutoFill 같은 민감 정보는 볼 수 없다고 명시돼 있어요. 디버깅 중 수집된 데이터는 개발자가 고른 AI 클라이언트로만 전달되고 Apple 서버로는 가지 않아요. 9to5Mac는 \"코딩 에이전트가 스크린샷·설명에 의존하지 않고 개발 중인 페이지를 직접 검사·디버깅할 수 있게 됐다\"라고 요약했어요.\n\n가장 가까운 대안은 Microsoft의 playwright-mcp 리포예요(<https://github.com/microsoft/playwright-mcp>). 별 3만 5천 개 규모의 이 리포는 Playwright를 감싸 Chromium·Firefox·WebKit을 한 서버로 제어해요. Safari MCP 서버는 한 브라우저에 특화된 대신 벤더가 직접 배포하는 엔드포인트라는 점이 다르거든요. 자동화·크로스 브라우저 CI에는 playwright-mcp가 여전히 유리해요. 반면 개발 중인 페이지를 실시간으로 검사·디버깅하는 워크플로에서는 Safari MCP가 접근성 검사·CSS media 에뮬레이션까지 브라우저 안에서 그대로 제공해요.\n\n정리하면 MCP가 커뮤니티 편의 도구를 넘어 플랫폼 벤더가 제품에 얹는 표준 인터페이스로 굳어지고 있다는 신호예요. 이번 주 함께 발표된 Microsoft Research의 flint-chart-mcp와 궤가 같아요. 자기 팀이 지금 코딩 에이전트로 프론트엔드 리뷰를 굴리고 있다면, Claude Code 같은 클라이언트를 Safari Technology Preview 247의 MCP 서버에 붙여 개발 중인 페이지에서 접근성 검사·콘솔 로그 두 도구만 먼저 굴려보세요.\n\n### 3. Agents' Last Exam: 실제 직업 1,500개 태스크로 최전선 에이전트를 재는 벤치마크\n\nUC Berkeley RDI가 Snorkel AI, 그리고 100여 개 기관에서 온 300명 이상의 전문가와 함께 만든 Agents' Last Exam(ALE)을 공개했어요(<https://arxiv.org/abs/2606.05405>). 이번 주 The New Stack이 결과 하나를 표제로 뽑으며 다시 조명했어요(<https://thenewstack.io/agents-last-exam-benchmark/>). 벤치마크의 재료가 학술적으로 추상화된 태스크가 아니에요. 미국 노동부의 O*NET·SOC 2018 직업 분류를 그대로 참조한 실제 업무예요. 태스크는 55개 서브필드로 나뉘고, 13개 산업 클러스터 아래에 총 1,000개 이상이 담겨 있어요. 실제 시험 셋은 1,500개 이상이에요.\n\n메소돌로지의 축은 두 가지예요. 첫째, 각 태스크는 해당 직업 종사자가 하루 안에 완성해 넘겨야 하는 산출물 형태로 정의돼 있어요. 재무 모델의 셀 값, 코드의 유닛 테스트 통과 여부, 계약서의 조항 존재 같은 것들이 그 예예요. 둘째, 채점은 이 verifiable outcome을 자동으로 대조하는 방식이에요. 두 축이 붙어 있어 벤치마크가 \"그럴듯한 데모\" 대신 \"완성된 결과\"를 재요.\n\n숫자가 이 벤치마크의 위치를 잡아 줘요. 가장 어려운 Last-Exam 티어에서 지금까지 시험된 최전선 에이전트 구성 전체의 평균 완전 통과율은 2.6%예요. 개별 하위 세트에서는 Fable 5·GPT-5.5·Composer 2.5 같은 최상급 모델이 0% 정답률을 낸 사례도 다수예요. TNS는 이 지점을 \"쓸모 있는 에이전트의 시대는 열렸지만, 실제로 취업이 가능한 에이전트의 시대는 아직 아니다\"라는 문장으로 요약했어요.\n\n선행 흐름과 견주면, 지금까지 에이전트 평가의 표준은 SWE-bench Verified(코딩)·OSWorld(컴퓨터 사용)·MMLU(지식) 정도였어요. 하나같이 좁은 도메인이거나 학술 추상 태스크였어요. ALE는 그 사이 공백을 실제 직업 분류라는 축으로 메우는 첫 시도예요. 지난주 다룬 Claude Sonnet 5 시스템 카드가 코딩·컴퓨터 사용·브라우저 조작 세 표면에서 신뢰도를 재는 흐름과도 결이 맞아요. 자기 팀에 적용해본다면, 리포지토리(<https://github.com/rdi-berkeley/agents-last-exam>)에서 자기 팀 도메인에 가까운 서브필드 하나를 골라 태스크 5개를 뽑고, 지금 굴리는 에이전트에 공개된 검증기를 붙여 2.6% 이상을 내는지부터 재보세요.\n\n## Quick mentions\n\n- [Anthropic's Claude Sonnet 5 system card says more about the future of AI than its benchmarks do](https://thenewstack.io/ai-agent-infrastructure-reliability/) — 145쪽짜리 Sonnet 5 시스템 카드가 벤치마크가 아니라 코딩·컴퓨터 사용·브라우저 조작에서의 에이전트 신뢰도 평가에 대부분을 할애했다는 The New Stack의 분석이에요.\n- [Flint: A visualization language for the AI era](https://www.microsoft.com/en-us/research/blog/flint-a-visualization-language-for-the-ai-era/) — Microsoft Research가 에이전트가 채팅 환경에서 바로 차트를 생성·검증·렌더링할 수 있게 하는 시각화 언어 Flint와 flint-chart-mcp 서버를 공개했어요.\n- [SAP launches AI Agent Hub at Sapphire 2026 to tame vendor agent sprawl](https://thenewstack.io/sap-ai-agent-hub/) — SAP가 벤더·빌드 위치와 무관하게 조직 안의 모든 에이전트·LLM·MCP 서버를 한 곳에서 인벤토리·거버넌스하는 AI Agent Hub를 Q3 GA로 예고했어요.\n- [With Google's debut, the most important AI agent feature is now the most boring one](https://thenewstack.io/managed-ai-agent-runtimes/) — AWS AgentCore·Azure AI Foundry·Google Vertex AI Agent Engine이 세션 격리·장기 메모리·툴 인증을 붙인 관리형 런타임을 세 클라우드에서 사실상 기본값으로 굳혔다는 정리예요.\n- [Why Anthropic just doubled Claude Cowork limits at no charge](https://thenewstack.io/anthropic-claude-cowork-promotion/) — Anthropic이 지난주 Sonnet 5 도입 가격 창과 맞물려 Claude Cowork의 월간 사용 한도를 무상으로 두 배 확대하며 개발자 이탈을 붙잡으려 했어요.\n- [AgenticDataBench: A Benchmark for LLM-based Data Agents](https://arxiv.org/abs/2607.01647) — 15개 도메인의 데이터 워크플로와 5개 B2B fintech 사용 사례에서 LLM 데이터 에이전트를 스키마 검사·조인·정제 같은 스킬 단위로 세밀하게 채점하는 첫 벤치마크예요.\n- [Can Agents Generalize to the Open World? Unveiling the Fragility of Static Training in Tool Use](https://arxiv.org/abs/2607.01084) — 정적 벤치마크에서 잘 도는 에이전트가 쿼리·툴셋·관찰·도메인 네 축의 분포 이동이 겹치는 OpenAgent 세팅에서 얼마나 무너지는지를 분리해 잰 논문이에요.\n- [omnigent-ai/omnigent](https://github.com/omnigent-ai/omnigent) — Claude Code·Codex·Cursor 같은 서로 다른 에이전트 하네스를 정책·샌드박스 위에 얹어 재작성 없이 교체·협업하게 하는 오픈소스 메타 하네스예요.\n- [MiroMindAI/MiroThinker](https://github.com/MiroMindAI/MiroThinker) — MiroMindAI가 BrowseComp·BrowseComp Zh에서 각각 74.0·75.3점을 낸 딥리서치 에이전트 MiroThinker-1.7을 공개했어요.\n- [googleapis/mcp-toolbox](https://github.com/googleapis/mcp-toolbox) — Google이 관리하는 오픈소스 데이터베이스 MCP 서버로, Postgres·MySQL·BigQuery·MongoDB 등 20종 이상 커넥터를 한 서버에 묶어 활성 개발 중이에요.\n",
+  "deep_dives": [
+    {
+      "cluster_id": "dd-2026-07-12-1",
+      "title": "ChatGPT Work 공개와 GPT-5.6 라인의 일반 API GA",
+      "body_md": "OpenAI가 7월 9일 ChatGPT Work를 공개했어요(<https://openai.com/index/introducing-chatgpt-work/>). 같은 발표에서 GPT-5.6 Sol·Terra·Luna 세 모델이 ChatGPT·Codex·일반 API에 GA로 풀렸어요. 6월 26일 미국 상무부 요청에 따라 \"신뢰 파트너 소그룹\"에만 열려 있던 게이트가 3주 만에 걷힌 셈이에요. 가격은 100만 토큰당 Sol 5달러·30달러, Terra 2.5달러·15달러, Luna 1달러·6달러예요. Plus·Pro·Business·Enterprise 사용자는 세 티어 중 하나를 고르고 요청별로 추론 강도까지 지정할 수 있어요.\n\nChatGPT Work가 이번 발표의 무게 중심이에요. 회사의 정의는 짧아요. \"결과물을 목표로 받고, 여러 앱과 워크플로에서 정보를 모아, 복잡한 프로젝트를 몇 시간짜리 단계로 쪼개 스스로 처리한다\"예요. 산출물이 대화 텍스트가 아니라 완성된 시트·슬라이드·문서·공유 가능한 웹 앱이라는 점이 옛 ChatGPT와 다른 지점이에요. 안에는 Codex가 들어가 있어 코드 편집·리뷰까지 같은 세션 안에서 굴려요. 롤아웃은 Pro·Enterprise·Edu 플랜에 목요일부터 웹·모바일 순으로 열리고, Plus·Business에는 며칠 뒤 붙는다고 밝혔어요. macOS·Windows용 데스크톱 앱도 Chat·Work·Codex 세 모드를 한 창에서 다루도록 다시 묶였어요.\n\n선행 흐름과 견주면 두 지점이 뚜렷해요. 지난주 다룬 Anthropic Claude Sonnet 5가 \"같은 프런티어 티어를 더 싸게\" 방향이었어요. ChatGPT Work는 반대로 \"모델 위에 워크플로 계층을 더 얹어 완성된 산출물을 팔겠다\" 쪽이에요. 함께 발표된 GPT-5.6 GA는 6월 28일 판에서 다룬 \"신뢰 파트너 한정\" 배포의 후속이에요. 3주 만에 케이스별 접근 게이트가 열리며 일반 API·기존 SDK로도 그대로 흘러 들어왔어요. Sol의 ultra 모드가 서브에이전트 협력을 한 호출로 묶는 구조는 6월 28일 판에서 정리한 대로예요.\n\n가장 가까운 비교군은 Anthropic Claude Cowork와 자체 워크플로 파이프라인을 쌓아 온 팀의 직접 스택이에요. Cowork는 세션·파일이 기기 사이를 따라다니는 그림이에요. ChatGPT Work는 앱들과 그 사이 데이터를 직접 읽고 완성된 파일을 뱉는 그림이라 결이 달라요. 완성물 품질을 재는 공식 벤치마크 숫자는 아직 공개되지 않았어요. 지금 Codex나 자체 워크플로 파이프라인을 굴리는 팀이라면, 이번 주 실제 처리한 완성물 태스크 한 건을 그대로 ChatGPT Work에 넘겨보고 산출된 시트·슬라이드 파일이 지금 파이프라인의 출력과 같은 품질로 열리는지부터 확인해보세요.",
+      "item_kind": "blog_post",
+      "maturity": null,
+      "primary_url": "https://openai.com/index/introducing-chatgpt-work/",
+      "source_count": 3
+    },
+    {
+      "cluster_id": "dd-2026-07-12-2",
+      "title": "Safari Technology Preview 247의 MCP 서버",
+      "body_md": "Apple이 7월 1일 Safari Technology Preview 247을 배포하면서 Safari MCP 서버를 안에 얹었어요(<https://thenewstack.io/safari-mcp-platform-infrastructure/>). Safari가 첫 브라우저 벤더의 1차 MCP 엔드포인트가 됐다는 점이 이번 릴리스의 핵심이에요. 지금까지 브라우저를 에이전트가 조작하는 통로는 대부분 Playwright·Selenium을 감싼 커뮤니티 MCP 서버였어요. 벤더가 직접 붙이지 않으니 인증·권한·개인정보 경계가 클라이언트마다 달랐어요. Safari는 이 경계를 브라우저 자체에서 그어 놓은 셈이에요.\n\n노출되는 도구는 16개예요. 스크린샷 캡처, DOM 검사, JavaScript 실행, 콘솔 출력 읽기, 네트워크 요청 관측, 뷰포트 크기 조정, CSS media 에뮬레이션, 접근성 검사가 들어가요. 접속 인터페이스는 표준 MCP라 Claude·ChatGPT·Gemini 등 MCP를 이해하는 어떤 클라이언트든 그대로 붙일 수 있어요. 서버는 로컬 머신에서만 돌고 자기 스스로는 외부 네트워크 요청을 내지 않아요. 브라우징 히스토리·AutoFill 같은 민감 정보는 볼 수 없다고 명시돼 있어요. 디버깅 중 수집된 데이터는 개발자가 고른 AI 클라이언트로만 전달되고 Apple 서버로는 가지 않아요. 9to5Mac는 \"코딩 에이전트가 스크린샷·설명에 의존하지 않고 개발 중인 페이지를 직접 검사·디버깅할 수 있게 됐다\"라고 요약했어요.\n\n가장 가까운 대안은 Microsoft의 playwright-mcp 리포예요(<https://github.com/microsoft/playwright-mcp>). 별 3만 5천 개 규모의 이 리포는 Playwright를 감싸 Chromium·Firefox·WebKit을 한 서버로 제어해요. Safari MCP 서버는 한 브라우저에 특화된 대신 벤더가 직접 배포하는 엔드포인트라는 점이 다르거든요. 자동화·크로스 브라우저 CI에는 playwright-mcp가 여전히 유리해요. 반면 개발 중인 페이지를 실시간으로 검사·디버깅하는 워크플로에서는 Safari MCP가 접근성 검사·CSS media 에뮬레이션까지 브라우저 안에서 그대로 제공해요.\n\n정리하면 MCP가 커뮤니티 편의 도구를 넘어 플랫폼 벤더가 제품에 얹는 표준 인터페이스로 굳어지고 있다는 신호예요. 이번 주 함께 발표된 Microsoft Research의 flint-chart-mcp와 궤가 같아요. 자기 팀이 지금 코딩 에이전트로 프론트엔드 리뷰를 굴리고 있다면, Claude Code 같은 클라이언트를 Safari Technology Preview 247의 MCP 서버에 붙여 개발 중인 페이지에서 접근성 검사·콘솔 로그 두 도구만 먼저 굴려보세요.",
+      "item_kind": "blog_post",
+      "maturity": "beta",
+      "primary_url": "https://thenewstack.io/safari-mcp-platform-infrastructure/",
+      "source_count": 3
+    },
+    {
+      "cluster_id": "dd-2026-07-12-3",
+      "title": "Agents' Last Exam: 실제 직업 1,500개 태스크로 최전선 에이전트를 재는 벤치마크",
+      "body_md": "UC Berkeley RDI가 Snorkel AI, 그리고 100여 개 기관에서 온 300명 이상의 전문가와 함께 만든 Agents' Last Exam(ALE)을 공개했어요(<https://arxiv.org/abs/2606.05405>). 이번 주 The New Stack이 결과 하나를 표제로 뽑으며 다시 조명했어요(<https://thenewstack.io/agents-last-exam-benchmark/>). 벤치마크의 재료가 학술적으로 추상화된 태스크가 아니에요. 미국 노동부의 O*NET·SOC 2018 직업 분류를 그대로 참조한 실제 업무예요. 태스크는 55개 서브필드로 나뉘고, 13개 산업 클러스터 아래에 총 1,000개 이상이 담겨 있어요. 실제 시험 셋은 1,500개 이상이에요.\n\n메소돌로지의 축은 두 가지예요. 첫째, 각 태스크는 해당 직업 종사자가 하루 안에 완성해 넘겨야 하는 산출물 형태로 정의돼 있어요. 재무 모델의 셀 값, 코드의 유닛 테스트 통과 여부, 계약서의 조항 존재 같은 것들이 그 예예요. 둘째, 채점은 이 verifiable outcome을 자동으로 대조하는 방식이에요. 두 축이 붙어 있어 벤치마크가 \"그럴듯한 데모\" 대신 \"완성된 결과\"를 재요.\n\n숫자가 이 벤치마크의 위치를 잡아 줘요. 가장 어려운 Last-Exam 티어에서 지금까지 시험된 최전선 에이전트 구성 전체의 평균 완전 통과율은 2.6%예요. 개별 하위 세트에서는 Fable 5·GPT-5.5·Composer 2.5 같은 최상급 모델이 0% 정답률을 낸 사례도 다수예요. TNS는 이 지점을 \"쓸모 있는 에이전트의 시대는 열렸지만, 실제로 취업이 가능한 에이전트의 시대는 아직 아니다\"라는 문장으로 요약했어요.\n\n선행 흐름과 견주면, 지금까지 에이전트 평가의 표준은 SWE-bench Verified(코딩)·OSWorld(컴퓨터 사용)·MMLU(지식) 정도였어요. 하나같이 좁은 도메인이거나 학술 추상 태스크였어요. ALE는 그 사이 공백을 실제 직업 분류라는 축으로 메우는 첫 시도예요. 지난주 다룬 Claude Sonnet 5 시스템 카드가 코딩·컴퓨터 사용·브라우저 조작 세 표면에서 신뢰도를 재는 흐름과도 결이 맞아요. 자기 팀에 적용해본다면, 리포지토리(<https://github.com/rdi-berkeley/agents-last-exam>)에서 자기 팀 도메인에 가까운 서브필드 하나를 골라 태스크 5개를 뽑고, 지금 굴리는 에이전트에 공개된 검증기를 붙여 2.6% 이상을 내는지부터 재보세요.",
+      "item_kind": "paper",
+      "maturity": null,
+      "primary_url": "https://arxiv.org/abs/2606.05405",
+      "source_count": 2
+    }
+  ],
+  "quick_mentions": [
+    {
+      "title": "Anthropic's Claude Sonnet 5 system card says more about the future of AI than its benchmarks do",
+      "url": "https://thenewstack.io/ai-agent-infrastructure-reliability/",
+      "source": "rss",
+      "item_kind": "blog_post",
+      "one_liner": "145쪽짜리 Sonnet 5 시스템 카드가 벤치마크가 아니라 코딩·컴퓨터 사용·브라우저 조작에서의 에이전트 신뢰도 평가에 대부분을 할애했다는 The New Stack의 분석이에요."
+    },
+    {
+      "title": "Flint: A visualization language for the AI era",
+      "url": "https://www.microsoft.com/en-us/research/blog/flint-a-visualization-language-for-the-ai-era/",
+      "source": "rss",
+      "item_kind": "blog_post",
+      "one_liner": "Microsoft Research가 에이전트가 채팅 환경에서 바로 차트를 생성·검증·렌더링할 수 있게 하는 시각화 언어 Flint와 flint-chart-mcp 서버를 공개했어요."
+    },
+    {
+      "title": "SAP launches AI Agent Hub at Sapphire 2026 to tame vendor agent sprawl",
+      "url": "https://thenewstack.io/sap-ai-agent-hub/",
+      "source": "rss",
+      "item_kind": "blog_post",
+      "one_liner": "SAP가 벤더·빌드 위치와 무관하게 조직 안의 모든 에이전트·LLM·MCP 서버를 한 곳에서 인벤토리·거버넌스하는 AI Agent Hub를 Q3 GA로 예고했어요."
+    },
+    {
+      "title": "With Google's debut, the most important AI agent feature is now the most boring one",
+      "url": "https://thenewstack.io/managed-ai-agent-runtimes/",
+      "source": "rss",
+      "item_kind": "blog_post",
+      "one_liner": "AWS AgentCore·Azure AI Foundry·Google Vertex AI Agent Engine이 세션 격리·장기 메모리·툴 인증을 붙인 관리형 런타임을 세 클라우드에서 사실상 기본값으로 굳혔다는 정리예요."
+    },
+    {
+      "title": "Why Anthropic just doubled Claude Cowork limits at no charge",
+      "url": "https://thenewstack.io/anthropic-claude-cowork-promotion/",
+      "source": "rss",
+      "item_kind": "blog_post",
+      "one_liner": "Anthropic이 지난주 Sonnet 5 도입 가격 창과 맞물려 Claude Cowork의 월간 사용 한도를 무상으로 두 배 확대하며 개발자 이탈을 붙잡으려 했어요."
+    },
+    {
+      "title": "AgenticDataBench: A Benchmark for LLM-based Data Agents",
+      "url": "https://arxiv.org/abs/2607.01647",
+      "source": "arxiv",
+      "item_kind": "paper",
+      "one_liner": "15개 도메인의 데이터 워크플로와 5개 B2B fintech 사용 사례에서 LLM 데이터 에이전트를 스키마 검사·조인·정제 같은 스킬 단위로 세밀하게 채점하는 첫 벤치마크예요."
+    },
+    {
+      "title": "Can Agents Generalize to the Open World? Unveiling the Fragility of Static Training in Tool Use",
+      "url": "https://arxiv.org/abs/2607.01084",
+      "source": "arxiv",
+      "item_kind": "paper",
+      "one_liner": "정적 벤치마크에서 잘 도는 에이전트가 쿼리·툴셋·관찰·도메인 네 축의 분포 이동이 겹치는 OpenAgent 세팅에서 얼마나 무너지는지를 분리해 잰 논문이에요."
+    },
+    {
+      "title": "omnigent-ai/omnigent",
+      "url": "https://github.com/omnigent-ai/omnigent",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "Claude Code·Codex·Cursor 같은 서로 다른 에이전트 하네스를 정책·샌드박스 위에 얹어 재작성 없이 교체·협업하게 하는 오픈소스 메타 하네스예요."
+    },
+    {
+      "title": "MiroMindAI/MiroThinker",
+      "url": "https://github.com/MiroMindAI/MiroThinker",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "MiroMindAI가 BrowseComp·BrowseComp Zh에서 각각 74.0·75.3점을 낸 딥리서치 에이전트 MiroThinker-1.7을 공개했어요."
+    },
+    {
+      "title": "googleapis/mcp-toolbox",
+      "url": "https://github.com/googleapis/mcp-toolbox",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "Google이 관리하는 오픈소스 데이터베이스 MCP 서버로, Postgres·MySQL·BigQuery·MongoDB 등 20종 이상 커넥터를 한 서버에 묶어 활성 개발 중이에요."
+    }
+  ],
+  "meta": {
+    "sources_considered": 55,
+    "sources_included": 13,
+    "failed_fetches": [
+      "arxiv API export.arxiv.org: HTTP 403 x3, recovered specific papers via WebSearch",
+      "simonwillison.net atom: HTTP 403, no in-window items recovered",
+      "thenewstack.io RSS: HTTP 403, recovered specific articles via WebSearch",
+      "importai.substack.com RSS: HTTP 403, no in-window items recovered",
+      "latent.space RSS: HTTP 403, no in-window items recovered",
+      "deepmind.google RSS: HTTP 403, no in-window items recovered",
+      "openai.com RSS: HTTP 403, ChatGPT Work details recovered via WebSearch",
+      "huggingface.co blog feed: HTTP 403, no in-window items recovered",
+      "anthropic community scraper RSS: reachable but no items after 2026-07-02",
+      "GitHub Trending: reachable, zero agent-relevant repos in top 25 this week"
+    ],
+    "fetch_notes": "GitHub Search API via MCP: 3 targeted queries surfaced omnigent, MiroThinker, agentscope, letta, googleapis/mcp-toolbox etc. Demoted for duplication vs last 21 days: microsoft/agent-framework, headroom, MemPalace, OpenViking, mcp-use, hindsight, DeusData/codebase-memory-mcp, elizaOS/eliza, DeepSeek-Reasonix, solace-agent-mesh, mempalace (all already in recent letters). Sonnet 5 (07-05 DD1) kept as QM because the system-card reliability angle is a materially different frame from last week's launch/pricing coverage; GPT-5.6 (06-28 DD1) kept as part of DD1 because the GA rollout + ChatGPT Work is a substantively new development beyond the trusted-partner preview."
+  },
+  "content_sha256": "fb6623f0ea741551911944491e94fb40662420f916273e6f40bffe3d8416508b"
+}

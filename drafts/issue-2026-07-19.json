@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "issue_id": "issue-2026-07-19",
+  "issue_date": "2026-07-19T00:00:00Z",
+  "body_md": "# AI Agent Weekly — 2026-07-19\n\n이번 주는 프런티어 모델·오픈소스 에이전트 하네스·AI 랩의 하부 스택이 서로 다른 표면에서 함께 움직인 한 주였어요. Google DeepMind는 7월 17일 Gemini 3.5 Pro를 공개했어요. 벤치마크 표 대신 \"원 모델을 폐기하고 다시 만들었다\"라는 배포 서사가 발표의 무게 중심이에요. GitHub에서는 자기 스킬 트리를 시간에 따라 키우는 계열의 에이전트 하네스가 여러 개 동시에 별을 끌었어요. Anthropic은 Samsung과 커스텀 실리콘을 논의하며 같은 주에 IPO 투자자 미팅을 잡았어요. 세 흐름 모두 \"이 위에 어떤 하부 스택을 얹어 팔 것인가\"라는 같은 질문에 서로 다른 각도로 답한 한 주였어요.\n\n### 1. Google Gemini 3.5 Pro 공개와 '전면 재빌드' 서사\n\nGoogle DeepMind가 7월 17일 Gemini 3.5 Pro를 공개했어요(<https://www.techtimes.com/articles/320308/20260713/gemini-35-pro-targets-july-17-after-full-rebuild-every-spec-remains-unconfirmed.htm>). 이번 릴리스의 무게 중심은 벤치마크 숫자보다 \"원 모델을 폐기하고 처음부터 다시 만들었다\"라는 배포 서사예요. TechTimes와 Memeburn이 인용한 익명 내부 소스에 따르면, DeepMind는 초기 학습본을 학습 도중 폐기했어요. 사유로 지목된 두 지점은 recursive tool-calling과 SVG generation에서 나타난 구조적 실패라고 적혀 있어요.\n\n공개된 스펙은 세 축에 있어요. 첫째는 컨텍스트 창이에요. 200만 토큰까지 확장됐고, Gemini 3.5 Flash의 100만 토큰보다 두 배 넓어요. Claude Fable 5의 약 20만 토큰과 견주면 열 배 수준이에요. 둘째는 추론 모드예요. Deep Think 모드가 월 250달러짜리 Ultra 티어에서만 활성화돼요. 지난 세대에서 실험 기능으로만 열려 있던 걸 이번엔 유료 티어의 기본 기능으로 승격시킨 셈이에요. 셋째는 API 가격이에요. 여러 유출 소스는 100만 토큰당 입력 1.25달러·출력 10달러 근처를 인용해요. 다만 7월 13일 시점의 Gemini API 공식 문서에는 model card도, pricing도, `gemini-3.5-pro`라는 모델 이름 자체도 등록돼 있지 않았다고 TechTimes가 명시했어요.\n\n선행 흐름과 견주면 두 지점이 눈에 들어와요. 하나는 프런티어 발표의 무게 중심이 벤치마크 표에서 배포 서사로 이동한다는 지점이에요. 지난 세대 Gemini 3.1 Pro는 GPT-5.5·Claude Opus 4.8을 겨눈 숫자 대결로 프레이밍됐어요. 이번 3.5 Pro는 \"무엇을 잘하는가\"보다 \"왜 처음부터 다시 만들었는가\"가 발표의 첫 문장이에요. 다른 하나는 recursive tool-calling이라는 지점이에요. 지난 3주 다룬 GPT-5.6 Sol의 ultra 모드와 Sakana Fugu의 컨덕터가 모두 \"여러 호출을 학습된 정책으로 얽는다\"는 방향이었어요. 그 층위가 프리트레이닝 단계에서 어긋나면 도구 호출 루프가 반복적으로 실패한다는 신호로 읽혀요.\n\n가장 가까운 비교군은 지난달 GA된 Anthropic Claude Sonnet 5와 GPT-5.6 라인이에요. Sonnet 5가 \"미들 티어를 값싸게 낮추는\" 축이었고, GPT-5.6 Sol이 \"한 모델 안에 서브에이전트 협력을 박는\" 축이었다면, Gemini 3.5 Pro는 \"긴 컨텍스트와 도구 호출 실패를 프리트레이닝 단계에서 다시 잡는\" 축이에요. 다만 공식 벤치마크 표가 아직 공개되지 않아 세 축 간의 실측 위치는 후속 카드가 필요해요. 지금 Gemini API 위에 에이전트를 얹어 굴리는 팀이라면, `gemini-3.5-pro`가 API 리스트에 실제로 등장하는 시점에 자기 팀에서 가장 자주 실패하던 recursive tool-calling 트레이스 한 건을 그대로 흘려보고, 3.1 Pro 대비 재시도 횟수가 얼마나 줄어드는지부터 재보세요.\n\n### 2. 자기진화 스킬 트리를 표방하는 오픈소스 에이전트 하네스의 부상\n\nGitHub Search에서 지난 2주 활발히 푸시된 리포 중, 자기 스킬 트리를 시간에 따라 키우는 형태의 에이전트 하네스가 여러 개 동시에 뜨거워졌어요. 대표 격은 lsdefine/GenericAgent예요(<https://github.com/lsdefine/GenericAgent>). 별 1만 3천여 개 규모이고, 태그라인은 \"Self-evolving agent: grows skill tree from 3.3K-line seed, achieving full system control with 6x less token consumption\"이에요. 3,300줄짜리 초기 시드에서 스킬 트리가 자라난다는 주장이고, 그 결과 같은 태스크에서 토큰 소비가 6배 줄어든다고 리포에 적혀 있어요.\n\n같은 계열의 리포가 여러 개 함께 붙었어요. affaan-m/ECC는 별 23만 개 규모예요(<https://github.com/affaan-m/ECC>). 별 수가 짧은 기간에 급하게 붙은 케이스라 그 신호 자체는 조심스럽게 봐야 해요. 태그라인은 \"The agent harness performance optimization system\"이고, skills·instincts·memory·security·research-first development를 Claude Code·Codex·Opencode·Cursor 위에 얹는다고 적혀 있어요. EvoMap/evolver는 별 9천 개 규모예요(<https://github.com/EvoMap/evolver>). GEP 기반의 \"auditable evolution\"을 표방하고, Genes·Capsules·Events라는 세 원소로 프롬프트·스킬의 변경 이력을 감사 가능하게 남기는 설계예요. cft0808/edict는 별 1만 6천 개 규모로, 9개의 전문 에이전트가 실시간 대시보드·모델 설정·감사 로그 위에서 협력하는 오케스트레이션 시스템이에요(<https://github.com/cft0808/edict>).\n\n리포 안의 얼개는 어느 정도 공통돼요. 초기 시드 스킬 파일이 존재하고, 실행 로그를 다시 반영해 새 스킬 파일을 자동으로 생성·업데이트하는 루프가 붙어 있어요. 감사 축을 어디에 두느냐만 갈려요. GenericAgent는 스킬 트리 자체를 파일 트리로 남기는 방향이에요. evolver는 gene·capsule 단위 diff를 축으로 두고, edict는 대시보드 위의 이벤트 로그를 축으로 삼아요.\n\n가장 가까운 대안은 지난 3주 다룬 Volcengine OpenViking과 omnigent-ai/omnigent예요. OpenViking은 메모리·RAG·스킬을 하나의 파일시스템 은유 안에 붙였고, omnigent는 서로 다른 에이전트 하네스를 재작성 없이 교체·협업하게 하는 메타 계층이었어요. 이번 클러스터가 다른 지점은 스킬 트리 자체를 진화시키고 그 diff를 감사 로그로 남긴다는 축이에요. 정리하면 \"정적 스킬 저장소\"에서 \"성장하는 스킬 저장소\"로 옮겨가는 첫 신호로 읽혀요. 다만 별 수의 신호는 리포마다 편차가 커서 실제 사용 사례는 아직 좁아요. 자기 팀에서 검증한다면, GenericAgent의 3,300줄짜리 시드를 그대로 clone해 자기 도메인 태스크 3개를 새 시드로 얹어보고, 열 번째 실행 시점의 스킬 트리 크기와 첫 실행 대비 태스크당 토큰 소비의 실제 감소 폭을 로그에서 대조해보세요.\n\n### 3. Anthropic의 Samsung 커스텀 실리콘 논의와 IPO 로드맵\n\nAnthropic이 Samsung Electronics와 커스텀 AI 칩 제조를 논의하고 있다는 보도가 7월 초부터 이어지고 있어요(<https://techcrunch.com/2026/07/02/anthropic-is-discussing-a-new-custom-chip-with-samsung/>). TechCrunch·The Information·Korea JoongAng Daily 등 여러 매체 보도의 공통 지점은 세 가지예요. 첫째, Samsung의 2nm 파운드리·패키징 기술을 겨냥하고 있다는 지점이에요. 둘째, 아직 초기 단계라 칩의 용도·서버 얼개·성능 목표가 확정되지 않았다는 점이에요. 셋째, Anthropic이 지난달 OpenAI의 커스텀 실리콘 프로그램을 이끌었던 Clive Chan을 고용해 자체 실리콘 조직을 붙였다는 점이에요.\n\n같은 주에 두 개의 연동 신호가 붙었어요. 하나는 자본이에요. Anthropic은 6월 1일 SEC에 confidential form S-1을 제출했어요(<https://www.anthropic.com/news/confidential-draft-s1-sec>). 같은 시점에 650억 달러 규모의 Series H를 밸류에이션 9,650억 달러에 클로즈했어요. 이 Series H에는 Samsung·SK hynix·Micron이 투자자로 붙어 있었어요. 다른 하나는 이번 주의 로드쇼 신호예요. 7월 15일에 은행이 IPO를 앞둔 투자자 미팅을 잡았다고 여러 매체가 인용했어요. 잠정 시점은 fall 2026 상장으로 좁혀지고 있고, Anthropic의 연환산 매출은 최근 470억 달러를 넘긴 것으로 보도됐어요.\n\n엔지니어 관점에서 이 흐름이 왜 중요한가는 한 지점에 모여요. 지금까지 프런티어 랩 중 자체 실리콘 파트너 라인이 없는 곳은 사실상 Anthropic 하나였어요. Google은 TPU 세대를 자체로 굴리고, OpenAI는 지난 봄 Broadcom과의 커스텀 칩 파트너십을 공개했어요. Amazon은 Trainium·Inferentia로 자체 라인을 세워 왔어요. Anthropic이 Samsung 2nm 라인을 잡으면 Claude 스택의 하부 비용 곡선이 클라우드 GPU 임대에서 벤더 락인 실리콘 쪽으로 이동해요. 지난 2주 다룬 Sonnet 5의 도입 가격 인하와 Claude Cowork의 무상 한도 확대는, 이 실리콘 이동을 앞두고 개발자 락인을 만드는 앞줄로도 읽혀요.\n\n리스크는 두 가지예요. 하나는 협상이 아직 초기 단계라 실제 실리콘이 나오는 시점이 최소 2027년 이후로 보인다는 점이에요. 다른 하나는 IPO 후 자본 배분이 실리콘·데이터센터·모델 학습 사이에서 어떻게 나뉘느냐에 따라 개발자 API 가격 곡선이 다시 흔들릴 수 있다는 점이에요. 지금 Claude API 위에 프로덕션 워크로드를 얹어 두고 있다면, 최근 30일치 추론 트래픽에서 입력·출력 토큰 비율과 저지연·고품질 요구 비율을 뽑아 두고, 커스텀 실리콘 세대의 예상 단가 곡선 변화에 자기 워크로드가 얼마나 민감한지부터 계산해두세요.\n\n## Quick mentions\n\n- [Introducing GPT-Live](https://openai.com/index/introducing-gpt-live/) — OpenAI가 대화 중 무거운 쿼리만 백그라운드로 GPT-5.5에 넘기는 2계층 풀듀플렉스 음성 모델 GPT-Live-1과 mini를 공개했어요.\n- [Introducing Muse Spark 1.1](https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/) — Meta가 100만 토큰 컨텍스트·데스크톱/브라우저/모바일 컴퓨터 사용을 지원하는 에이전트 모델 Muse Spark 1.1을 첫 유료 Meta Model API와 함께 풀었어요.\n- [Verifying Rust cryptography in SymCrypt, from standards to code](https://www.microsoft.com/en-us/research/blog/verifying-rust-cryptography-in-symcrypt-from-standards-to-code/) — Microsoft가 Rust·Lean·Aeneas와 AI 에이전트를 함께 써 ML-KEM·SHA-3 같은 포스트양자 암호 구현을 기계 증명으로 검증한 파이프라인을 공개했어요.\n- [LLMoxie: Exploring Agentic AI for Scientific Software Development](https://arxiv.org/abs/2607.02703) — LLMoxie 논문이 과학 소프트웨어 개발 워크플로에서 에이전트가 얼마나 소화할 수 있는지 KDD 2026 워크숍용 태스크로 측정했어요.\n- [lobehub/lobehub](https://github.com/lobehub/lobehub) — 별 8만 개 규모의 \"Chief Agent Operator\"를 표방하며, 여러 에이전트를 팀 단위로 채용·스케줄·보고하는 얼개를 오픈소스로 풀었어요.\n- [agentscope-ai/agentscope](https://github.com/agentscope-ai/agentscope) — 별 2만 8천 개 규모의 라이브러리로, ReAct·MCP·다중 에이전트를 한 프레임워크에서 관측 가능하게 굴리며 이번 주도 활발히 업데이트되고 있어요.\n- [strands-agents/harness-sdk](https://github.com/strands-agents/harness-sdk) — Python·TypeScript로 에이전트 하네스를 처음부터 끝까지 붙일 수 있는 오픈 SDK로, Bedrock·Anthropic·OpenAI 어느 모델에도 붙는다고 표방해요.\n- [bytedance/deer-flow](https://github.com/bytedance/deer-flow) — 별 7만 7천 개 규모의 롱호라이즌 SuperAgent 하네스로, 샌드박스·메모리·서브에이전트·메시지 게이트웨이를 한 얼개로 묶었어요.\n- [google/adk-python](https://github.com/google/adk-python) — Google이 관리하는 Agent Development Kit로, ADK 위에 다중 에이전트를 서로 다른 프런티어 모델과 함께 얹는 코드퍼스트 툴킷이에요.\n- [HKUDS/DeepCode](https://github.com/HKUDS/DeepCode) — 별 1만 6천 개 규모의 \"Open Agentic Coding\" 프로젝트로, Paper2Code·Text2Web·Text2Backend 세 과제를 한 하네스에서 굴려요.\n",
+  "deep_dives": [
+    {
+      "cluster_id": "dd-2026-07-19-1",
+      "title": "Google Gemini 3.5 Pro 공개와 '전면 재빌드' 서사",
+      "body_md": "Google DeepMind가 7월 17일 Gemini 3.5 Pro를 공개했어요(<https://www.techtimes.com/articles/320308/20260713/gemini-35-pro-targets-july-17-after-full-rebuild-every-spec-remains-unconfirmed.htm>). 이번 릴리스의 무게 중심은 벤치마크 숫자보다 \"원 모델을 폐기하고 처음부터 다시 만들었다\"라는 배포 서사예요. TechTimes와 Memeburn이 인용한 익명 내부 소스에 따르면, DeepMind는 초기 학습본을 학습 도중 폐기했어요. 사유로 지목된 두 지점은 recursive tool-calling과 SVG generation에서 나타난 구조적 실패라고 적혀 있어요.\n\n공개된 스펙은 세 축에 있어요. 첫째는 컨텍스트 창이에요. 200만 토큰까지 확장됐고, Gemini 3.5 Flash의 100만 토큰보다 두 배 넓어요. Claude Fable 5의 약 20만 토큰과 견주면 열 배 수준이에요. 둘째는 추론 모드예요. Deep Think 모드가 월 250달러짜리 Ultra 티어에서만 활성화돼요. 지난 세대에서 실험 기능으로만 열려 있던 걸 이번엔 유료 티어의 기본 기능으로 승격시킨 셈이에요. 셋째는 API 가격이에요. 여러 유출 소스는 100만 토큰당 입력 1.25달러·출력 10달러 근처를 인용해요. 다만 7월 13일 시점의 Gemini API 공식 문서에는 model card도, pricing도, `gemini-3.5-pro`라는 모델 이름 자체도 등록돼 있지 않았다고 TechTimes가 명시했어요.\n\n선행 흐름과 견주면 두 지점이 눈에 들어와요. 하나는 프런티어 발표의 무게 중심이 벤치마크 표에서 배포 서사로 이동한다는 지점이에요. 지난 세대 Gemini 3.1 Pro는 GPT-5.5·Claude Opus 4.8을 겨눈 숫자 대결로 프레이밍됐어요. 이번 3.5 Pro는 \"무엇을 잘하는가\"보다 \"왜 처음부터 다시 만들었는가\"가 발표의 첫 문장이에요. 다른 하나는 recursive tool-calling이라는 지점이에요. 지난 3주 다룬 GPT-5.6 Sol의 ultra 모드와 Sakana Fugu의 컨덕터가 모두 \"여러 호출을 학습된 정책으로 얽는다\"는 방향이었어요. 그 층위가 프리트레이닝 단계에서 어긋나면 도구 호출 루프가 반복적으로 실패한다는 신호로 읽혀요.\n\n가장 가까운 비교군은 지난달 GA된 Anthropic Claude Sonnet 5와 GPT-5.6 라인이에요. Sonnet 5가 \"미들 티어를 값싸게 낮추는\" 축이었고, GPT-5.6 Sol이 \"한 모델 안에 서브에이전트 협력을 박는\" 축이었다면, Gemini 3.5 Pro는 \"긴 컨텍스트와 도구 호출 실패를 프리트레이닝 단계에서 다시 잡는\" 축이에요. 다만 공식 벤치마크 표가 아직 공개되지 않아 세 축 간의 실측 위치는 후속 카드가 필요해요. 지금 Gemini API 위에 에이전트를 얹어 굴리는 팀이라면, `gemini-3.5-pro`가 API 리스트에 실제로 등장하는 시점에 자기 팀에서 가장 자주 실패하던 recursive tool-calling 트레이스 한 건을 그대로 흘려보고, 3.1 Pro 대비 재시도 횟수가 얼마나 줄어드는지부터 재보세요.",
+      "item_kind": "blog_post",
+      "maturity": null,
+      "primary_url": "https://www.techtimes.com/articles/320308/20260713/gemini-35-pro-targets-july-17-after-full-rebuild-every-spec-remains-unconfirmed.htm",
+      "source_count": 3
+    },
+    {
+      "cluster_id": "dd-2026-07-19-2",
+      "title": "자기진화 스킬 트리를 표방하는 오픈소스 에이전트 하네스의 부상",
+      "body_md": "GitHub Search에서 지난 2주 활발히 푸시된 리포 중, 자기 스킬 트리를 시간에 따라 키우는 형태의 에이전트 하네스가 여러 개 동시에 뜨거워졌어요. 대표 격은 lsdefine/GenericAgent예요(<https://github.com/lsdefine/GenericAgent>). 별 1만 3천여 개 규모이고, 태그라인은 \"Self-evolving agent: grows skill tree from 3.3K-line seed, achieving full system control with 6x less token consumption\"이에요. 3,300줄짜리 초기 시드에서 스킬 트리가 자라난다는 주장이고, 그 결과 같은 태스크에서 토큰 소비가 6배 줄어든다고 리포에 적혀 있어요.\n\n같은 계열의 리포가 여러 개 함께 붙었어요. affaan-m/ECC는 별 23만 개 규모예요(<https://github.com/affaan-m/ECC>). 별 수가 짧은 기간에 급하게 붙은 케이스라 그 신호 자체는 조심스럽게 봐야 해요. 태그라인은 \"The agent harness performance optimization system\"이고, skills·instincts·memory·security·research-first development를 Claude Code·Codex·Opencode·Cursor 위에 얹는다고 적혀 있어요. EvoMap/evolver는 별 9천 개 규모예요(<https://github.com/EvoMap/evolver>). GEP 기반의 \"auditable evolution\"을 표방하고, Genes·Capsules·Events라는 세 원소로 프롬프트·스킬의 변경 이력을 감사 가능하게 남기는 설계예요. cft0808/edict는 별 1만 6천 개 규모로, 9개의 전문 에이전트가 실시간 대시보드·모델 설정·감사 로그 위에서 협력하는 오케스트레이션 시스템이에요(<https://github.com/cft0808/edict>).\n\n리포 안의 얼개는 어느 정도 공통돼요. 초기 시드 스킬 파일이 존재하고, 실행 로그를 다시 반영해 새 스킬 파일을 자동으로 생성·업데이트하는 루프가 붙어 있어요. 감사 축을 어디에 두느냐만 갈려요. GenericAgent는 스킬 트리 자체를 파일 트리로 남기는 방향이에요. evolver는 gene·capsule 단위 diff를 축으로 두고, edict는 대시보드 위의 이벤트 로그를 축으로 삼아요.\n\n가장 가까운 대안은 지난 3주 다룬 Volcengine OpenViking과 omnigent-ai/omnigent예요. OpenViking은 메모리·RAG·스킬을 하나의 파일시스템 은유 안에 붙였고, omnigent는 서로 다른 에이전트 하네스를 재작성 없이 교체·협업하게 하는 메타 계층이었어요. 이번 클러스터가 다른 지점은 스킬 트리 자체를 진화시키고 그 diff를 감사 로그로 남긴다는 축이에요. 정리하면 \"정적 스킬 저장소\"에서 \"성장하는 스킬 저장소\"로 옮겨가는 첫 신호로 읽혀요. 다만 별 수의 신호는 리포마다 편차가 커서 실제 사용 사례는 아직 좁아요. 자기 팀에서 검증한다면, GenericAgent의 3,300줄짜리 시드를 그대로 clone해 자기 도메인 태스크 3개를 새 시드로 얹어보고, 열 번째 실행 시점의 스킬 트리 크기와 첫 실행 대비 태스크당 토큰 소비의 실제 감소 폭을 로그에서 대조해보세요.",
+      "item_kind": "repo",
+      "maturity": "experimental",
+      "primary_url": "https://github.com/lsdefine/GenericAgent",
+      "source_count": 4
+    },
+    {
+      "cluster_id": "dd-2026-07-19-3",
+      "title": "Anthropic의 Samsung 커스텀 실리콘 논의와 IPO 로드맵",
+      "body_md": "Anthropic이 Samsung Electronics와 커스텀 AI 칩 제조를 논의하고 있다는 보도가 7월 초부터 이어지고 있어요(<https://techcrunch.com/2026/07/02/anthropic-is-discussing-a-new-custom-chip-with-samsung/>). TechCrunch·The Information·Korea JoongAng Daily 등 여러 매체 보도의 공통 지점은 세 가지예요. 첫째, Samsung의 2nm 파운드리·패키징 기술을 겨냥하고 있다는 지점이에요. 둘째, 아직 초기 단계라 칩의 용도·서버 얼개·성능 목표가 확정되지 않았다는 점이에요. 셋째, Anthropic이 지난달 OpenAI의 커스텀 실리콘 프로그램을 이끌었던 Clive Chan을 고용해 자체 실리콘 조직을 붙였다는 점이에요.\n\n같은 주에 두 개의 연동 신호가 붙었어요. 하나는 자본이에요. Anthropic은 6월 1일 SEC에 confidential form S-1을 제출했어요(<https://www.anthropic.com/news/confidential-draft-s1-sec>). 같은 시점에 650억 달러 규모의 Series H를 밸류에이션 9,650억 달러에 클로즈했어요. 이 Series H에는 Samsung·SK hynix·Micron이 투자자로 붙어 있었어요. 다른 하나는 이번 주의 로드쇼 신호예요. 7월 15일에 은행이 IPO를 앞둔 투자자 미팅을 잡았다고 여러 매체가 인용했어요. 잠정 시점은 fall 2026 상장으로 좁혀지고 있고, Anthropic의 연환산 매출은 최근 470억 달러를 넘긴 것으로 보도됐어요.\n\n엔지니어 관점에서 이 흐름이 왜 중요한가는 한 지점에 모여요. 지금까지 프런티어 랩 중 자체 실리콘 파트너 라인이 없는 곳은 사실상 Anthropic 하나였어요. Google은 TPU 세대를 자체로 굴리고, OpenAI는 지난 봄 Broadcom과의 커스텀 칩 파트너십을 공개했어요. Amazon은 Trainium·Inferentia로 자체 라인을 세워 왔어요. Anthropic이 Samsung 2nm 라인을 잡으면 Claude 스택의 하부 비용 곡선이 클라우드 GPU 임대에서 벤더 락인 실리콘 쪽으로 이동해요. 지난 2주 다룬 Sonnet 5의 도입 가격 인하와 Claude Cowork의 무상 한도 확대는, 이 실리콘 이동을 앞두고 개발자 락인을 만드는 앞줄로도 읽혀요.\n\n리스크는 두 가지예요. 하나는 협상이 아직 초기 단계라 실제 실리콘이 나오는 시점이 최소 2027년 이후로 보인다는 점이에요. 다른 하나는 IPO 후 자본 배분이 실리콘·데이터센터·모델 학습 사이에서 어떻게 나뉘느냐에 따라 개발자 API 가격 곡선이 다시 흔들릴 수 있다는 점이에요. 지금 Claude API 위에 프로덕션 워크로드를 얹어 두고 있다면, 최근 30일치 추론 트래픽에서 입력·출력 토큰 비율과 저지연·고품질 요구 비율을 뽑아 두고, 커스텀 실리콘 세대의 예상 단가 곡선 변화에 자기 워크로드가 얼마나 민감한지부터 계산해두세요.",
+      "item_kind": "blog_post",
+      "maturity": null,
+      "primary_url": "https://techcrunch.com/2026/07/02/anthropic-is-discussing-a-new-custom-chip-with-samsung/",
+      "source_count": 4
+    }
+  ],
+  "quick_mentions": [
+    {
+      "title": "Introducing GPT-Live",
+      "url": "https://openai.com/index/introducing-gpt-live/",
+      "source": "rss",
+      "item_kind": "blog_post",
+      "one_liner": "OpenAI가 대화 중 무거운 쿼리만 백그라운드로 GPT-5.5에 넘기는 2계층 풀듀플렉스 음성 모델 GPT-Live-1과 mini를 공개했어요."
+    },
+    {
+      "title": "Introducing Muse Spark 1.1",
+      "url": "https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/",
+      "source": "rss",
+      "item_kind": "blog_post",
+      "one_liner": "Meta가 100만 토큰 컨텍스트·데스크톱/브라우저/모바일 컴퓨터 사용을 지원하는 에이전트 모델 Muse Spark 1.1을 첫 유료 Meta Model API와 함께 풀었어요."
+    },
+    {
+      "title": "Verifying Rust cryptography in SymCrypt, from standards to code",
+      "url": "https://www.microsoft.com/en-us/research/blog/verifying-rust-cryptography-in-symcrypt-from-standards-to-code/",
+      "source": "rss",
+      "item_kind": "blog_post",
+      "one_liner": "Microsoft가 Rust·Lean·Aeneas와 AI 에이전트를 함께 써 ML-KEM·SHA-3 같은 포스트양자 암호 구현을 기계 증명으로 검증한 파이프라인을 공개했어요."
+    },
+    {
+      "title": "LLMoxie: Exploring Agentic AI for Scientific Software Development",
+      "url": "https://arxiv.org/abs/2607.02703",
+      "source": "arxiv",
+      "item_kind": "paper",
+      "one_liner": "LLMoxie 논문이 과학 소프트웨어 개발 워크플로에서 에이전트가 얼마나 소화할 수 있는지 KDD 2026 워크숍용 태스크로 측정했어요."
+    },
+    {
+      "title": "lobehub/lobehub",
+      "url": "https://github.com/lobehub/lobehub",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "별 8만 개 규모의 \"Chief Agent Operator\"를 표방하며, 여러 에이전트를 팀 단위로 채용·스케줄·보고하는 얼개를 오픈소스로 풀었어요."
+    },
+    {
+      "title": "agentscope-ai/agentscope",
+      "url": "https://github.com/agentscope-ai/agentscope",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "별 2만 8천 개 규모의 라이브러리로, ReAct·MCP·다중 에이전트를 한 프레임워크에서 관측 가능하게 굴리며 이번 주도 활발히 업데이트되고 있어요."
+    },
+    {
+      "title": "strands-agents/harness-sdk",
+      "url": "https://github.com/strands-agents/harness-sdk",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "Python·TypeScript로 에이전트 하네스를 처음부터 끝까지 붙일 수 있는 오픈 SDK로, Bedrock·Anthropic·OpenAI 어느 모델에도 붙는다고 표방해요."
+    },
+    {
+      "title": "bytedance/deer-flow",
+      "url": "https://github.com/bytedance/deer-flow",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "별 7만 7천 개 규모의 롱호라이즌 SuperAgent 하네스로, 샌드박스·메모리·서브에이전트·메시지 게이트웨이를 한 얼개로 묶었어요."
+    },
+    {
+      "title": "google/adk-python",
+      "url": "https://github.com/google/adk-python",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "Google이 관리하는 Agent Development Kit로, ADK 위에 다중 에이전트를 서로 다른 프런티어 모델과 함께 얹는 코드퍼스트 툴킷이에요."
+    },
+    {
+      "title": "HKUDS/DeepCode",
+      "url": "https://github.com/HKUDS/DeepCode",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "별 1만 6천 개 규모의 \"Open Agentic Coding\" 프로젝트로, Paper2Code·Text2Web·Text2Backend 세 과제를 한 하네스에서 굴려요."
+    }
+  ],
+  "meta": {
+    "sources_considered": 55,
+    "sources_included": 13,
+    "failed_fetches": [
+      "arxiv API export.arxiv.org: HTTP 403 x3, WebSearch recovered specific in-window items only",
+      "simonwillison.net atom: HTTP 403, WebSearch confirmed no in-window items after 07-08 llm-coding-agent (already covered 07-05)",
+      "thenewstack.io RSS: HTTP 403, WebSearch confirmed Kafka+A2A Jul-14 piece exists but slug unverified, dropped",
+      "importai.substack.com RSS: HTTP 403, no in-window items recovered",
+      "latent.space RSS: HTTP 403, no in-window items recovered",
+      "deepmind.google RSS: HTTP 403, WebSearch surfaced Gemini 3.5 Pro Jul-17 rebuild story used in DD1",
+      "openai.com blog RSS: HTTP 403, WebSearch confirmed GPT-Live Jul-8 used as QM",
+      "huggingface.co blog feed: HTTP 403, no in-window items recovered",
+      "lilianweng.github.io: HTTP 403, no in-window items recovered",
+      "magazine.sebastianraschka.com: HTTP 403, no in-window items recovered",
+      "anthropic community scraper RSS: reachable but no items after 2026-07-02",
+      "meta community scraper RSS: reachable but latest in-window item is Muse Spark 1.1 Jul-9 (used as QM)"
+    ],
+    "fetch_notes": "GitHub Search via MCP: 5 topic-scoped queries surfaced GenericAgent, ECC, evolver, edict, lobehub, agentscope, harness-sdk, deer-flow, adk-python, DeepCode. Demoted vs last 21 days: OpenViking (07-05 DD3), omnigent (07-12 QM), headroom (06-28 QM), codebase-memory-mcp (07-05 QM), hindsight (07-05 QM), mcp-use (07-05 QM), elizaOS/eliza (07-05/07-12 QM), SolaceLabs/solace-agent-mesh (07-05 QM), microsoft/playwright-mcp (07-12 DD2 comparison), googleapis/mcp-toolbox (07-12 QM), MiroThinker (07-12 QM). Anthropic Sonnet 5 not repeated in QMs; DD3 references it only as prior-context for framing."
+  },
+  "content_sha256": "3aad04c1e43340c62c086eca0b626b9ba3735edcd643bd8fc81524c133872bd3"
+}

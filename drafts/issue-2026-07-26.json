@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "issue_id": "issue-2026-07-26",
+  "issue_date": "2026-07-26T00:00:00Z",
+  "body_md": "# AI Agent Weekly — 2026-07-26\n\n\n이번 주는 코딩 에이전트를 겨냥한 무게급 모델이 72시간 안에 세 개나 풀린 주였어요. Anthropic이 7월 24일 Claude Opus 5를 GA로 냈어요. 앞선 21일 하루에는 Google DeepMind가 Gemini 3.6 Flash와 두 자매 모델을 한꺼번에 열었어요. 같은 21일 poolside도 118B 오픈 웨이트 코딩 모델 Laguna S 2.1을 Hugging Face에 얹었어요. 프런티어·하이퍼스케일러·오픈 웨이트, 세 자리에서 같은 주에 서로 다른 답이 나온 셈이에요.\n\n### 1. Claude Opus 5의 프런티어 티어 유지형 업데이트\n\nAnthropic이 7월 24일 Claude Opus 5를 공개했어요(<https://www.anthropic.com/news/claude-opus-5>). 가격은 100만 토큰당 입력 5달러·출력 25달러예요. 직전 세대인 Opus 4.8과 같은 값이에요. 컨텍스트 윈도우는 기본값과 최댓값이 모두 1M 토큰이에요. 지난 세대에서 별도 프리뷰였던 1M 창이 이번엔 별도 게이트 없이 그대로 열려 있어요.\n\n큰 변화는 두 손잡이에 몰려 있어요. 첫째, effort 설정이 들어갔어요. 사용자가 요청마다 사고 강도를 다섯 단계로 지정해요. 그 값에 따라 토큰 사용량과 응답 지연이 갈립니다. 둘째, 사고 트레이스가 기본으로 켜져 있어요. high 단계 이상에서 사고를 끄려고 하면 API가 400 에러를 되돌려줘요. 상위 사고 트레이스가 옵션이 아니라 계약처럼 굳어진 셈이에요. Anthropic은 이 두 손잡이가 \"장시간 도는 다단계 작업에서 스레드를 놓치지 않게 하는 축\"이라고 설명했어요.\n\n발표된 에이전트 벤치마크는 세 축에서 움직였어요. 컴퓨터 사용을 재는 OSWorld 2.0은 70.57%예요. 데스크톱 자동화 태스크를 묶은 AutomationBench는 26.0%로 나왔어요. ARC-AGI-3은 30.16%예요. 세 지표 모두 프런티어급이지만, 장시간 도는 코딩·자동화 트레이스가 얼마나 안정적으로 완주하는지를 재는 축에 몰려 있다는 게 특징이에요. VentureBeat는 이 릴리스를 \"에이전트·엔터프라이즈 워크플로를 겨냥한 더 싼 옵션\"으로 요약했어요(<https://venturebeat.com/orchestration/anthropic-launches-claude-opus-5-a-cheaper-ai-model-for-coding-agents-and-enterprise-workflows>).\n\n선행 흐름과 견주면 두 지점이 뚜렷해요. 3주 전 다룬 Sonnet 5가 미들 티어 값을 내리며 오피스형 지식 태스크에서 Opus 4.8과 어깨를 맞췄어요. 반대로 이번 Opus 5는 굳어진 미들 티어 위에 상위 티어를 한 번 더 밀어 올린 릴리스예요. 가장 가까운 비교군은 같은 주 발표된 Gemini 3.6 Flash와 poolside Laguna S 2.1이에요. 셋 다 장시간 도는 코딩 에이전트를 겨냥하지만 가격·라이선스·배포 위치가 서로 달라요. 지금 Opus 4.8 위에서 자체 에이전트를 굴리고 있다면, 프로덕션 트레이스 중 실행 시간이 5분을 넘는 태스크 한 건을 골라 effort 다섯 단계 각각에서 완주 여부와 토큰 사용량이 어떻게 바뀌는지부터 재보세요.\n\n### 2. Google Gemini 3.6 Flash 트리오와 Cyber 티어의 정부·신뢰 파트너 게이트\n\nGoogle DeepMind가 7월 21일 Gemini 3.6 Flash, 3.5 Flash-Lite, 3.5 Flash Cyber 세 티어를 한꺼번에 열었어요(<https://techcrunch.com/2026/07/21/google-releases-three-new-gemini-models-but-no-3-5-pro/>). 셋 다 대규모로 도는 에이전트 워크로드를 우선 겨냥해 튜닝됐다고 밝혔어요. 3.6 Flash가 워크호스 자리를 이어받아요. 가격은 100만 토큰당 입력 1.5달러·출력 7.5달러예요. 지식 컷오프는 2026년 3월로 앞당겨졌어요. 3.5 Flash 대비 같은 태스크에서 출력 토큰이 약 17% 줄었다고 보고했어요. 컨텍스트 창은 1M 토큰이에요.\n\n두 번째 티어인 3.5 Flash-Lite는 저지연·고처리 워크로드 쪽이에요. 가격은 100만 토큰당 입력 0.3달러·출력 2.5달러예요. Google은 이 티어를 에이전트 검색·문서 처리·서브에이전트 팬아웃 같은 사용 패턴에 맞춘 것이라고 적었어요. Artificial Analysis 벤치마크 보고에서는 SWE-Bench Pro와 OSWorld-Verified에서 이전 세대의 기본 티어인 Gemini 3 Flash를 근소하게 앞선다고 나왔어요. 정리하면 \"더 싼 티어가 지난 세대 워크호스 티어를 밀어냈다\"라는 얘기예요.\n\n세 번째 티어인 3.5 Flash Cyber는 얘기가 달라요. 사이버 취약점 탐지·수정에 특화 튜닝된 모델인데, 접근이 정부와 신뢰 파트너로만 열린 파일럿 프로그램이에요. TechCrunch는 이 배포 형태를 \"케이스별 접근\"으로 요약했어요. 이 그림은 4주 전(6월 28일 판)에서 다룬 GPT-5.6 \"신뢰 파트너 한정\" 게이트와 결이 겹쳐요. 다만 GPT-5.6이 플래그십 라인 자체에 게이트를 걸었다면, Gemini 3.5 Flash Cyber는 사이버라는 도메인 한 축에만 게이트를 걸었다는 점이 달라요. \"에이전트 능력이 오르면 배포 조건이 자동으로 끼어든다\"는 흐름이 벤더별로 한 단계씩 굳어지는 모습이에요.\n\n같은 주 발표된 Claude Opus 5, poolside Laguna S 2.1과 견주면 위치가 잡혀요. Opus 5가 프런티어 티어를 다시 굳히는 방향, poolside가 오픈 웨이트로 같은 자리에 내려서는 방향이라면, Google은 세 티어를 한꺼번에 놓고 가격·용도로 쪼갠 방향이에요. 자기 팀이 지금 Gemini 3 Flash나 3.5 Flash 위에서 에이전트를 굴리고 있다면, 같은 태스크 100건을 3.6 Flash·3.5 Flash-Lite·기존 3 Flash 세 티어에 나눠 돌려보고 토큰 총합·응답 지연·정답률이 실제로 어떤 3중 곡선을 그리는지부터 측정해보세요.\n\n### 3. poolside Laguna S 2.1: 클로즈드 모델과 어깨를 맞춘 118B 오픈 웨이트 코딩 에이전트\n\npoolside가 7월 21일 오픈 웨이트 코딩 에이전트 모델 Laguna S 2.1을 공개했어요(<https://poolside.ai/blog/introducing-laguna-s-2-1>). 총 파라미터 118B, 토큰당 활성 8B의 Mixture-of-Experts예요. 48개 층에 라우팅 전문가 256개와 공유 전문가 1개가 얹혀 있고, 토큰당 top-10을 활성화해요. 컨텍스트는 유료 엔드포인트에서 1M 토큰, 무료 티어와 로컬 Ollama에서는 256K가 열려요. 라이선스는 OpenMDW-1.1이라 상용 워크로드에도 얹을 수 있어요.\n\n발표된 벤치마크가 이 모델의 위치를 잡아 줘요. Terminal-Bench 2.1은 70.2%, SWE-Bench Multilingual은 78.5%, 공개 SWE-Bench Pro는 59.4%예요. DeepSWE 40.4%, SWE Atlas 46.2%, Toolathlon Verified 49.7%도 함께 실렸어요. Terminal-Bench 2.1 70.2%는 poolside가 관리하는 리더보드에서 11위로 자기보다 여러 배 큰 오픈 모델들 위쪽에 위치했어요. MarkTechPost는 이 릴리스를 두고 자기보다 여러 배 큰 경쟁 모델을 앞선다는 정리로 소개했어요(<https://www.marktechpost.com/2026/07/21/poolside-releases-laguna-s-2-1/>).\n\n배포 얼개도 오픈 웨이트답게 넓어요. 가중치는 Hugging Face에 올라와 있고(<https://huggingface.co/poolside/Laguna-S-2.1>), OpenRouter·Ollama·vLLM·poolside 자체 에이전트 CLI에서 바로 굴릴 수 있어요. NVFP4로 양자화한 가중치는 단일 NVIDIA DGX Spark 한 대에 얹혀요. 즉 클라우드 클러스터 없이 워크스테이션 한 대로 프런티어급 코딩 에이전트를 로컬에서 돌리는 그림이 가능해요.\n\n가장 가까운 대안은 poolside가 벤치마크 카드에서 직접 견준 DeepSeek-V4-Flash, NVIDIA Nemotron 3 Ultra, Thinking Machines Inkling이에요. 같은 주 발표된 Claude Opus 5·Gemini 3.6 Flash가 각각 클로즈드 프런티어·하이퍼스케일러 자리를 채운 걸 감안하면, Laguna S 2.1은 같은 벤치마크 표를 오픈 웨이트로 다시 그리는 3번째 축이에요. 지금 Claude Sonnet 5나 Gemini 3 Flash 위에서 코딩 에이전트를 굴린다면, 프로덕션 태스크 20건을 Hugging Face 가중치로 로컬 Ollama에 붙여보고 자기 팀 SWE-Bench Pro 서브셋에서 정답률·토큰 사용량이 어떻게 갈리는지부터 계측해보세요.\n\n## Quick mentions\n\n- [Alibaba Cloud unveils agent-native innovations at WAIC 2026](https://www.alibabacloud.com/blog/alibaba-cloud-unveils-agent-native-innovations-at-waic-2026_603377) — Alibaba Cloud가 WAIC 2026에서 AgentTeams·AgentLoop·AgentRun 세 계층으로 묶은 Agent Native Cloud를 열고, 21일까지 Qwen 3.8-Max-Preview·Audio-3.0-TTS·Image-3.0을 72시간 안에 함께 풀었어요.\n- [How Meta's AI Models Are Powering the First Wave of Genesis Mission Projects](https://ai.meta.com/blog/genesis-mission-lawrence-berkeley-national-laboratory-segment-anything-dino/) — Meta의 오픈소스 비전 모델 SAM 3와 DINOv3를 미국 DOE의 Genesis Mission에 얹어 Berkeley Lab 빔라인 데이터 분석 시간을 한 달에서 15분까지 줄였다고 공개했어요.\n- [Ushur launches the Ushur Agentic Platform: AI agents that finish the job](https://www.globenewswire.com/news-release/2026/07/22/3331397/0/en/ushur-launches-the-ushur-agentic-platform-ai-agents-that-finish-the-job.html) — Ushur가 SMS·이메일·웹·채팅·음성 채널을 넘나들며 고객 여정 한 건을 첫 접점부터 최종 처리까지 완주하도록 설계한 Ushur Agentic Platform을 22일에 GA로 열었어요.\n- [Claude Developer Platform release notes — July 22, 2026](https://docs.anthropic.com/en/release-notes/overview) — Anthropic이 22일 Claude Developer Platform에 Managed Agents용 effort 설정, 환경·메모리 웹훅 확장, 세션 시딩, 스레드 이벤트 델타 스트림을 함께 붙였어요.\n- [microsoft/agent-governance-toolkit](https://github.com/microsoft/agent-governance-toolkit) — Microsoft가 OWASP Agentic Top 10을 정책 엔진·제로 트러스트 신원·샌드박스 실행 세 축으로 덮어 오픈소스로 푼 새 거버넌스 툴킷이에요.\n- [iflytek/skillhub](https://github.com/iflytek/skillhub) — iFlytek이 에이전트 스킬 패키지를 사내 레지스트리에 얹어 RBAC·감사 로그로 관리하도록 만든 자체 호스팅 오픈소스로, Docker·Kubernetes 배포를 지원해요.\n- [HKUDS/DeepCode](https://github.com/HKUDS/DeepCode) — HKUDS의 DeepCode는 논문 PDF에서 코드를, 자연어 요구사항에서 웹·백엔드를 생성하는 오픈 에이전트 코딩 프레임워크로 별 1만 6천 개대까지 붙었어요.\n- [NirDiamant/agents-towards-production](https://github.com/NirDiamant/agents-towards-production) — 프로토타입에서 배포까지 프로덕션급 GenAI 에이전트를 코드 우선으로 처음부터 만드는 튜토리얼 모음으로 별이 2만 개를 넘겼어요.\n- [rllm-org/rllm](https://github.com/rllm-org/rllm) — LLM 기반 에이전트 학습을 RL로 확장하는 오픈 프레임워크로, 검색·SWE 에이전트를 같은 러너 위에서 굴리도록 설계됐어요.\n- [The-Pocket/PocketFlow](https://github.com/The-Pocket/PocketFlow) — 100줄짜리 미니멀 LLM 프레임워크로 flow-based 접근에서 에이전트가 에이전트를 조립하는 그림을 표방하며 별 1만 개대에 올라와 있어요.\n",
+  "deep_dives": [
+    {
+      "cluster_id": "dd-2026-07-26-1",
+      "title": "Claude Opus 5의 프런티어 티어 유지형 업데이트",
+      "body_md": "Anthropic이 7월 24일 Claude Opus 5를 공개했어요(<https://www.anthropic.com/news/claude-opus-5>). 가격은 100만 토큰당 입력 5달러·출력 25달러예요. 직전 세대인 Opus 4.8과 같은 값이에요. 컨텍스트 윈도우는 기본값과 최댓값이 모두 1M 토큰이에요. 지난 세대에서 별도 프리뷰였던 1M 창이 이번엔 별도 게이트 없이 그대로 열려 있어요.\n\n큰 변화는 두 손잡이에 몰려 있어요. 첫째, effort 설정이 들어갔어요. 사용자가 요청마다 사고 강도를 다섯 단계로 지정해요. 그 값에 따라 토큰 사용량과 응답 지연이 갈립니다. 둘째, 사고 트레이스가 기본으로 켜져 있어요. high 단계 이상에서 사고를 끄려고 하면 API가 400 에러를 되돌려줘요. 상위 사고 트레이스가 옵션이 아니라 계약처럼 굳어진 셈이에요. Anthropic은 이 두 손잡이가 \"장시간 도는 다단계 작업에서 스레드를 놓치지 않게 하는 축\"이라고 설명했어요.\n\n발표된 에이전트 벤치마크는 세 축에서 움직였어요. 컴퓨터 사용을 재는 OSWorld 2.0은 70.57%예요. 데스크톱 자동화 태스크를 묶은 AutomationBench는 26.0%로 나왔어요. ARC-AGI-3은 30.16%예요. 세 지표 모두 프런티어급이지만, 장시간 도는 코딩·자동화 트레이스가 얼마나 안정적으로 완주하는지를 재는 축에 몰려 있다는 게 특징이에요. VentureBeat는 이 릴리스를 \"에이전트·엔터프라이즈 워크플로를 겨냥한 더 싼 옵션\"으로 요약했어요(<https://venturebeat.com/orchestration/anthropic-launches-claude-opus-5-a-cheaper-ai-model-for-coding-agents-and-enterprise-workflows>).\n\n선행 흐름과 견주면 두 지점이 뚜렷해요. 3주 전 다룬 Sonnet 5가 미들 티어 값을 내리며 오피스형 지식 태스크에서 Opus 4.8과 어깨를 맞췄어요. 반대로 이번 Opus 5는 굳어진 미들 티어 위에 상위 티어를 한 번 더 밀어 올린 릴리스예요. 가장 가까운 비교군은 같은 주 발표된 Gemini 3.6 Flash와 poolside Laguna S 2.1이에요. 셋 다 장시간 도는 코딩 에이전트를 겨냥하지만 가격·라이선스·배포 위치가 서로 달라요. 지금 Opus 4.8 위에서 자체 에이전트를 굴리고 있다면, 프로덕션 트레이스 중 실행 시간이 5분을 넘는 태스크 한 건을 골라 effort 다섯 단계 각각에서 완주 여부와 토큰 사용량이 어떻게 바뀌는지부터 재보세요.",
+      "item_kind": "blog_post",
+      "maturity": "production-ready",
+      "primary_url": "https://www.anthropic.com/news/claude-opus-5",
+      "source_count": 2
+    },
+    {
+      "cluster_id": "dd-2026-07-26-2",
+      "title": "Google Gemini 3.6 Flash 트리오와 Cyber 티어의 정부·신뢰 파트너 게이트",
+      "body_md": "Google DeepMind가 7월 21일 Gemini 3.6 Flash, 3.5 Flash-Lite, 3.5 Flash Cyber 세 티어를 한꺼번에 열었어요(<https://techcrunch.com/2026/07/21/google-releases-three-new-gemini-models-but-no-3-5-pro/>). 셋 다 대규모로 도는 에이전트 워크로드를 우선 겨냥해 튜닝됐다고 밝혔어요. 3.6 Flash가 워크호스 자리를 이어받아요. 가격은 100만 토큰당 입력 1.5달러·출력 7.5달러예요. 지식 컷오프는 2026년 3월로 앞당겨졌어요. 3.5 Flash 대비 같은 태스크에서 출력 토큰이 약 17% 줄었다고 보고했어요. 컨텍스트 창은 1M 토큰이에요.\n\n두 번째 티어인 3.5 Flash-Lite는 저지연·고처리 워크로드 쪽이에요. 가격은 100만 토큰당 입력 0.3달러·출력 2.5달러예요. Google은 이 티어를 에이전트 검색·문서 처리·서브에이전트 팬아웃 같은 사용 패턴에 맞춘 것이라고 적었어요. Artificial Analysis 벤치마크 보고에서는 SWE-Bench Pro와 OSWorld-Verified에서 이전 세대의 기본 티어인 Gemini 3 Flash를 근소하게 앞선다고 나왔어요. 정리하면 \"더 싼 티어가 지난 세대 워크호스 티어를 밀어냈다\"라는 얘기예요.\n\n세 번째 티어인 3.5 Flash Cyber는 얘기가 달라요. 사이버 취약점 탐지·수정에 특화 튜닝된 모델인데, 접근이 정부와 신뢰 파트너로만 열린 파일럿 프로그램이에요. TechCrunch는 이 배포 형태를 \"케이스별 접근\"으로 요약했어요. 이 그림은 4주 전(6월 28일 판)에서 다룬 GPT-5.6 \"신뢰 파트너 한정\" 게이트와 결이 겹쳐요. 다만 GPT-5.6이 플래그십 라인 자체에 게이트를 걸었다면, Gemini 3.5 Flash Cyber는 사이버라는 도메인 한 축에만 게이트를 걸었다는 점이 달라요. \"에이전트 능력이 오르면 배포 조건이 자동으로 끼어든다\"는 흐름이 벤더별로 한 단계씩 굳어지는 모습이에요.\n\n같은 주 발표된 Claude Opus 5, poolside Laguna S 2.1과 견주면 위치가 잡혀요. Opus 5가 프런티어 티어를 다시 굳히는 방향, poolside가 오픈 웨이트로 같은 자리에 내려서는 방향이라면, Google은 세 티어를 한꺼번에 놓고 가격·용도로 쪼갠 방향이에요. 자기 팀이 지금 Gemini 3 Flash나 3.5 Flash 위에서 에이전트를 굴리고 있다면, 같은 태스크 100건을 3.6 Flash·3.5 Flash-Lite·기존 3 Flash 세 티어에 나눠 돌려보고 토큰 총합·응답 지연·정답률이 실제로 어떤 3중 곡선을 그리는지부터 측정해보세요.",
+      "item_kind": "blog_post",
+      "maturity": "production-ready",
+      "primary_url": "https://techcrunch.com/2026/07/21/google-releases-three-new-gemini-models-but-no-3-5-pro/",
+      "source_count": 2
+    },
+    {
+      "cluster_id": "dd-2026-07-26-3",
+      "title": "poolside Laguna S 2.1: 클로즈드 모델과 어깨를 맞춘 118B 오픈 웨이트 코딩 에이전트",
+      "body_md": "poolside가 7월 21일 오픈 웨이트 코딩 에이전트 모델 Laguna S 2.1을 공개했어요(<https://poolside.ai/blog/introducing-laguna-s-2-1>). 총 파라미터 118B, 토큰당 활성 8B의 Mixture-of-Experts예요. 48개 층에 라우팅 전문가 256개와 공유 전문가 1개가 얹혀 있고, 토큰당 top-10을 활성화해요. 컨텍스트는 유료 엔드포인트에서 1M 토큰, 무료 티어와 로컬 Ollama에서는 256K가 열려요. 라이선스는 OpenMDW-1.1이라 상용 워크로드에도 얹을 수 있어요.\n\n발표된 벤치마크가 이 모델의 위치를 잡아 줘요. Terminal-Bench 2.1은 70.2%, SWE-Bench Multilingual은 78.5%, 공개 SWE-Bench Pro는 59.4%예요. DeepSWE 40.4%, SWE Atlas 46.2%, Toolathlon Verified 49.7%도 함께 실렸어요. Terminal-Bench 2.1 70.2%는 poolside가 관리하는 리더보드에서 11위로 자기보다 여러 배 큰 오픈 모델들 위쪽에 위치했어요. MarkTechPost는 이 릴리스를 두고 자기보다 여러 배 큰 경쟁 모델을 앞선다는 정리로 소개했어요(<https://www.marktechpost.com/2026/07/21/poolside-releases-laguna-s-2-1/>).\n\n배포 얼개도 오픈 웨이트답게 넓어요. 가중치는 Hugging Face에 올라와 있고(<https://huggingface.co/poolside/Laguna-S-2.1>), OpenRouter·Ollama·vLLM·poolside 자체 에이전트 CLI에서 바로 굴릴 수 있어요. NVFP4로 양자화한 가중치는 단일 NVIDIA DGX Spark 한 대에 얹혀요. 즉 클라우드 클러스터 없이 워크스테이션 한 대로 프런티어급 코딩 에이전트를 로컬에서 돌리는 그림이 가능해요.\n\n가장 가까운 대안은 poolside가 벤치마크 카드에서 직접 견준 DeepSeek-V4-Flash, NVIDIA Nemotron 3 Ultra, Thinking Machines Inkling이에요. 같은 주 발표된 Claude Opus 5·Gemini 3.6 Flash가 각각 클로즈드 프런티어·하이퍼스케일러 자리를 채운 걸 감안하면, Laguna S 2.1은 같은 벤치마크 표를 오픈 웨이트로 다시 그리는 3번째 축이에요. 지금 Claude Sonnet 5나 Gemini 3 Flash 위에서 코딩 에이전트를 굴린다면, 프로덕션 태스크 20건을 Hugging Face 가중치로 로컬 Ollama에 붙여보고 자기 팀 SWE-Bench Pro 서브셋에서 정답률·토큰 사용량이 어떻게 갈리는지부터 계측해보세요.",
+      "item_kind": "blog_post",
+      "maturity": "production-ready",
+      "primary_url": "https://poolside.ai/blog/introducing-laguna-s-2-1",
+      "source_count": 3
+    }
+  ],
+  "quick_mentions": [
+    {
+      "title": "Alibaba Cloud unveils agent-native innovations at WAIC 2026",
+      "url": "https://www.alibabacloud.com/blog/alibaba-cloud-unveils-agent-native-innovations-at-waic-2026_603377",
+      "source": "rss",
+      "item_kind": "blog_post",
+      "one_liner": "Alibaba Cloud가 WAIC 2026에서 AgentTeams·AgentLoop·AgentRun 세 계층으로 묶은 Agent Native Cloud를 열고, 21일까지 Qwen 3.8-Max-Preview·Audio-3.0-TTS·Image-3.0을 72시간 안에 함께 풀었어요."
+    },
+    {
+      "title": "How Meta's AI Models Are Powering the First Wave of Genesis Mission Projects",
+      "url": "https://ai.meta.com/blog/genesis-mission-lawrence-berkeley-national-laboratory-segment-anything-dino/",
+      "source": "rss",
+      "item_kind": "blog_post",
+      "one_liner": "Meta의 오픈소스 비전 모델 SAM 3와 DINOv3를 미국 DOE의 Genesis Mission에 얹어 Berkeley Lab 빔라인 데이터 분석 시간을 한 달에서 15분까지 줄였다고 공개했어요."
+    },
+    {
+      "title": "Ushur launches the Ushur Agentic Platform: AI agents that finish the job",
+      "url": "https://www.globenewswire.com/news-release/2026/07/22/3331397/0/en/ushur-launches-the-ushur-agentic-platform-ai-agents-that-finish-the-job.html",
+      "source": "rss",
+      "item_kind": "blog_post",
+      "one_liner": "Ushur가 SMS·이메일·웹·채팅·음성 채널을 넘나들며 고객 여정 한 건을 첫 접점부터 최종 처리까지 완주하도록 설계한 Ushur Agentic Platform을 22일에 GA로 열었어요."
+    },
+    {
+      "title": "Claude Developer Platform release notes — July 22, 2026",
+      "url": "https://docs.anthropic.com/en/release-notes/overview",
+      "source": "rss",
+      "item_kind": "blog_post",
+      "one_liner": "Anthropic이 22일 Claude Developer Platform에 Managed Agents용 effort 설정, 환경·메모리 웹훅 확장, 세션 시딩, 스레드 이벤트 델타 스트림을 함께 붙였어요."
+    },
+    {
+      "title": "microsoft/agent-governance-toolkit",
+      "url": "https://github.com/microsoft/agent-governance-toolkit",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "Microsoft가 OWASP Agentic Top 10을 정책 엔진·제로 트러스트 신원·샌드박스 실행 세 축으로 덮어 오픈소스로 푼 새 거버넌스 툴킷이에요."
+    },
+    {
+      "title": "iflytek/skillhub",
+      "url": "https://github.com/iflytek/skillhub",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "iFlytek이 에이전트 스킬 패키지를 사내 레지스트리에 얹어 RBAC·감사 로그로 관리하도록 만든 자체 호스팅 오픈소스로, Docker·Kubernetes 배포를 지원해요."
+    },
+    {
+      "title": "HKUDS/DeepCode",
+      "url": "https://github.com/HKUDS/DeepCode",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "HKUDS의 DeepCode는 논문 PDF에서 코드를, 자연어 요구사항에서 웹·백엔드를 생성하는 오픈 에이전트 코딩 프레임워크로 별 1만 6천 개대까지 붙었어요."
+    },
+    {
+      "title": "NirDiamant/agents-towards-production",
+      "url": "https://github.com/NirDiamant/agents-towards-production",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "프로토타입에서 배포까지 프로덕션급 GenAI 에이전트를 코드 우선으로 처음부터 만드는 튜토리얼 모음으로 별이 2만 개를 넘겼어요."
+    },
+    {
+      "title": "rllm-org/rllm",
+      "url": "https://github.com/rllm-org/rllm",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "LLM 기반 에이전트 학습을 RL로 확장하는 오픈 프레임워크로, 검색·SWE 에이전트를 같은 러너 위에서 굴리도록 설계됐어요."
+    },
+    {
+      "title": "The-Pocket/PocketFlow",
+      "url": "https://github.com/The-Pocket/PocketFlow",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "100줄짜리 미니멀 LLM 프레임워크로 flow-based 접근에서 에이전트가 에이전트를 조립하는 그림을 표방하며 별 1만 개대에 올라와 있어요."
+    }
+  ],
+  "meta": {
+    "sources_considered": 55,
+    "sources_included": 13,
+    "failed_fetches": [
+      "arxiv API export.arxiv.org: HTTP 403 x3, no in-window items recovered via WebSearch (only pre-2026-07-19 papers surfaced)",
+      "thenewstack.io RSS: HTTP 403, no in-window items recovered",
+      "simonwillison.net atom: HTTP 403, no in-window items recovered",
+      "importai.substack.com RSS: HTTP 403, no in-window items recovered",
+      "latent.space RSS: HTTP 403, no in-window items recovered",
+      "deepmind.google RSS: HTTP 403, Gemini 3.6 Flash trio recovered via WebSearch",
+      "openai.com RSS: HTTP 403, no in-window items recovered",
+      "huggingface.co blog feed: HTTP 403, no in-window items recovered",
+      "lilianweng.github.io: HTTP 403, no in-window items recovered",
+      "magazine.sebastianraschka.com: HTTP 403, no in-window items recovered",
+      "anthropic community scraper RSS: reachable but no items after 2026-07-02; Opus 5 (07-24) and Managed Agents update (07-22) recovered via WebSearch",
+      "microsoft research RSS: reachable but no items after 2026-07-13",
+      "GitHub Trending: reachable, zero agent-relevant repos in top 25 this week",
+      "gh CLI: not available in this session; used MCP GitHub search_repositories instead — 2 targeted topic queries surfaced microsoft/agent-governance-toolkit, iflytek/skillhub, HKUDS/DeepCode, NirDiamant/agents-towards-production, rllm-org/rllm, The-Pocket/PocketFlow, and confirmed no fresh unique repos beyond those already in the last 21 days"
+    ],
+    "fetch_notes": "In-window (2026-07-19 through 2026-07-25) coverage came primarily via WebSearch after the RSS/arxiv 403 wall. Demoted for duplication vs last 21 days: none of the shortlisted DDs overlap with 07-05 (Sonnet 5 / Claude Science / OpenViking) or 07-12 (ChatGPT Work+GPT-5.6 GA / Safari MCP / Agents' Last Exam) — this week's three model drops (Opus 5, Gemini 3.6 Flash trio, Laguna S 2.1) are all new artefacts, not follow-ups. Alibaba Agent Native Cloud + Qwen 3.8-Max-Preview kept as QM rather than DD because the WAIC keynote lands on 2026-07-18, one day outside the 7-day window (only the Qwen model drops on 07-19-21 sit inside). Demoted at QM level: microsoft/agent-framework (06-28 QM), omnigent (07-12 QM), headroom (06-28 QM), elizaOS (07-05 QM) — none re-added even though they still show recent pushes."
+  },
+  "content_sha256": "2656ef38e4d8d2b43cadf78816df0a236c8097fe9f7fb602d8c203f99c8887b0"
+}

@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "issue_id": "issue-2026-08-02",
+  "issue_date": "2026-08-02T00:00:00Z",
+  "body_md": "# AI Agent Weekly — 2026-08-02\n\n이번 주는 학습과 정책이 겹친 한 주였어요. Microsoft Research가 같은 날에 에이전트 학습을 다루는 릴리스를 두 개 냈어요. 하나는 훈련 환경을 어떻게 설계해야 컴퓨터-사용 에이전트가 프런티어 모델 근처까지 올라오는지 실증했어요. 다른 하나는 배포 뒤에도 경험을 지식으로 계속 재구성하는 프레임워크예요. Anthropic은 77개 기업 서한 사흘 뒤에 오픈-웨이트 모델 정책 입장문을 냈어요. 벤더별 능력 게이트가 정책 논의 위에 얹히는 흐름이 이어지고 있어요.\n\n### 1. Anthropic의 오픈-웨이트 정책 입장문과 세 갈래 대체 조치\n\nAnthropic이 7월 27일 \"오픈-웨이트 모델에 대한 우리의 입장\"이라는 정책 문서를 냈어요(<https://www.anthropic.com/news/position-open-weights-models>). Dario Amodei CEO의 이름으로 나왔어요. 사흘 전 \"Open Weights and American AI Leadership\"이라는 서한이 공개됐어요. Nvidia·Microsoft·Meta·OpenAI·Google을 비롯한 77개 기업·재단·벤처가 이름을 올렸어요. 이 자리에 Anthropic 이름은 빠져 있었어요. 이번 문서는 그 공백에 대한 회사의 응답이에요.\n\n핵심 문장은 한 줄로 정리돼요. \"Anthropic은 오픈-웨이트 모델에 대한 금지를 요구한 적이 없다\"예요. 회사가 우려하는 건 \"오픈-웨이트 그 자체가 아니라, 프런티어 모델의 능력이 군사·사이버·생물학 공격에 악용될 수 있는 수준에 도달했을 때 벌어질 일\"이라고 못박았어요. 그 대신 회사가 제안한 대체 조치가 세 가지 있어요. 첫째, 첨단 칩과 칩 제조 장비의 대중국 반출 통제와 밀수 단속이에요. 둘째, 산업 규모의 모델 지식 증류 파이프라인에 대한 정책 조치예요. 셋째, 오픈이든 클로즈드든 무관하게 충분히 강한 모델에 대한 배포 전 안전 시험 의무화예요.\n\n세 조치의 초점이 서로 달라요. 첫 번째는 훈련 자원의 국가 간 흐름을 겨냥해요. 두 번째는 이미 나온 모델을 값싸게 복제하는 파이프라인을 겨냥해요. 세 번째는 모델 자체의 위험 프로파일 검증에 무게를 실어요. CNBC는 이 갈래를 두고 \"Amodei가 오픈-웨이트 금지가 아니라 대중국 칩 통제와 사전 안전 시험을 이야기하고 있다\"고 요약했어요(<https://www.cnbc.com/2026/07/27/anthropic-ceo-dario-amodei-isnt-advocating-open-weight-model-ban.html>). TheStreet를 비롯한 다른 언론도 이 프레이밍을 그대로 옮겼어요.\n\n선행 흐름과 견주면 두 지점이 뚜렷해요. 지금까지 오픈-웨이트 규제 논의의 대부분은 \"웨이트 공개 자체가 남용 벡터\"라는 프레임으로 굴러왔어요. Anthropic의 이번 문서는 그 축을 하드웨어 통제·복제 규제·능력 시험이라는 3축으로 옮기려는 시도예요. 6월 28일 판에서 다룬 GPT-5.6의 신뢰-파트너 게이트, 지난주 다룬 Gemini 3.5 Flash Cyber의 정부·파트너 한정 파일럿과도 결이 같아요. 능력 임계값을 넘긴 모델에 접근 조건을 붙이려는 흐름이 프런티어 벤더 세 곳에서 각기 다른 형태로 굳어지고 있어요. 자기 팀이 오픈-웨이트 모델을 프로덕션에 얹고 있다면, Anthropic이 제안한 배포 전 안전 시험을 어떻게 자기 파이프라인에 끼워 넣을지 한 페이지짜리 자체 정책 초안을 이번 주 안에 뽑아보세요.\n\n### 2. Microsoft Echoverse: 시뮬레이션 깊이가 컴퓨터-사용 에이전트 학습을 가른다는 실증\n\nMicrosoft Research가 7월 30일 Echoverse를 공개했어요(<https://www.microsoft.com/en-us/research/blog/echoverse-deep-evolving-environments-for-computer-use-agents/>). 컴퓨터-사용 에이전트를 훈련시키기 위한 합성 환경 12개를 묶은 프레임워크예요. 저자는 Akshay Nambi를 비롯한 9명의 Microsoft Research 팀이에요. 12개 환경은 도메인 특화 10개와 UI 컨트롤 2개로 나뉘어 있어요. 도메인 쪽은 EchoMail·EchoCalendar·EchoChat·EchoML·EchoForge·EchoBank·EchoCare·EchoForum·EchoTunes·EchoStay예요. UI 쪽은 날짜 선택기와 nested-filter 컨트롤이에요.\n\n훈련 대상은 9B 파라미터의 Qwen3.5예요. 실험 결과가 이 프레임워크의 위치를 잡아 줘요. 12개 환경 평균 정답률이 훈련 전 36.5%에서 훈련 후 67.1%로 올랐어요. 프런티어 참조로 놓은 GPT-5.4는 같은 세팅에서 80.7%가 나왔어요. 9B 모델이 프런티어 모델의 83% 수준까지 올라온 셈이에요. 훈련 도메인에 없던 WebVoyager 벤치마크에서도 66.5%에서 71.5%로 5.0%포인트 개선이 이전됐어요. 자기 훈련 환경 안에서만 오르고 마는 게 아니라 도메인 밖 태스크로도 일부 옮겨졌다는 얘기예요.\n\n핵심 실증은 시뮬레이션 깊이에 대한 것이에요. 같은 사이트를 얕은(shallow) 빌드와 깊은(deep) 빌드로 각각 지어 훈련시켰어요. 얕은 빌드로 훈련한 모델은 얕은 환경에서 오히려 성능이 회귀했어요. 깊은 빌드로 훈련한 모델만 성능이 올랐어요. 팀은 이 결과를 두고 \"높은 시뮬레이션 충실도는 있으면 좋은 것이 아니라 필수(must-have)\"라고 정리했어요. 훈련 데이터를 더 부어도 환경이 얕으면 학습 신호가 오히려 잡히지 않는다는 얘기예요.\n\n가장 가까운 선행 연구는 두 갈래예요. 첫째는 WebArena·VisualWebArena처럼 웹 태스크를 정지된 스냅숏으로 정형화한 정적 벤치마크예요. 둘째는 SWE-Gym·Terminal-Bench처럼 실제 저장소를 그대로 재생한 살아 있는 환경이에요. Echoverse는 이 사이에서 \"훈련용 합성 환경을 처음부터 깊게 짓는\" 3번째 축을 잡았어요. 모델·환경·태스크·검증기가 함께 개선되는 공진화 루프를 명시적으로 설계에 넣은 것도 다른 점이에요. 자기 팀이 지금 웹·데스크톱 에이전트를 자체 환경에서 파인튜닝하고 있다면, 훈련 환경의 상태 공간을 절반으로 자른 얕은 버전을 하나 만들어 같은 훈련 스크립트로 돌려보고 다운스트림 성능 격차가 얼마나 벌어지는지부터 재보세요.\n\n### 3. Microsoft EvoLib: 배포 이후 경험으로 지식 라이브러리를 재구성하는 프레임워크\n\nMicrosoft Research가 7월 30일 EvoLib을 함께 공개했어요(<https://www.microsoft.com/en-us/research/blog/evolib-turning-experience-into-evolving-knowledge/>). 저자는 Weijia Xu·Alessandro Sordoni·Zelalem Gero·Michel Galley·Eric Yuan·Jianfeng Gao 여섯 명이에요. 코드는 MIT 라이선스로 GitHub에 함께 열렸어요(<https://github.com/microsoft/EvoLib>). 같은 날 공개된 Echoverse가 훈련 환경 축을 잡았다면, EvoLib은 반대편 축을 잡아요. 모델 파라미터를 손대지 않고, 배포 뒤 얻은 경험을 재사용 가능한 스킬과 지식으로 계속 재구성해요.\n\n동작 얼개는 두 축이에요. 첫째는 통합(consolidation)이에요. 유사한 지식 조각을 더 일반적인 형태로 합쳐요. 둘째는 동적 가중(dynamic weighting)이에요. 장기 영향을 기준으로 지식의 우선순위를 다시 매겨요. 저자들 표현으로는 \"새 경험이 들어올 때마다 기존 지식을 계속 다듬고, 통합하고, 재가중한다\"예요. 정적 메모리처럼 경험을 쌓아 두기만 하는 것이 아니라, 라이브러리 자체가 계속 재조직된다는 게 요지예요.\n\n평가는 세 축에서 이뤄졌어요. 첫째, 수학 추론이에요. 둘째, 효율 제약이 붙은 코드 작성이에요. 셋째, 장기 의사결정과 환경 상호작용이 필요한 태스크예요. LiveCodeBench·BigCodeBench·HMMT·AgentBoard·ScienceWorld·PDDL 같은 벤치마크가 세팅으로 쓰였어요. 세 축 모두에서 검색 기반 메모리와 요약 기반 메모리 기법들을 앞섰다고 보고했어요. 토큰 사용량은 더 적었어요. 테스트 시점의 추가 계산을 성능으로 바꾸는 효율 측면에서도 정적 메모리 기반보다 앞선다고 보고됐어요.\n\n가장 가까운 선행 연구는 letta·Voyager·Reflexion 같은 계열이에요. 이들은 에이전트가 자기 경험을 조각으로 저장해 두고 그때그때 다시 부르는 검색 프레임이었어요. EvoLib은 검색 대신 라이브러리 자체를 계속 편집한다는 점에서 다른 축이에요. 이번 주 arxiv에 올라온 \"Filesystem-Based Memory for LLM Agents\"(<https://arxiv.org/abs/2607.26637>)가 파일 시스템을 매체로 같은 문제를 다룬다는 점에서 궤가 겹쳐요. 자기 팀이 지금 프로덕션 에이전트에 요약 기반 메모리를 얹고 있다면, EvoLib README의 LiveCodeBench 파이프라인을 그대로 돌려서 같은 태스크에서 자체 요약 메모리 대비 정답률·토큰 격차가 얼마나 벌어지는지부터 재보세요.\n\n## Quick mentions\n\n- [Cognizant and Anthropic expand their partnership to bring Claude to enterprise clients](https://www.anthropic.com/news/cognizant-anthropic) — Anthropic이 Cognizant와의 파트너십을 확장해 Claude를 IT 서비스 고객사의 기업 워크플로에 얹는 배포 채널을 늘리기로 했어요.\n- [Toward an Organizational Science of Multi-Agent LLM Systems](https://arxiv.org/abs/2607.25446) — 다중 에이전트 LLM 프레임워크가 조직 구조·조정·프로토콜 세 관심사를 뒤엉키게 다뤄 온 문제를 세 축으로 분리해 재정의한 논문이에요.\n- [Filesystem-Based Memory for LLM Agents: Organization, Evolution, and Sustainability](https://arxiv.org/abs/2607.26637) — 관리·검색·실행 세 역할이 하나의 markdown 디렉터리를 공유하는 파일 시스템 기반 에이전트 장기 메모리를 처음으로 체계적으로 실증한 논문이에요.\n- [Even More Deception: Objective Misalignment in Mixed-Motive LLM Multi-Agent Systems](https://arxiv.org/abs/2607.26120) — 혼합 동기가 있는 다중 에이전트 세팅에서 LLM들의 내적 추론과 공개 발화 사이 어긋남을 모델·역할·목표별로 분리해 측정한 논문이에요.\n- [lsdefine/GenericAgent](https://github.com/lsdefine/GenericAgent) — 3.3K줄 시드에서 스킬 트리를 스스로 키워 전체 시스템 제어와 토큰 소비 6분의 1 수준을 달성했다고 주장하는 자기 진화 에이전트 리포예요.\n- [HKUDS/nanobot](https://github.com/HKUDS/nanobot) — HKUDS가 낸 초경량 자체 호스팅 개인 AI 에이전트 프레임워크로, WebUI·툴·메모리·MCP·멀티 에이전트 워크플로를 한 파이썬 패키지에 담았어요.\n- [eigent-ai/eigent](https://github.com/eigent-ai/eigent) — Claude Cowork와 Codex를 로컬·무료로 대체하려는 오픈소스 Cowork Desktop으로 별 1만 4천 개대에 올라와 있어요.\n- [EvoMap/evolver](https://github.com/EvoMap/evolver) — Genes·Capsules·Events 세 개념으로 에이전트 진화를 감사할 수 있게 만든 GEP 기반 self-evolving 엔진이에요.\n- [farion1231/cc-switch](https://github.com/farion1231/cc-switch) — Claude Code·Codex·OpenCode·Grok Build 등 서로 다른 코딩 에이전트 하네스를 하나의 데스크톱 앱에서 전환·설정하도록 묶은 오픈소스예요.\n- [Reimagining Independence: Meta's AI Models and the University of Pittsburgh's Assistive Robotics](https://ai.meta.com/blog/assistive-robotics-university-of-pittsburgh-sam-dino/) — Meta의 SAM·DINO 계열 오픈 비전 모델을 Pittsburgh 대학교와 함께 보조 로봇에 붙여, 사용자가 원하는 물체·행동을 실시간으로 지시하도록 만든 사례예요.\n",
+  "deep_dives": [
+    {
+      "cluster_id": "dd-2026-08-02-1",
+      "title": "Anthropic의 오픈-웨이트 정책 입장문과 세 갈래 대체 조치",
+      "body_md": "Anthropic이 7월 27일 \"오픈-웨이트 모델에 대한 우리의 입장\"이라는 정책 문서를 냈어요(<https://www.anthropic.com/news/position-open-weights-models>). Dario Amodei CEO의 이름으로 나왔어요. 사흘 전 \"Open Weights and American AI Leadership\"이라는 서한이 공개됐어요. Nvidia·Microsoft·Meta·OpenAI·Google을 비롯한 77개 기업·재단·벤처가 이름을 올렸어요. 이 자리에 Anthropic 이름은 빠져 있었어요. 이번 문서는 그 공백에 대한 회사의 응답이에요.\n\n핵심 문장은 한 줄로 정리돼요. \"Anthropic은 오픈-웨이트 모델에 대한 금지를 요구한 적이 없다\"예요. 회사가 우려하는 건 \"오픈-웨이트 그 자체가 아니라, 프런티어 모델의 능력이 군사·사이버·생물학 공격에 악용될 수 있는 수준에 도달했을 때 벌어질 일\"이라고 못박았어요. 그 대신 회사가 제안한 대체 조치가 세 가지 있어요. 첫째, 첨단 칩과 칩 제조 장비의 대중국 반출 통제와 밀수 단속이에요. 둘째, 산업 규모의 모델 지식 증류 파이프라인에 대한 정책 조치예요. 셋째, 오픈이든 클로즈드든 무관하게 충분히 강한 모델에 대한 배포 전 안전 시험 의무화예요.\n\n세 조치의 초점이 서로 달라요. 첫 번째는 훈련 자원의 국가 간 흐름을 겨냥해요. 두 번째는 이미 나온 모델을 값싸게 복제하는 파이프라인을 겨냥해요. 세 번째는 모델 자체의 위험 프로파일 검증에 무게를 실어요. CNBC는 이 갈래를 두고 \"Amodei가 오픈-웨이트 금지가 아니라 대중국 칩 통제와 사전 안전 시험을 이야기하고 있다\"고 요약했어요(<https://www.cnbc.com/2026/07/27/anthropic-ceo-dario-amodei-isnt-advocating-open-weight-model-ban.html>). TheStreet를 비롯한 다른 언론도 이 프레이밍을 그대로 옮겼어요.\n\n선행 흐름과 견주면 두 지점이 뚜렷해요. 지금까지 오픈-웨이트 규제 논의의 대부분은 \"웨이트 공개 자체가 남용 벡터\"라는 프레임으로 굴러왔어요. Anthropic의 이번 문서는 그 축을 하드웨어 통제·복제 규제·능력 시험이라는 3축으로 옮기려는 시도예요. 6월 28일 판에서 다룬 GPT-5.6의 신뢰-파트너 게이트, 지난주 다룬 Gemini 3.5 Flash Cyber의 정부·파트너 한정 파일럿과도 결이 같아요. 능력 임계값을 넘긴 모델에 접근 조건을 붙이려는 흐름이 프런티어 벤더 세 곳에서 각기 다른 형태로 굳어지고 있어요. 자기 팀이 오픈-웨이트 모델을 프로덕션에 얹고 있다면, Anthropic이 제안한 배포 전 안전 시험을 어떻게 자기 파이프라인에 끼워 넣을지 한 페이지짜리 자체 정책 초안을 이번 주 안에 뽑아보세요.",
+      "item_kind": "blog_post",
+      "maturity": null,
+      "primary_url": "https://www.anthropic.com/news/position-open-weights-models",
+      "source_count": 3
+    },
+    {
+      "cluster_id": "dd-2026-08-02-2",
+      "title": "Microsoft Echoverse: 시뮬레이션 깊이가 컴퓨터-사용 에이전트 학습을 가른다는 실증",
+      "body_md": "Microsoft Research가 7월 30일 Echoverse를 공개했어요(<https://www.microsoft.com/en-us/research/blog/echoverse-deep-evolving-environments-for-computer-use-agents/>). 컴퓨터-사용 에이전트를 훈련시키기 위한 합성 환경 12개를 묶은 프레임워크예요. 저자는 Akshay Nambi를 비롯한 9명이에요. 12개 환경은 도메인 특화 10개와 UI 컨트롤 2개로 나뉘어요. 도메인 쪽은 EchoMail·EchoCalendar·EchoBank·EchoCare처럼 메일·캘린더·금융·의료 업무를 각각 본뜬 사이트예요. UI 쪽은 날짜 선택기와 nested-filter 컨트롤이에요.\n\n훈련 대상은 9B 파라미터의 Qwen3.5예요. 12개 환경 평균 정답률이 훈련 전 36.5%에서 훈련 후 67.1%로 올랐어요. 프런티어 참조로 놓은 GPT-5.4는 같은 세팅에서 80.7%가 나왔어요. 9B 모델이 프런티어 모델의 83% 수준까지 올라온 셈이에요. 훈련 도메인에 없던 WebVoyager 벤치마크에서도 66.5%에서 71.5%로 5.0%포인트 개선이 이전됐어요. 훈련 환경 안에서만 오르고 마는 게 아니라는 얘기예요.\n\n핵심 실증은 시뮬레이션 깊이예요. 팀은 같은 사이트를 얕은(shallow) 빌드 방식과 깊은(deep) 빌드 방식으로 갈라 비교했어요. 얕은 빌드는 화면만 그럴듯하게 세운 환경이에요. 클릭은 받아 주지만 그 클릭이 뒤에서 아무것도 바꾸지 않아요. 깊은 빌드에서는 네 가지가 달라요. 버튼의 비활성 조건과 권한과 에러 메시지가 실제 제품 로직을 따라요. 한 화면에서 만든 변경이 다른 화면과 다른 사용자에게도 남아요. 보낸 메시지는 받는 사람 받은편지함에 나타나고, 취소한 회의는 양쪽 캘린더에서 지워져요. 앞 단계에서 고른 선택이 뒤 단계에 고를 수 있는 것을 좁혀요. 채점도 픽셀이 아니라 애플리케이션 상태를 읽어서 해요.\n\n두 방식으로 각각 훈련시킨 결과는 갈렸어요. 얕은 빌드로 훈련한 모델은 Allrecipes에서 훈련 전 80.0%보다 낮은 75.0%로 내려갔어요. 깊은 빌드로 훈련했을 때만 85.0%로 올랐어요. Hugging Face에서는 얕은 빌드가 48.0%로 훈련 전과 같았고, 깊은 빌드는 65.0%가 됐어요. 팀은 이 결과를 두고 \"높은 시뮬레이션 충실도는 있으면 좋은 것이 아니라 필수(must-have)\"라고 정리했어요. 환경이 얕으면 훈련을 더 돌리는 게 개선이 아니라 손해라는 얘기예요.\n\n가장 가까운 선행 연구는 두 갈래예요. 첫째는 WebArena·VisualWebArena처럼 웹 태스크를 정지된 스냅숏으로 정형화한 정적 벤치마크예요. 둘째는 SWE-Gym·Terminal-Bench처럼 실제 저장소를 그대로 재생한 살아 있는 환경이에요. Echoverse는 이 사이에서 \"훈련용 합성 환경을 처음부터 깊게 짓는\" 3번째 축을 잡았어요. 자기 팀이 지금 웹·데스크톱 에이전트를 자체 환경에서 파인튜닝하고 있다면, 훈련 환경의 상태 공간을 절반으로 자른 얕은 버전을 하나 만들어 같은 훈련 스크립트로 돌려보고 다운스트림 성능 격차가 얼마나 벌어지는지부터 재보세요.",
+      "item_kind": "blog_post",
+      "maturity": "experimental",
+      "primary_url": "https://www.microsoft.com/en-us/research/blog/echoverse-deep-evolving-environments-for-computer-use-agents/",
+      "source_count": 1
+    },
+    {
+      "cluster_id": "dd-2026-08-02-3",
+      "title": "Microsoft EvoLib: 배포 이후 경험으로 지식 라이브러리를 재구성하는 프레임워크",
+      "body_md": "Microsoft Research가 7월 30일 EvoLib을 함께 공개했어요(<https://www.microsoft.com/en-us/research/blog/evolib-turning-experience-into-evolving-knowledge/>). 저자는 Weijia Xu·Alessandro Sordoni·Zelalem Gero·Michel Galley·Eric Yuan·Jianfeng Gao 여섯 명이에요. 코드는 MIT 라이선스로 GitHub에 함께 열렸어요(<https://github.com/microsoft/EvoLib>). 같은 날 공개된 Echoverse가 훈련 환경 축을 잡았다면, EvoLib은 반대편 축을 잡아요. 모델 파라미터를 손대지 않고, 배포 뒤 얻은 경험을 재사용 가능한 스킬과 지식으로 계속 재구성해요.\n\n동작 얼개는 두 축이에요. 첫째는 통합(consolidation)이에요. 유사한 지식 조각을 더 일반적인 형태로 합쳐요. 둘째는 동적 가중(dynamic weighting)이에요. 장기 영향을 기준으로 지식의 우선순위를 다시 매겨요. 저자들 표현으로는 \"새 경험이 들어올 때마다 기존 지식을 계속 다듬고, 통합하고, 재가중한다\"예요. 정적 메모리처럼 경험을 쌓아 두기만 하는 것이 아니라, 라이브러리 자체가 계속 재조직된다는 게 요지예요.\n\n평가는 세 축에서 이뤄졌어요. 첫째, 수학 추론이에요. 둘째, 효율 제약이 붙은 코드 작성이에요. 셋째, 장기 의사결정과 환경 상호작용이 필요한 태스크예요. LiveCodeBench·BigCodeBench·HMMT·AgentBoard·ScienceWorld·PDDL 같은 벤치마크가 세팅으로 쓰였어요. 세 축 모두에서 검색 기반 메모리와 요약 기반 메모리 기법들을 앞섰다고 보고했어요. 토큰 사용량은 더 적었어요. 테스트 시점의 추가 계산을 성능으로 바꾸는 효율 측면에서도 정적 메모리 기반보다 앞선다고 보고됐어요.\n\n가장 가까운 선행 연구는 letta·Voyager·Reflexion 같은 계열이에요. 이들은 에이전트가 자기 경험을 조각으로 저장해 두고 그때그때 다시 부르는 검색 프레임이었어요. EvoLib은 검색 대신 라이브러리 자체를 계속 편집한다는 점에서 다른 축이에요. 이번 주 arxiv에 올라온 \"Filesystem-Based Memory for LLM Agents\"(<https://arxiv.org/abs/2607.26637>)가 파일 시스템을 매체로 같은 문제를 다룬다는 점에서 궤가 겹쳐요. 자기 팀이 지금 프로덕션 에이전트에 요약 기반 메모리를 얹고 있다면, EvoLib README의 LiveCodeBench 파이프라인을 그대로 돌려서 같은 태스크에서 자체 요약 메모리 대비 정답률·토큰 격차가 얼마나 벌어지는지부터 재보세요.",
+      "item_kind": "blog_post",
+      "maturity": "experimental",
+      "primary_url": "https://www.microsoft.com/en-us/research/blog/evolib-turning-experience-into-evolving-knowledge/",
+      "source_count": 2
+    }
+  ],
+  "quick_mentions": [
+    {
+      "title": "Cognizant and Anthropic expand their partnership to bring Claude to enterprise clients",
+      "url": "https://www.anthropic.com/news/cognizant-anthropic",
+      "source": "rss",
+      "item_kind": "blog_post",
+      "one_liner": "Anthropic이 Cognizant와의 파트너십을 확장해 Claude를 IT 서비스 고객사의 기업 워크플로에 얹는 배포 채널을 늘리기로 했어요."
+    },
+    {
+      "title": "Toward an Organizational Science of Multi-Agent LLM Systems",
+      "url": "https://arxiv.org/abs/2607.25446",
+      "source": "arxiv",
+      "item_kind": "paper",
+      "one_liner": "다중 에이전트 LLM 프레임워크가 조직 구조·조정·프로토콜 세 관심사를 뒤엉키게 다뤄 온 문제를 세 축으로 분리해 재정의한 논문이에요."
+    },
+    {
+      "title": "Filesystem-Based Memory for LLM Agents: Organization, Evolution, and Sustainability",
+      "url": "https://arxiv.org/abs/2607.26637",
+      "source": "arxiv",
+      "item_kind": "paper",
+      "one_liner": "관리·검색·실행 세 역할이 하나의 markdown 디렉터리를 공유하는 파일 시스템 기반 에이전트 장기 메모리를 처음으로 체계적으로 실증한 논문이에요."
+    },
+    {
+      "title": "Even More Deception: Objective Misalignment in Mixed-Motive LLM Multi-Agent Systems",
+      "url": "https://arxiv.org/abs/2607.26120",
+      "source": "arxiv",
+      "item_kind": "paper",
+      "one_liner": "혼합 동기가 있는 다중 에이전트 세팅에서 LLM들의 내적 추론과 공개 발화 사이 어긋남을 모델·역할·목표별로 분리해 측정한 논문이에요."
+    },
+    {
+      "title": "lsdefine/GenericAgent",
+      "url": "https://github.com/lsdefine/GenericAgent",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "3.3K줄 시드에서 스킬 트리를 스스로 키워 전체 시스템 제어와 토큰 소비 6분의 1 수준을 달성했다고 주장하는 자기 진화 에이전트 리포예요."
+    },
+    {
+      "title": "HKUDS/nanobot",
+      "url": "https://github.com/HKUDS/nanobot",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "HKUDS가 낸 초경량 자체 호스팅 개인 AI 에이전트 프레임워크로, WebUI·툴·메모리·MCP·멀티 에이전트 워크플로를 한 파이썬 패키지에 담았어요."
+    },
+    {
+      "title": "eigent-ai/eigent",
+      "url": "https://github.com/eigent-ai/eigent",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "Claude Cowork와 Codex를 로컬·무료로 대체하려는 오픈소스 Cowork Desktop으로 별 1만 4천 개대에 올라와 있어요."
+    },
+    {
+      "title": "EvoMap/evolver",
+      "url": "https://github.com/EvoMap/evolver",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "Genes·Capsules·Events 세 개념으로 에이전트 진화를 감사할 수 있게 만든 GEP 기반 self-evolving 엔진이에요."
+    },
+    {
+      "title": "farion1231/cc-switch",
+      "url": "https://github.com/farion1231/cc-switch",
+      "source": "github",
+      "item_kind": "repo",
+      "one_liner": "Claude Code·Codex·OpenCode·Grok Build 등 서로 다른 코딩 에이전트 하네스를 하나의 데스크톱 앱에서 전환·설정하도록 묶은 오픈소스예요."
+    },
+    {
+      "title": "Reimagining Independence: Meta's AI Models and the University of Pittsburgh's Assistive Robotics",
+      "url": "https://ai.meta.com/blog/assistive-robotics-university-of-pittsburgh-sam-dino/",
+      "source": "rss",
+      "item_kind": "blog_post",
+      "one_liner": "Meta의 SAM·DINO 계열 오픈 비전 모델을 Pittsburgh 대학교와 함께 보조 로봇에 붙여, 사용자가 원하는 물체·행동을 실시간으로 지시하도록 만든 사례예요."
+    }
+  ],
+  "meta": {
+    "sources_considered": 42,
+    "sources_included": 13,
+    "failed_fetches": [
+      "arxiv API export.arxiv.org: HTTP 403 x3 (initial + 2 retries), in-window papers recovered via WebSearch",
+      "thenewstack.io RSS: HTTP 403, no in-window items recovered",
+      "simonwillison.net atom: HTTP 403, no in-window items recovered",
+      "importai.substack.com RSS: HTTP 403, no in-window items recovered",
+      "latent.space RSS: HTTP 403, no in-window items recovered",
+      "openai.com RSS: HTTP 403, no OpenAI news surfaced in window",
+      "deepmind.google RSS: HTTP 403, no DeepMind items surfaced in window",
+      "huggingface.co blog feed: HTTP 403, no in-window items recovered",
+      "lilianweng.github.io: HTTP 403, no in-window items recovered",
+      "magazine.sebastianraschka.com: HTTP 403, no in-window items recovered",
+      "anthropic community scraper RSS: 2 in-window items (Cognizant partnership + open-weights position); open-weights page WebFetch itself 403'd but content recovered via WebSearch",
+      "GitHub Trending: reachable, zero agent-relevant repos in top 25 this week",
+      "gh CLI: not available in this session; used MCP GitHub search_repositories instead — 3 topic queries (topic:mcp, topic:llm-agent, 'agent memory' OR 'mcp server') surfaced GenericAgent, nanobot, eigent, evolver, cc-switch as fresh non-dupes"
+    ],
+    "fetch_notes": "In-window (2026-07-26 through 2026-08-02) coverage: Microsoft Research feed carried both DD2 (Echoverse) and DD3 (EvoLib) natively; Anthropic community scraper carried the open-weights position teaser but full text came via WebSearch after the anthropic.com page 403'd WebFetch. Demoted for duplication vs last 21 days: none of the three DDs overlap with 07-12 (ChatGPT Work / Safari MCP / Agents' Last Exam) or 07-26 (Opus 5 / Gemini 3.6 Flash / poolside Laguna). The Meta University of Pittsburgh piece was kept as a QM because the partner and application are distinct from 07-26 QM #2's Berkeley Lab / Genesis Mission story even though the underlying SAM+DINO models are the same. Repos already in the last 21-day QMs (omnigent, MiroThinker, googleapis/mcp-toolbox, agent-governance-toolkit, iflytek/skillhub, HKUDS/DeepCode, agents-towards-production, rllm, PocketFlow) were not re-included; DeepCode is same-org (HKUDS) as this week's nanobot QM but distinct repo, so nanobot stays."
+  },
+  "content_sha256": "4af40be17480a2f5a1b5d818cbc1c62152e656dace6394e9b67bdde816e51159"
+}

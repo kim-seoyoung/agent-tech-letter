@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>AI Agent Weekly — 2026-08-02</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; color: #17171c; background: #ffffff; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+.container { max-width: 680px; margin: 0 auto; padding: 44px; }
+header { margin-bottom: 44px; }
+.kicker { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #1e33d6; margin: 0 0 10px 0; }
+h1 { font-size: 30px; font-weight: 800; margin: 0; color: #17171c; letter-spacing: -0.03em; line-height: 1; }
+h1 em { font-style: normal; background: linear-gradient(transparent 62%, #eef0fe 62%); padding: 0 2px; }
+.rule { height: 3px; background: #17171c; margin: 18px 0 12px 0; }
+.date { color: #6b6b74; margin: 0; font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 13px; letter-spacing: 0.03em; }
+h2 { font-size: 22px; }
+h3 { font-size: 18px; }
+a { color: #1e33d6; text-decoration: none; }
+a:hover { text-decoration: underline; }
+code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; background: #f1f1eb; padding: 1px 4px; border-radius: 3px; font-size: 0.92em; }
+pre { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; background: #f1f1eb; padding: 12px; border-radius: 6px; overflow-x: auto; }
+.body p { margin: 0 0 15px 0; }
+.body a { border-bottom: 1px solid #eef0fe; }
+.body a:hover { text-decoration: none; border-bottom-color: #1e33d6; }
+.body h3, .body h4 { margin: 32px 0 10px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; font-size: 18px; font-weight: 600; color: #17171c; line-height: 1.4; }
+.body ul, .body ol { margin: 0 0 16px 0; padding-left: 24px; }
+.body li { margin-bottom: 6px; }
+.body blockquote { margin: 16px 0; padding: 4px 0 4px 16px; border-left: 3px solid #e7e6e0; color: #6b6b74; }
+.sources a:hover { text-decoration: none; border-bottom-color: #1e33d6 !important; color: #1e33d6 !important; }
+.qm-section { margin-top: 64px; padding-top: 32px; border-top: 2px solid #17171c; }
+.qm-kicker { margin: 0 0 6px 0; font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #1e33d6; }
+.qm-section h2 { margin: 0 0 20px 0; font-size: 22px; color: #17171c; letter-spacing: -0.01em; }
+.quick-mentions { padding-left: 20px; margin: 0; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<p class="kicker">Weekly intelligence · 에이전트 생태계</p>
+<h1>AI <em>Agent</em> Weekly</h1>
+<div class="rule"></div>
+<p class="date">2026-08-02</p>
+</header>
+<main><section class="deep-dive" style="margin: 0; padding-top: 0; margin-top: 0; border-top: none;">
+  <p class="dd-index" style="font-family: ui-monospace, &#39;SF Mono&#39;, Menlo, Consolas, monospace; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #1e33d6; margin: 0 0 12px 0;">DEEP DIVE 01</p>
+  <h2 style="font-size: 22px; font-weight: 700; color: #17171c; margin: 0 0 14px 0; line-height: 1.35; letter-spacing: -0.01em;">Anthropic의 오픈-웨이트 정책 입장문과 세 갈래 대체 조치</h2>
+  <p class="tags" style="margin: 0 0 22px 0; font-family: ui-monospace, &#39;SF Mono&#39;, Menlo, Consolas, monospace; font-size: 13px;">
+    <span class="tag" style="background: #f1f1eb; color: #6b6b74; padding: 2px 8px; border-radius: 4px; font-size: 12px;">blog_post</span>
+  </p>
+  <div class="body" style="color: #17171c; font-family: Georgia, &#39;Times New Roman&#39;, &#39;Nanum Myeongjo&#39;, serif; font-size: 16px; line-height: 1.78;"><p>Anthropic이 7월 27일 &quot;오픈-웨이트 모델에 대한 우리의 입장&quot;이라는 정책 문서를 냈어요(<a href="https://www.anthropic.com/news/position-open-weights-models">anthropic.com</a>). Dario Amodei CEO의 이름으로 나왔어요. 사흘 전 &quot;Open Weights and American AI Leadership&quot;이라는 서한이 공개됐어요. Nvidia·Microsoft·Meta·OpenAI·Google을 비롯한 77개 기업·재단·벤처가 이름을 올렸어요. 이 자리에 Anthropic 이름은 빠져 있었어요. 이번 문서는 그 공백에 대한 회사의 응답이에요.</p>
+<p>핵심 문장은 한 줄로 정리돼요. &quot;Anthropic은 오픈-웨이트 모델에 대한 금지를 요구한 적이 없다&quot;예요. 회사가 우려하는 건 &quot;오픈-웨이트 그 자체가 아니라, 프런티어 모델의 능력이 군사·사이버·생물학 공격에 악용될 수 있는 수준에 도달했을 때 벌어질 일&quot;이라고 못박았어요. 그 대신 회사가 제안한 대체 조치가 세 가지 있어요. 첫째, 첨단 칩과 칩 제조 장비의 대중국 반출 통제와 밀수 단속이에요. 둘째, 산업 규모의 모델 지식 증류 파이프라인에 대한 정책 조치예요. 셋째, 오픈이든 클로즈드든 무관하게 충분히 강한 모델에 대한 배포 전 안전 시험 의무화예요.</p>
+<p>세 조치의 초점이 서로 달라요. 첫 번째는 훈련 자원의 국가 간 흐름을 겨냥해요. 두 번째는 이미 나온 모델을 값싸게 복제하는 파이프라인을 겨냥해요. 세 번째는 모델 자체의 위험 프로파일 검증에 무게를 실어요. CNBC는 이 갈래를 두고 &quot;Amodei가 오픈-웨이트 금지가 아니라 대중국 칩 통제와 사전 안전 시험을 이야기하고 있다&quot;고 요약했어요(<a href="https://www.cnbc.com/2026/07/27/anthropic-ceo-dario-amodei-isnt-advocating-open-weight-model-ban.html">cnbc.com</a>). TheStreet를 비롯한 다른 언론도 이 프레이밍을 그대로 옮겼어요.</p>
+<p>선행 흐름과 견주면 두 지점이 뚜렷해요. 지금까지 오픈-웨이트 규제 논의의 대부분은 &quot;웨이트 공개 자체가 남용 벡터&quot;라는 프레임으로 굴러왔어요. Anthropic의 이번 문서는 그 축을 하드웨어 통제·복제 규제·능력 시험이라는 3축으로 옮기려는 시도예요. 6월 28일 판에서 다룬 GPT-5.6의 신뢰-파트너 게이트, 지난주 다룬 Gemini 3.5 Flash Cyber의 정부·파트너 한정 파일럿과도 결이 같아요. 능력 임계값을 넘긴 모델에 접근 조건을 붙이려는 흐름이 프런티어 벤더 세 곳에서 각기 다른 형태로 굳어지고 있어요. 자기 팀이 오픈-웨이트 모델을 프로덕션에 얹고 있다면, Anthropic이 제안한 배포 전 안전 시험을 어떻게 자기 파이프라인에 끼워 넣을지 한 페이지짜리 자체 정책 초안을 이번 주 안에 뽑아보세요.</p></div>
+</section><section class="deep-dive" style="margin: 0; padding-top: 48px; margin-top: 48px; border-top: 1px solid #e7e6e0;">
+  <p class="dd-index" style="font-family: ui-monospace, &#39;SF Mono&#39;, Menlo, Consolas, monospace; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #1e33d6; margin: 0 0 12px 0;">DEEP DIVE 02</p>
+  <h2 style="font-size: 22px; font-weight: 700; color: #17171c; margin: 0 0 14px 0; line-height: 1.35; letter-spacing: -0.01em;">Microsoft Echoverse: 시뮬레이션 깊이가 컴퓨터-사용 에이전트 학습을 가른다는 실증</h2>
+  <p class="tags" style="margin: 0 0 22px 0; font-family: ui-monospace, &#39;SF Mono&#39;, Menlo, Consolas, monospace; font-size: 13px;">
+    <span class="tag" style="background: #f1f1eb; color: #6b6b74; padding: 2px 8px; border-radius: 4px; font-size: 12px;">blog_post</span>
+<span class="tag" style="background: #efefea; color: #55555e; padding: 2px 8px; border-radius: 4px; font-size: 12px;">experimental</span>  </p>
+  <div class="body" style="color: #17171c; font-family: Georgia, &#39;Times New Roman&#39;, &#39;Nanum Myeongjo&#39;, serif; font-size: 16px; line-height: 1.78;"><p>Microsoft Research가 7월 30일 Echoverse를 공개했어요(<a href="https://www.microsoft.com/en-us/research/blog/echoverse-deep-evolving-environments-for-computer-use-agents/">microsoft.com</a>). 컴퓨터-사용 에이전트를 훈련시키기 위한 합성 환경 12개를 묶은 프레임워크예요. 저자는 Akshay Nambi를 비롯한 9명이에요. 12개 환경은 도메인 특화 10개와 UI 컨트롤 2개로 나뉘어요. 도메인 쪽은 EchoMail·EchoCalendar·EchoBank·EchoCare처럼 메일·캘린더·금융·의료 업무를 각각 본뜬 사이트예요. UI 쪽은 날짜 선택기와 nested-filter 컨트롤이에요.</p>
+<p>훈련 대상은 9B 파라미터의 Qwen3.5예요. 12개 환경 평균 정답률이 훈련 전 36.5%에서 훈련 후 67.1%로 올랐어요. 프런티어 참조로 놓은 GPT-5.4는 같은 세팅에서 80.7%가 나왔어요. 9B 모델이 프런티어 모델의 83% 수준까지 올라온 셈이에요. 훈련 도메인에 없던 WebVoyager 벤치마크에서도 66.5%에서 71.5%로 5.0%포인트 개선이 이전됐어요. 훈련 환경 안에서만 오르고 마는 게 아니라는 얘기예요.</p>
+<p>핵심 실증은 시뮬레이션 깊이예요. 팀은 같은 사이트를 얕은(shallow) 빌드 방식과 깊은(deep) 빌드 방식으로 갈라 비교했어요. 얕은 빌드는 화면만 그럴듯하게 세운 환경이에요. 클릭은 받아 주지만 그 클릭이 뒤에서 아무것도 바꾸지 않아요. 깊은 빌드에서는 네 가지가 달라요. 버튼의 비활성 조건과 권한과 에러 메시지가 실제 제품 로직을 따라요. 한 화면에서 만든 변경이 다른 화면과 다른 사용자에게도 남아요. 보낸 메시지는 받는 사람 받은편지함에 나타나고, 취소한 회의는 양쪽 캘린더에서 지워져요. 앞 단계에서 고른 선택이 뒤 단계에 고를 수 있는 것을 좁혀요. 채점도 픽셀이 아니라 애플리케이션 상태를 읽어서 해요.</p>
+<p>두 방식으로 각각 훈련시킨 결과는 갈렸어요. 얕은 빌드로 훈련한 모델은 Allrecipes에서 훈련 전 80.0%보다 낮은 75.0%로 내려갔어요. 깊은 빌드로 훈련했을 때만 85.0%로 올랐어요. Hugging Face에서는 얕은 빌드가 48.0%로 훈련 전과 같았고, 깊은 빌드는 65.0%가 됐어요. 팀은 이 결과를 두고 &quot;높은 시뮬레이션 충실도는 있으면 좋은 것이 아니라 필수(must-have)&quot;라고 정리했어요. 환경이 얕으면 훈련을 더 돌리는 게 개선이 아니라 손해라는 얘기예요.</p>
+<p>가장 가까운 선행 연구는 두 갈래예요. 첫째는 WebArena·VisualWebArena처럼 웹 태스크를 정지된 스냅숏으로 정형화한 정적 벤치마크예요. 둘째는 SWE-Gym·Terminal-Bench처럼 실제 저장소를 그대로 재생한 살아 있는 환경이에요. Echoverse는 이 사이에서 &quot;훈련용 합성 환경을 처음부터 깊게 짓는&quot; 3번째 축을 잡았어요. 자기 팀이 지금 웹·데스크톱 에이전트를 자체 환경에서 파인튜닝하고 있다면, 훈련 환경의 상태 공간을 절반으로 자른 얕은 버전을 하나 만들어 같은 훈련 스크립트로 돌려보고 다운스트림 성능 격차가 얼마나 벌어지는지부터 재보세요.</p></div>
+</section><section class="deep-dive" style="margin: 0; padding-top: 48px; margin-top: 48px; border-top: 1px solid #e7e6e0;">
+  <p class="dd-index" style="font-family: ui-monospace, &#39;SF Mono&#39;, Menlo, Consolas, monospace; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #1e33d6; margin: 0 0 12px 0;">DEEP DIVE 03</p>
+  <h2 style="font-size: 22px; font-weight: 700; color: #17171c; margin: 0 0 14px 0; line-height: 1.35; letter-spacing: -0.01em;">Microsoft EvoLib: 배포 이후 경험으로 지식 라이브러리를 재구성하는 프레임워크</h2>
+  <p class="tags" style="margin: 0 0 22px 0; font-family: ui-monospace, &#39;SF Mono&#39;, Menlo, Consolas, monospace; font-size: 13px;">
+    <span class="tag" style="background: #f1f1eb; color: #6b6b74; padding: 2px 8px; border-radius: 4px; font-size: 12px;">blog_post</span>
+<span class="tag" style="background: #efefea; color: #55555e; padding: 2px 8px; border-radius: 4px; font-size: 12px;">experimental</span>  </p>
+  <div class="body" style="color: #17171c; font-family: Georgia, &#39;Times New Roman&#39;, &#39;Nanum Myeongjo&#39;, serif; font-size: 16px; line-height: 1.78;"><p>Microsoft Research가 7월 30일 EvoLib을 함께 공개했어요(<a href="https://www.microsoft.com/en-us/research/blog/evolib-turning-experience-into-evolving-knowledge/">microsoft.com</a>). 저자는 Weijia Xu·Alessandro Sordoni·Zelalem Gero·Michel Galley·Eric Yuan·Jianfeng Gao 여섯 명이에요. 코드는 MIT 라이선스로 GitHub에 함께 열렸어요(<a href="https://github.com/microsoft/EvoLib">github.com</a>). 같은 날 공개된 Echoverse가 훈련 환경 축을 잡았다면, EvoLib은 반대편 축을 잡아요. 모델 파라미터를 손대지 않고, 배포 뒤 얻은 경험을 재사용 가능한 스킬과 지식으로 계속 재구성해요.</p>
+<p>동작 얼개는 두 축이에요. 첫째는 통합(consolidation)이에요. 유사한 지식 조각을 더 일반적인 형태로 합쳐요. 둘째는 동적 가중(dynamic weighting)이에요. 장기 영향을 기준으로 지식의 우선순위를 다시 매겨요. 저자들 표현으로는 &quot;새 경험이 들어올 때마다 기존 지식을 계속 다듬고, 통합하고, 재가중한다&quot;예요. 정적 메모리처럼 경험을 쌓아 두기만 하는 것이 아니라, 라이브러리 자체가 계속 재조직된다는 게 요지예요.</p>
+<p>평가는 세 축에서 이뤄졌어요. 첫째, 수학 추론이에요. 둘째, 효율 제약이 붙은 코드 작성이에요. 셋째, 장기 의사결정과 환경 상호작용이 필요한 태스크예요. LiveCodeBench·BigCodeBench·HMMT·AgentBoard·ScienceWorld·PDDL 같은 벤치마크가 세팅으로 쓰였어요. 세 축 모두에서 검색 기반 메모리와 요약 기반 메모리 기법들을 앞섰다고 보고했어요. 토큰 사용량은 더 적었어요. 테스트 시점의 추가 계산을 성능으로 바꾸는 효율 측면에서도 정적 메모리 기반보다 앞선다고 보고됐어요.</p>
+<p>가장 가까운 선행 연구는 letta·Voyager·Reflexion 같은 계열이에요. 이들은 에이전트가 자기 경험을 조각으로 저장해 두고 그때그때 다시 부르는 검색 프레임이었어요. EvoLib은 검색 대신 라이브러리 자체를 계속 편집한다는 점에서 다른 축이에요. 이번 주 arxiv에 올라온 &quot;Filesystem-Based Memory for LLM Agents&quot;(<a href="https://arxiv.org/abs/2607.26637">arxiv.org</a>)가 파일 시스템을 매체로 같은 문제를 다룬다는 점에서 궤가 겹쳐요. 자기 팀이 지금 프로덕션 에이전트에 요약 기반 메모리를 얹고 있다면, EvoLib README의 LiveCodeBench 파이프라인을 그대로 돌려서 같은 태스크에서 자체 요약 메모리 대비 정답률·토큰 격차가 얼마나 벌어지는지부터 재보세요.</p></div>
+</section><div class="qm-section">
+<p class="qm-kicker">Also this week</p>
+<h2>Quick Mentions</h2>
+<ul class="quick-mentions"><li style="margin-bottom: 10px; color: #17171c; font-size: 16px; line-height: 1.55;">
+  <span class="tag" style="background: #f1f1eb; padding: 2px 8px; border-radius: 4px; font-size: 12px;">blog_post</span>
+  <a href="https://www.anthropic.com/news/cognizant-anthropic" style="color: #1e33d6; font-weight: 600;">Cognizant and Anthropic expand their partnership to bring Claude to enterprise clients</a>
+  <span style="color: #6b6b74;"> &mdash; Anthropic이 Cognizant와의 파트너십을 확장해 Claude를 IT 서비스 고객사의 기업 워크플로에 얹는 배포 채널을 늘리기로 했어요.</span>
+</li><li style="margin-bottom: 10px; color: #17171c; font-size: 16px; line-height: 1.55;">
+  <span class="tag" style="background: #f1f1eb; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
+  <a href="https://arxiv.org/abs/2607.25446" style="color: #1e33d6; font-weight: 600;">Toward an Organizational Science of Multi-Agent LLM Systems</a>
+  <span style="color: #6b6b74;"> &mdash; 다중 에이전트 LLM 프레임워크가 조직 구조·조정·프로토콜 세 관심사를 뒤엉키게 다뤄 온 문제를 세 축으로 분리해 재정의한 논문이에요.</span>
+</li><li style="margin-bottom: 10px; color: #17171c; font-size: 16px; line-height: 1.55;">
+  <span class="tag" style="background: #f1f1eb; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
+  <a href="https://arxiv.org/abs/2607.26637" style="color: #1e33d6; font-weight: 600;">Filesystem-Based Memory for LLM Agents: Organization, Evolution, and Sustainability</a>
+  <span style="color: #6b6b74;"> &mdash; 관리·검색·실행 세 역할이 하나의 markdown 디렉터리를 공유하는 파일 시스템 기반 에이전트 장기 메모리를 처음으로 체계적으로 실증한 논문이에요.</span>
+</li><li style="margin-bottom: 10px; color: #17171c; font-size: 16px; line-height: 1.55;">
+  <span class="tag" style="background: #f1f1eb; padding: 2px 8px; border-radius: 4px; font-size: 12px;">paper</span>
+  <a href="https://arxiv.org/abs/2607.26120" style="color: #1e33d6; font-weight: 600;">Even More Deception: Objective Misalignment in Mixed-Motive LLM Multi-Agent Systems</a>
+  <span style="color: #6b6b74;"> &mdash; 혼합 동기가 있는 다중 에이전트 세팅에서 LLM들의 내적 추론과 공개 발화 사이 어긋남을 모델·역할·목표별로 분리해 측정한 논문이에요.</span>
+</li><li style="margin-bottom: 10px; color: #17171c; font-size: 16px; line-height: 1.55;">
+  <span class="tag" style="background: #f1f1eb; padding: 2px 8px; border-radius: 4px; font-size: 12px;">repo</span>
+  <a href="https://github.com/lsdefine/GenericAgent" style="color: #1e33d6; font-weight: 600;">lsdefine/GenericAgent</a>
+  <span style="color: #6b6b74;"> &mdash; 3.3K줄 시드에서 스킬 트리를 스스로 키워 전체 시스템 제어와 토큰 소비 6분의 1 수준을 달성했다고 주장하는 자기 진화 에이전트 리포예요.</span>
+</li><li style="margin-bottom: 10px; color: #17171c; font-size: 16px; line-height: 1.55;">
+  <span class="tag" style="background: #f1f1eb; padding: 2px 8px; border-radius: 4px; font-size: 12px;">repo</span>
+  <a href="https://github.com/HKUDS/nanobot" style="color: #1e33d6; font-weight: 600;">HKUDS/nanobot</a>
+  <span style="color: #6b6b74;"> &mdash; HKUDS가 낸 초경량 자체 호스팅 개인 AI 에이전트 프레임워크로, WebUI·툴·메모리·MCP·멀티 에이전트 워크플로를 한 파이썬 패키지에 담았어요.</span>
+</li><li style="margin-bottom: 10px; color: #17171c; font-size: 16px; line-height: 1.55;">
+  <span class="tag" style="background: #f1f1eb; padding: 2px 8px; border-radius: 4px; font-size: 12px;">repo</span>
+  <a href="https://github.com/eigent-ai/eigent" style="color: #1e33d6; font-weight: 600;">eigent-ai/eigent</a>
+  <span style="color: #6b6b74;"> &mdash; Claude Cowork와 Codex를 로컬·무료로 대체하려는 오픈소스 Cowork Desktop으로 별 1만 4천 개대에 올라와 있어요.</span>
+</li><li style="margin-bottom: 10px; color: #17171c; font-size: 16px; line-height: 1.55;">
+  <span class="tag" style="background: #f1f1eb; padding: 2px 8px; border-radius: 4px; font-size: 12px;">repo</span>
+  <a href="https://github.com/EvoMap/evolver" style="color: #1e33d6; font-weight: 600;">EvoMap/evolver</a>
+  <span style="color: #6b6b74;"> &mdash; Genes·Capsules·Events 세 개념으로 에이전트 진화를 감사할 수 있게 만든 GEP 기반 self-evolving 엔진이에요.</span>
+</li><li style="margin-bottom: 10px; color: #17171c; font-size: 16px; line-height: 1.55;">
+  <span class="tag" style="background: #f1f1eb; padding: 2px 8px; border-radius: 4px; font-size: 12px;">repo</span>
+  <a href="https://github.com/farion1231/cc-switch" style="color: #1e33d6; font-weight: 600;">farion1231/cc-switch</a>
+  <span style="color: #6b6b74;"> &mdash; Claude Code·Codex·OpenCode·Grok Build 등 서로 다른 코딩 에이전트 하네스를 하나의 데스크톱 앱에서 전환·설정하도록 묶은 오픈소스예요.</span>
+</li><li style="margin-bottom: 10px; color: #17171c; font-size: 16px; line-height: 1.55;">
+  <span class="tag" style="background: #f1f1eb; padding: 2px 8px; border-radius: 4px; font-size: 12px;">blog_post</span>
+  <a href="https://ai.meta.com/blog/assistive-robotics-university-of-pittsburgh-sam-dino/" style="color: #1e33d6; font-weight: 600;">Reimagining Independence: Meta&#39;s AI Models and the University of Pittsburgh&#39;s Assistive Robotics</a>
+  <span style="color: #6b6b74;"> &mdash; Meta의 SAM·DINO 계열 오픈 비전 모델을 Pittsburgh 대학교와 함께 보조 로봇에 붙여, 사용자가 원하는 물체·행동을 실시간으로 지시하도록 만든 사례예요.</span>
+</li></ul>
+</div>
+</main>
+</div>
+</body>
+</html>
